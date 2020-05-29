@@ -52,3 +52,143 @@
 #auth .header-content {
 	text-align: right;
 }
+
+.alert {
+	position: relative;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: 1rem;
+	border: 1px solid transparent;
+	border-radius: 0.35rem;
+}
+
+.alert-heading {
+	color: inherit;
+}
+
+.alert-link {
+	font-weight: 700;
+}
+
+.alert-dismissible {
+	padding-right: 4rem;
+}
+
+.alert-dismissible .close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.75rem 1.25rem;
+	color: inherit;
+}
+
+.alert-primary {
+	color: #293c74;
+	background-color: #dce3f9;
+	border-color: #cdd8f6;
+}
+
+.alert-primary hr {
+	border-top-color: #b7c7f2;
+}
+
+.alert-primary .alert-link {
+	color: #1c294e;
+}
+
+.alert-secondary {
+	color: #45464e;
+	background-color: #e7e7ea;
+	border-color: #dddde2;
+}
+
+.alert-secondary hr {
+	border-top-color: #cfcfd6;
+}
+
+.alert-secondary .alert-link {
+	color: #2d2e33;
+}
+
+.alert-success {
+	color: #0f6848;
+	background-color: #d2f4e8;
+	border-color: #bff0de;
+}
+
+.alert-success hr {
+	border-top-color: #aaebd3;
+}
+
+.alert-success .alert-link {
+	color: #093b29;
+}
+
+.alert-info {
+	color: #1c606a;
+	background-color: #d7f1f5;
+	border-color: #c7ebf1;
+}
+
+.alert-info hr {
+	border-top-color: #b3e4ec;
+}
+
+.alert-info .alert-link {
+	color: #113b42;
+}
+
+.alert-warning {
+	color: #806520;
+	background-color: #fdf3d8;
+	border-color: #fceec9;
+}
+
+.alert-warning hr {
+	border-top-color: #fbe6b1;
+}
+
+.alert-warning .alert-link {
+	color: #574516;
+}
+
+.alert-danger {
+	color: #78261f;
+	background-color: #fadbd8;
+	border-color: #f8ccc8;
+}
+
+.alert-danger hr {
+	border-top-color: #f5b7b1;
+}
+
+.alert-danger .alert-link {
+	color: #4f1915;
+}
+
+.alert-light {
+	color: #818183;
+	background-color: #fefefe;
+	border-color: #fdfdfe;
+}
+
+.alert-light hr {
+	border-top-color: #ececf6;
+}
+
+.alert-light .alert-link {
+	color: #686869;
+}
+
+.alert-dark {
+	color: #2f3037;
+	background-color: #dedee1;
+	border-color: #d1d1d5;
+}
+
+.alert-dark hr {
+	border-top-color: #c4c4c9;
+}
+
+.alert-dark .alert-link {
+	color: #18181c;
+}

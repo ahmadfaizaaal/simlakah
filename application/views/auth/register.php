@@ -35,10 +35,11 @@
                         <div class="p-5">
                             <div class="text-center mb-4">
                                 <img class="background-position: center; background-size: cover;" src="<?= BASE_THEME; ?>img/logo_simlakah.png" style="width:75%; height:75%;" alt="Simlakah Image">
-                                <!-- <h1 class="h4 text-gray-900 mb-4"><b>Registration Page</b></h1> -->
                             </div>
-                            <!-- <hr> -->
-                            <form class="user" method="post" action="<?= BASE_URL . 'auth/register'; ?>">
+
+                            <?= $this->session->flashdata('message'); ?>
+
+                            <form class="user" method="post" action="<?= BASE_URL . 'auth/register/' . $param; ?>">
                                 <!-- NO KTP -->
                                 <div class="form-group row">
                                     <div class="col-sm-9 mb-3 mb-sm-0">
@@ -46,10 +47,7 @@
                                         <?= form_error('nik', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <div class="col-sm-3">
-                                        <!-- <button type="submit" class="btn btn-success btn-user btn-block" onclick="cek()">
-                                            Cek KTP
-                                        </button> -->
-                                        <input type="button" class="btn btn-success btn-user btn-block" id="nik" name="nik" onclick="cek()" value="Cek KTP">
+                                        <input type="button" class="btn btn-success btn-user btn-block" id="btnCekNIK" name="btnCekNIK" value="Cek KTP">
                                     </div>
                                 </div>
                                 <!-- NAMA LENGKAP -->
@@ -60,30 +58,29 @@
                                 <!-- TEMPAT TANGGAL LAHIR -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="birthplace" name="birthplace" placeholder="Tempat Lahir" readonly>
-                                        <?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
+                                        <input type="text" class="form-control form-control-user" id="birthplace" name="birthplace" placeholder="Tempat Lahir" value="<?= set_value('birthplace'); ?>" readonly>
+                                        <?= form_error('birthplace', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="birthdate" name="birthdate" placeholder="Tanggal Lahir" readonly>
+                                        <input type="text" class="form-control form-control-user" id="birthdate" name="birthdate" placeholder="Tanggal Lahir" value="<?= set_value('birthdate'); ?>" readonly>
                                     </div>
                                 </div>
                                 <!-- ALAMAT -->
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="address" name="address" placeholder="Alamat Sesuai KTP" value="<?= set_value('fullname'); ?>" readonly>
-                                    <?= form_error('fullname', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    <input type="text" class="form-control form-control-user" id="address" name="address" placeholder="Alamat Sesuai KTP" value="<?= set_value('address'); ?>" readonly>
+                                    <?= form_error('address', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Username" value="<?= set_value('username'); ?>">
-                                    <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
-                                </div> -->
+                                <!-- NO. HP -->
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user mobile-valid" id="phone" name="phone" placeholder="No. HP / WA" value="<?= set_value('phone'); ?>">
                                     <?= form_error('phone', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
+                                <!-- EMAIL -->
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="email" name="email" placeholder="Email" value="<?= set_value('email'); ?>">
                                     <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
+                                <!-- KATA SANDI -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user" id="password1" name="password1" placeholder="Kata Sandi">
@@ -101,7 +98,7 @@
                             <div class="text-center">
                                 <p class="small">Sudah mempunyai akun?
                                     <strong>
-                                        <a href="<?= BASE_URL . 'auth/login' ?>" class="main-text">Login sekarang!</a>
+                                        <a href="<?= BASE_URL . 'auth/login/' . $param ?>" class="main-text">Login sekarang!</a>
                                     </strong>
                                 </p>
                             </div>
@@ -159,14 +156,68 @@
                 return false;
             });
 
-            $('#birthdate').datepicker({
-                dateFormat: 'dd-mm-yyyy'
-            }).val();
+            $('#nik').on('keypress', function(e) {
+                var $this = $(this);
+                var regex = new RegExp("^[0-9\b]+$");
+                var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+                // for 16 digit number only
+                if ($this.val().length > 15) {
+                    e.preventDefault();
+                    return false;
+                }
+                if (regex.test(str)) {
+                    currentNum = 56;
+                    return true;
+                }
+                e.preventDefault();
+                return false;
+            });
 
         });
 
-        function cek() {
-            alert("tes");
+        $('#btnCekNIK').on('click', function() {
+            var nik = $('#nik').val();
+            if ('' != nik) {
+                $.ajax({
+                    type: 'ajax',
+                    method: 'post',
+                    url: '<?= BASE_URL . 'auth/cekNIK'; ?>',
+                    data: {
+                        nik: nik
+                    },
+                    async: false,
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data != null) {
+                            $('input[name=fullname]').val(data.NAMA);
+                            $('input[name=birthplace]').val(data.TEMPAT_LAHIR);
+                            $('input[name=birthdate]').val(dateFormat(data.TANGGAL_LAHIR));
+                            var alamat = data.ALAMAT + ' RT ' + data.RT + ' RW ' + data.RW + ' ' +
+                                data.KELURAHAN + ' ' + data.KECAMATAN + ' ' + data.KABUPATEN_KOTA;
+                            $('input[name=address]').val(alamat);
+                        } else {
+                            $('input[name=fullname]').val('');
+                            $('input[name=birthplace]').val('');
+                            $('input[name=birthdate]').val('');
+                            $('input[name=address]').val('');
+                            alert('Data NIK tidak ditemukan!');
+                        }
+                    },
+                    error: function() {
+                        alert('Could not Edit Data');
+                    }
+                });
+            } else {
+                alert('Masukkan No. KTP!');
+            }
+        });
+
+        function dateFormat(date) {
+            var day = date.substr(8, 2);
+            var month = date.substr(6, 1);
+            var year = date.substr(0, 4);
+            var label = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            return day + ' ' + label[month] + ' ' + year;
         }
     </script>
 

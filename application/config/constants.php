@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-define('BASE_URL', 'http://localhost/simlakah/');
-define('BASE_THEME', 'http://localhost/simlakah/assets/');
+define('BASE_URL', 'http://localhost:8015/simlakah/');
+define('BASE_THEME', 'http://localhost:8015/simlakah/assets/');
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace

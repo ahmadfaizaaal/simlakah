@@ -44,13 +44,13 @@
 
                                     <?= $this->session->flashdata('message'); ?>
 
-                                    <form class="user" method="post" action="<?= BASE_URL . 'auth'; ?>">
+                                    <form class="user" method="post" action="<?= BASE_URL . 'auth/login/' . $param; ?>">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Username" value="<?= set_value('username'); ?>">
-                                            <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="text" class="form-control form-control-user" id="nik" name="nik" placeholder="Username / No. KTP" value="<?= set_value('nik'); ?>">
+                                            <?= form_error('nik', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Kata Sandi">
                                             <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <button type="submit" class="btn btn-success btn-user btn-block">
@@ -64,7 +64,7 @@
                                     <div class="text-center">
                                         <p class="small">Belum pernah mendaftar?
                                             <strong>
-                                                <a href="<?= BASE_URL . 'auth/register' ?>" class="main-text">Buat Akun!</a>
+                                                <a href="<?= BASE_URL . 'auth/register/' . $param ?>" class="main-text">Buat Akun!</a>
                                             </strong>
                                         </p>
                                     </div>
