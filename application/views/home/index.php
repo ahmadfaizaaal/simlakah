@@ -55,7 +55,7 @@
                         if ($this->session->userdata('nik') != '') {
                         ?>
                             <li>
-                                <a href="#login">
+                                <a href="<?= BASE_URL . 'auth/logout' ?>">
                                     <span>
                                         <i class="fas fa-fw fa-sign-out-alt"></i>
                                     </span> Logout

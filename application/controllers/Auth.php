@@ -30,7 +30,7 @@ class Auth extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Sistem Manajemen Layanan Pernikahan';
             $data['param'] = $param;
-            $this->load->view('auth/login2', $data);
+            $this->load->view('auth/login', $data);
         } else {
             $this->_login($param);
         }
@@ -121,7 +121,7 @@ class Auth extends CI_Controller
                     </button>
                 </div>'
             );
-            redirect('auth/register');
+            redirect('auth/register/' . $param);
         } else {
             //BEGINNING RULES
             $this->form_validation->set_rules('nik', 'No. KTP', 'required|trim|min_length[16]|max_length[16]|numeric', [
@@ -186,13 +186,13 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata(
                     'message',
                     '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        Selamat! Akun anda telah berhasil dibuat. Silahkan login untuk melanjutkan!
+                        <strong>Selamat!</strong> Akun anda telah berhasil dibuat. Silahkan login untuk melanjutkan!
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>'
                 );
-                redirect('auth/login');
+                redirect('auth/login/' . $param);
             }
         }
     }
