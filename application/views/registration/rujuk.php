@@ -288,8 +288,8 @@
                                                         </div>
                                                         <div class="col-sm-9"> -->
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="rjk_foto_s" id="rjk_foto_s">
-                                                        <label for="rjk_foto_s" class="custom-file-label required"></label>
+                                                        <input type="file" class="custom-file-input" name="rjk_foto_s" id="rjk_foto_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('rjk_foto_s', 'foto_s')">
+                                                        <label for="rjk_foto_s" class="custom-file-label required" id="foto_s"></label>
                                                         <p class="text-left"><small class="text-muted">NB : Silahkan unggah pas foto ukuran 2x3 dengan latar belakang berwarna biru.</small></p>
                                                     </div>
                                                     <!-- </div> -->
@@ -380,8 +380,8 @@
                                                         </div>
                                                         <div class="col-sm-9"> -->
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="rjk_foto_i" id="rjk_foto_i">
-                                                        <label for="rjk_foto_i" class="custom-file-label required"></label>
+                                                        <input type="file" class="custom-file-input" name="rjk_foto_i" id="rjk_foto_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('rjk_foto_i', 'foto_i')">
+                                                        <label for="rjk_foto_i" class="custom-file-label required" id="foto_i"></label>
                                                         <p class="text-left"><small class="text-muted">NB : Silahkan unggah pas foto ukuran 2x3 dengan latar belakang berwarna biru.</small></p>
                                                     </div>
                                                     <!-- </div>
@@ -394,11 +394,22 @@
                                         <h6><i class="step-icon ft-file-text"></i>Data Dokumen Rujuk</h6>
                                         <fieldset class="mt-2">
                                             <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <div class="card text-white box-shadow-0 bg-gradient-x-warning">
+                                                        <div class="card-content collapse show">
+                                                            <div class="card-body">
+                                                                <p class="card-text"><i class="ft-alert-triangle"></i>&nbsp; Jenis dokumen berupa file foto yang bertipe <strong>.JPG / .PNG / .JPEG</strong></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label class="col-md-4 label-control" for="rjk_docaktacerai"><?= $question[24]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-8">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="rjk_docaktacerai" id="rjk_docaktacerai">
-                                                        <label for="rjk_docaktacerai" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="rjk_docaktacerai" id="rjk_docaktacerai" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('rjk_docaktacerai', 'aktacerai')">
+                                                        <label for="rjk_docaktacerai" class="custom-file-label" id="aktacerai"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -406,14 +417,14 @@
                                                 <label class="col-md-4 label-control" for="rjk_docktp"><?= $question[25]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="rjk_docktp_s" id="rjk_docktp_s">
-                                                        <label for="rjk_docktp_s" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="rjk_docktp_s" id="rjk_docktp_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('rjk_docktp_s', 'ktps')">
+                                                        <label for="rjk_docktp_s" class="custom-file-label" id="ktps"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="rjk_docktp_i" id="rjk_docktp_i">
-                                                        <label for="rjk_docktp_i" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="rjk_docktp_i" id="rjk_docktp_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('rjk_docktp_i', 'ktpi')">
+                                                        <label for="rjk_docktp_i" class="custom-file-label" id="ktpi"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -421,14 +432,14 @@
                                                 <label class="col-md-4 label-control" for="rjk_dockk"><?= $question[27]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="rjk_dockk_s" id="rjk_dockk_s">
-                                                        <label for="rjk_dockk_s" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="rjk_dockk_s" id="rjk_dockk_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('rjk_dockk_s', 'kks')">
+                                                        <label for="rjk_dockk_s" class="custom-file-label" id="kks"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="rjk_dockk_i" id="rjk_dockk_i">
-                                                        <label for="rjk_dockk_i" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="rjk_dockk_i" id="rjk_dockk_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('rjk_dockk_i', 'kki')">
+                                                        <label for="rjk_dockk_i" class="custom-file-label" id="kki"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -436,14 +447,14 @@
                                                 <label class="col-md-4 label-control" for="rjk_docakta"><?= $question[29]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="rjk_docakta_s" id="rjk_docakta_s">
-                                                        <label for="rjk_docakta_s" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="rjk_docakta_s" id="rjk_docakta_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('rjk_docakta_s', 'aktas')">
+                                                        <label for="rjk_docakta_s" class="custom-file-label" id="aktas"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="rjk_docakta_i" id="rjk_docakta_i">
-                                                        <label for="rjk_docakta_i" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="rjk_docakta_i" id="rjk_docakta_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('rjk_docakta_i', 'aktai')">
+                                                        <label for="rjk_docakta_i" class="custom-file-label" id="aktai"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -524,7 +535,7 @@
                     var statusCerai_label = '<?= $question[3]->QUESTION_LABEL; ?>';
                     var statusCerai_ans = $('#rjk_status_cerai').val();
 
-                    if ($('#masaIdah').val() > 90) {
+                    if ($('#masaIdah').val() < 90) {
                         $.ajax({
                             type: 'ajax',
                             method: 'post',
@@ -554,7 +565,7 @@
                             }
                         });
                     } else {
-                        swal("Calon istri anda masih dalam masa idah! (<90 hari)", "Error!", "error");
+                        swal("Melebihi batas masa idah (>90 hari)", "Anda harus mengulang akad nikah!", "error");
                     }
                 } else {
                     swal("Isi field yang kosong!", "Error!", "error");
@@ -608,8 +619,6 @@
             validateNIK('i');
             validateMobilePhone('i');
             initializeJobList('i');
-
-            getFileNameOfImage();
 
             // CHECK NIK
             $('#rjk_btnceknik_s').on('click', function() {
@@ -711,11 +720,9 @@
             });
         }
 
-        function getFileNameOfImage() {
-            $('.custom-file-input').on('change', function() {
-                let fileName = $(this).val().split('\\').pop();
-                $(this).next('.custom-file-label').addClass('selected').html(fileName);
-            });
+        function getFileNameOfImage(inputId, id) {
+            let fileName = $('#' + inputId).val().split('\\').pop();
+            $('#' + id).addClass('selected').html(fileName);
         }
 
         function getKewarganegaraan(element, actor) {

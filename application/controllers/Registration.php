@@ -39,12 +39,12 @@ class Registration extends CI_Controller
                 $objAlamatAkad = explode("^", $this->input->post('alamatAkad'));
 
                 array_push($params, $objTempatAkad, $objTanggalAkad, $objAlamatAkad);
-            } else if ('nikah' == $type) {
+            } else if ('isbat' == $type) {
                 $objTanggalAkad = explode("^", $this->input->post('tanggalAkad'));
                 $objAlamatAkad = explode("^", $this->input->post('alamatAkad'));
 
                 array_push($params, $objTanggalAkad, $objAlamatAkad);
-            } else {
+            } elseif ('rujuk' == $type) {
                 $objTanggalDaftarRujuk = explode("^", $this->input->post('tanggalDaftarRujuk'));
                 $objTanggalCerai = explode("^", $this->input->post('tanggalCerai'));
                 $objMasaidah = explode("^", $this->input->post('masaIdah'));
@@ -95,6 +95,10 @@ class Registration extends CI_Controller
             $pekerjaan_s = $this->input->post('nkh_pekerjaan_s');
             $nohp_s = $this->input->post('nkh_nohp_s');
             $foto_s = $this->uploadFile('nkh_foto_s', 'foto', $nama_s, $type, $regID);
+            $pendukung_s = '';
+            if ($_FILES['nkh_docpendukung_s']['name']) {
+                $pendukung_s = $this->uploadFile('nkh_docpendukung_s', 'pendukung', $nama_s, $type, $regID);
+            }
 
             //istri
             $kwn_i = $this->input->post('nkh_kewarganegaraan_i');
@@ -108,10 +112,14 @@ class Registration extends CI_Controller
             $pekerjaan_i = $this->input->post('nkh_pekerjaan_i');
             $nohp_i = $this->input->post('nkh_nohp_i');
             $foto_i = $this->uploadFile('nkh_foto_i', 'foto', $nama_i, $type, $regID);
+            $pendukung_i = '';
+            if ($_FILES['nkh_docpendukung_i']['name']) {
+                $pendukung_i = $this->uploadFile('nkh_docpendukung_i', 'pendukung', $nama_i, $type, $regID);
+            }
 
             //dokumen
-            $n1 = $this->uploadFile('nkh_docn1', 'N1', $nama_s, $type, $regID);
-            $n3 = $this->uploadFile('nkh_docn3', 'N3', $nama_s, $type, $regID);
+            $n1 = $this->uploadFile('nkh_docn1', 'N1', '', $type, $regID);
+            $n3 = $this->uploadFile('nkh_docn3', 'N3', '', $type, $regID);
             $ktp_s = $this->uploadFile('nkh_docktp_s', 'ktp', $nama_s, $type, $regID);
             $ktp_i = $this->uploadFile('nkh_docktp_i', 'ktp', $nama_i, $type, $regID);
             $kk_s = $this->uploadFile('nkh_dockk_s', 'kk', $nama_s, $type, $regID);
@@ -121,7 +129,7 @@ class Registration extends CI_Controller
 
             array_push($params, $kwn_s, $nik_s, $nama_s, $ttl_s, $umur_s, $status_s, $agama_s, $alamat_s, $pekerjaan_s, $nohp_s, $foto_s);
             array_push($params, $kwn_i, $nik_i, $nama_i, $ttl_i, $umur_i, $status_i, $agama_i, $alamat_i, $pekerjaan_i, $nohp_i, $foto_i);
-            array_push($params, $n1, $n3, $ktp_s, $ktp_i, $kk_s, $kk_i, $akta_s, $akta_i);
+            array_push($params, $n1, $n3, $ktp_s, $ktp_i, $kk_s, $kk_i, $akta_s, $akta_i, $pendukung_s, $pendukung_i);
             $startIndex = 3;
         } else if ('isbat' == $type) {
             //suami
@@ -149,7 +157,7 @@ class Registration extends CI_Controller
             $foto_i = $this->uploadFile('isb_foto_i', 'foto', $nama_i, $type, $regID);
 
             //dokumen
-            $sppa = $this->uploadFile('isb_docsppa', 'SPPA', $nama_s, $type, $regID);
+            $sppa = $this->uploadFile('isb_docsppa', 'SPPA', '', $type, $regID);
             $ktp_s = $this->uploadFile('isb_docktp_s', 'ktp', $nama_s, $type, $regID);
             $ktp_i = $this->uploadFile('isb_docktp_i', 'ktp', $nama_i, $type, $regID);
             $kk_s = $this->uploadFile('isb_dockk_s', 'kk', $nama_s, $type, $regID);
@@ -187,7 +195,7 @@ class Registration extends CI_Controller
             $foto_i = $this->uploadFile('rjk_foto_i', 'foto', $nama_i, $type, $regID);
 
             //dokumen
-            $aktacerai = $this->uploadFile('rjk_docaktacerai', 'aktacerai', $nama_s, $type, $regID);
+            $aktacerai = $this->uploadFile('rjk_docaktacerai', 'aktacerai', '', $type, $regID);
             $ktp_s = $this->uploadFile('rjk_docktp_s', 'ktp', $nama_s, $type, $regID);
             $ktp_i = $this->uploadFile('rjk_docktp_i', 'ktp', $nama_i, $type, $regID);
             $kk_s = $this->uploadFile('rjk_dockk_s', 'kk', $nama_s, $type, $regID);
@@ -215,11 +223,23 @@ class Registration extends CI_Controller
         if (count($params) == $insertedDetail) {
             reset($params);
             $startIndex = 0;
+            $registrationType = '';
+            $actionMsg = '';
+            if ('nikah' == $type) {
+                $registrationType = 'Pernikahan';
+                $actionMsg = 'pemberitahuan sidang pranikah.';
+            } else if ('isbat' == $type) {
+                $registrationType = 'Isbat';
+                $actionMsg = 'pengambilan buku nikah.';
+            } else if ('rujuk' == $type) {
+                $registrationType = 'Rujuk';
+                $actionMsg = 'pemberitahuan sidang prarujuk.';
+            }
             $this->session->set_flashdata(
                 'message',
                 '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Selamat!</strong> Pendaftaran pernikahan anda sedang kami proses.<br>Silahkan tunggu info selanjutnya untuk pemberitahuan sidang pranikah.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <strong>Selamat!</strong> Pendaftaran ' . $registrationType . ' anda sedang kami proses.<br>Silahkan tunggu info selanjutnya untuk ' . $actionMsg .
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>'
@@ -241,10 +261,11 @@ class Registration extends CI_Controller
         }
     }
 
-    public function listJob()
+    public function isNeedAdditionalDoc()
     {
-        $job = $this->registration->getListJob();
-        echo json_encode($job);
+        $jobLabel = $this->input->post('jobLabel');
+        $jobAuth = $this->registration->getJobAuth($jobLabel);
+        echo json_encode($jobAuth);
     }
 
     public function getMasaIdah()
@@ -258,10 +279,16 @@ class Registration extends CI_Controller
     public function uploadFile($fileName, $fileType, $nama, $regType, $regID)
     {
         $file = $_FILES[$fileName]['name'];
-        $new_fileName = $regID . '_' . str_replace(" ", "_", $nama) . '_' . date('YmdHis') . '_' . $fileType;
+        $new_fileName = '';
+
+        if ($nama == '') {
+            $new_fileName = $regID . '_' . date('YmdHis') . '_' . $fileType;
+        } else {
+            $new_fileName = $regID . '_' . str_replace(" ", "_", $nama) . '_' . date('YmdHis') . '_' . $fileType;
+        }
 
         if ($file) {
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|JPG|PNG|JPEG|pdf|PDF';
+            $config['allowed_types'] = 'jpg|png|jpeg|JPG|PNG|JPEG';
             $config['max_size'] = 2048;
             $config['upload_path'] = './assets/registration/' . $fileType . '/';
             $config['file_name'] = $new_fileName;

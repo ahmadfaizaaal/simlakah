@@ -9,6 +9,13 @@ class M_Registration extends CI_Model
         date_default_timezone_set('Asia/Bangkok');
     }
 
+    public function getJobAuth($jobLabel)
+    {
+        $result = $this->db->get_where('pekerjaan', ['LABEL_PEKERJAAN' => $jobLabel]);
+        $job = $result->result();
+        return $job[0]->IS_NEED_AUTH;
+    }
+
     public function getListJob()
     {
         $query = $this->db->get('pekerjaan');

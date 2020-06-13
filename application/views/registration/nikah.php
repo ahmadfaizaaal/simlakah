@@ -299,8 +299,8 @@
                                                         </div>
                                                         <div class="col-sm-9"> -->
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_foto_s" id="nkh_foto_s">
-                                                        <label for="nkh_foto_s" class="custom-file-label required"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_foto_s" id="nkh_foto_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_foto_s', 'foto_s')">
+                                                        <label for="nkh_foto_s" class="custom-file-label required" id="foto_s"></label>
                                                         <p class="text-left"><small class="text-muted">NB : Silahkan unggah pas foto ukuran 2x3 dengan latar belakang berwarna biru.</small></p>
                                                     </div>
                                                     <!-- </div> -->
@@ -402,8 +402,8 @@
                                                         </div>
                                                         <div class="col-sm-9"> -->
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_foto_i" id="nkh_foto_i">
-                                                        <label for="nkh_foto_i" class="custom-file-label required"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_foto_i" id="nkh_foto_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_foto_i', 'foto_i')">
+                                                        <label for="nkh_foto_i" class="custom-file-label required" id="foto_i"></label>
                                                         <p class="text-left"><small class="text-muted">NB : Silahkan unggah pas foto ukuran 2x3 dengan latar belakang berwarna biru.</small></p>
                                                     </div>
                                                     <!-- </div>
@@ -416,11 +416,22 @@
                                         <h6><i class="step-icon ft-file-text"></i>Data Dokumen Nikah</h6>
                                         <fieldset class="mt-2">
                                             <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <div class="card text-white box-shadow-0 bg-gradient-x-warning">
+                                                        <div class="card-content collapse show">
+                                                            <div class="card-body">
+                                                                <p class="card-text"><i class="ft-alert-triangle"></i>&nbsp; Jenis dokumen berupa file foto yang bertipe <strong>.JPG / .PNG / .JPEG</strong></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label class="col-md-4 label-control" for="nkh_docn1"><?= $question[25]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-8">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_docn1" id="nkh_docn1">
-                                                        <label for="nkh_docn1" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_docn1" id="nkh_docn1" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_docn1', 'docn1')">
+                                                        <label for="nkh_docn1" class="custom-file-label" id="docn1"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -428,8 +439,8 @@
                                                 <label class="col-md-4 label-control" for="nkh_docn3"><?= $question[26]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-8">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_docn3" id="nkh_docn3">
-                                                        <label for="nkh_docn3" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_docn3" id="nkh_docn3" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_docn3', 'docn3')">
+                                                        <label for="nkh_docn3" class="custom-file-label" id="docn3"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -437,14 +448,16 @@
                                                 <label class="col-md-4 label-control" for="nkh_docktp"><?= $question[27]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_docktp_s" id="nkh_docktp_s">
-                                                        <label for="nkh_docktp_s" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_docktp_s" id="nkh_docktp_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_docktp_s', 'ktps')">
+                                                        <label for="nkh_docktp_s" class="custom-file-label" id="ktps"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk suami</small></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_docktp_i" id="nkh_docktp_i">
-                                                        <label for="nkh_docktp_i" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_docktp_i" id="nkh_docktp_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_docktp_i', 'ktpi')">
+                                                        <label for="nkh_docktp_i" class="custom-file-label" id="ktpi"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk istri</small></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -452,14 +465,16 @@
                                                 <label class="col-md-4 label-control" for="nkh_dockk"><?= $question[29]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_dockk_s" id="nkh_dockk_s">
-                                                        <label for="nkh_dockk_s" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_dockk_s" id="nkh_dockk_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_dockk_s', 'kks')">
+                                                        <label for="nkh_dockk_s" class="custom-file-label" id="kks"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk suami</small></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_dockk_i" id="nkh_dockk_i">
-                                                        <label for="nkh_dockk_i" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_dockk_i" id="nkh_dockk_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_dockk_i', 'kki')">
+                                                        <label for="nkh_dockk_i" class="custom-file-label" id="kki"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk istri</small></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -467,14 +482,33 @@
                                                 <label class="col-md-4 label-control" for="nkh_docakta"><?= $question[31]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_docakta_s" id="nkh_docakta_s">
-                                                        <label for="nkh_docakta_s" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_docakta_s" id="nkh_docakta_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_docakta_s', 'aktas')">
+                                                        <label for="nkh_docakta_s" class="custom-file-label" id="aktas"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk suami</small></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="nkh_docakta_i" id="nkh_docakta_i">
-                                                        <label for="nkh_docakta_i" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="nkh_docakta_i" id="nkh_docakta_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_docakta_i', 'aktai')">
+                                                        <label for="nkh_docakta_i" class="custom-file-label" id="aktai"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk istri</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" id="jobAuth">
+                                                <label class="col-md-4 label-control"><?= $question[33]->QUESTION_LABEL ?> <span class="danger">*</span></label>
+                                                <div class="">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="nkh_docpendukung_s" id="nkh_docpendukung_s" accept="image/jpg, image/jpeg, image/png" onchange="getFileNameOfImage('nkh_docpendukung_s', 'adds')">
+                                                        <label for="nkh_docpendukung_s" class="custom-file-label" id="adds"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk suami</small></p>
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="nkh_docpendukung_i" id="nkh_docpendukung_i" accept="image/jpg, image/jpeg, image/png" onchange="getFileNameOfImage('nkh_docpendukung_i', 'addi')">
+                                                        <label for="nkh_docpendukung_i" class="custom-file-label" id="addi"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk istri</small></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -533,10 +567,15 @@
     <script src="<?= BASE_THEME ?>datetime/build/js/bootstrap-datetimepicker.min.js"></script>
     <script>
         var numberLength = 0;
+        var hasAuth = {
+            's': false,
+            'i': false
+        };
 
         $(function() {
             $('#detailSection').hide();
             $('#cancelRegistration').hide();
+            $('#jobAuth').hide();
 
             $('#nextToDetail').on('click', function() {
                 if ($('#nkh_tempat').val() != '' && $('#nkh_tanggal_akad').val() != '' &&
@@ -624,6 +663,7 @@
             validateNIK('s');
             validateMobilePhone('s');
             initializeJobList('s');
+            initializeJobAuth('s');
 
             //istri
             initializeDatetime('i');
@@ -631,8 +671,7 @@
             validateNIK('i');
             validateMobilePhone('i');
             initializeJobList('i');
-
-            getFileNameOfImage();
+            initializeJobAuth('i');
 
             // VALIDASI TEMPAT AKAD NIKAH
             $('#nkh_tempat').change(function() {
@@ -695,6 +734,60 @@
             });
         }
 
+        function initializeJobAuth(actor) {
+            $('#nkh_pekerjaan_' + actor).change(function() {
+                var nkh_pekerjaan = $('#nkh_pekerjaan_' + actor).val();
+                $.ajax({
+                    type: 'ajax',
+                    method: 'post',
+                    url: '<?= BASE_URL . 'registration/isNeedAdditionalDoc'; ?>',
+                    data: {
+                        jobLabel: nkh_pekerjaan
+                    },
+                    async: false,
+                    dataType: 'json',
+                    success: function(response) {
+                        if ('1' == response) {
+                            hasAuth[actor] = true;
+                            $('#nkh_docpendukung_' + actor).parent().parent().show();
+                            $('#nkh_docpendukung_' + actor).attr('required', true);
+                        } else {
+                            hasAuth[actor] = false;
+                            $('#nkh_docpendukung_' + actor).parent().parent().hide();
+                            $('#nkh_docpendukung_' + actor).attr('required', false);
+                        }
+                    },
+                    error: function() {
+                        swal("Internal Server error 500!", "Error!", "error");
+                    }
+                });
+
+                if (hasAuth['s'] && hasAuth['i']) {
+                    $('#nkh_docpendukung_s').parent().parent().removeClass();
+                    $('#nkh_docpendukung_i').parent().parent().removeClass();
+                    $('#nkh_docpendukung_s').parent().parent().addClass('col-md-4');
+                    $('#nkh_docpendukung_i').parent().parent().addClass('col-md-4');
+                    // $('#jobAuth').show();
+                } else if (hasAuth['s'] && !hasAuth['i']) {
+                    $('#nkh_docpendukung_s').parent().parent().removeClass();
+                    $('#nkh_docpendukung_i').parent().parent().removeClass();
+                    $('#nkh_docpendukung_s').parent().parent().addClass('col-md-8');
+                    // $('#jobAuth').show();
+                } else if (!hasAuth['s'] && hasAuth['i']) {
+                    $('#nkh_docpendukung_s').parent().parent().removeClass();
+                    $('#nkh_docpendukung_i').parent().parent().removeClass();
+                    $('#nkh_docpendukung_i').parent().parent().addClass('col-md-8');
+                    // $('#jobAuth').show();
+                }
+
+                if (hasAuth['s'] || hasAuth['i']) {
+                    $('#jobAuth').show();
+                } else {
+                    $('#jobAuth').hide();
+                }
+            });
+        }
+
         function initializeJobList(actor) {
             var data = [];
             $.ajax({
@@ -723,11 +816,9 @@
             });
         }
 
-        function getFileNameOfImage() {
-            $('.custom-file-input').on('change', function() {
-                let fileName = $(this).val().split('\\').pop();
-                $(this).next('.custom-file-label').addClass('selected').html(fileName);
-            });
+        function getFileNameOfImage(inputId, id) {
+            let fileName = $('#' + inputId).val().split('\\').pop();
+            $('#' + id).addClass('selected').html(fileName);
         }
 
         function getKewarganegaraan(element, actor) {

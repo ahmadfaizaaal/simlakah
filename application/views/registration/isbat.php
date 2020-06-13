@@ -287,8 +287,8 @@
                                                         </div>
                                                         <div class="col-sm-9"> -->
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="isb_foto_s" id="isb_foto_s">
-                                                        <label for="isb_foto_s" class="custom-file-label required"></label>
+                                                        <input type="file" class="custom-file-input" name="isb_foto_s" id="isb_foto_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('isb_foto_s', 'foto_s')">
+                                                        <label for="isb_foto_s" class="custom-file-label required" id="foto_s"></label>
                                                         <p class="text-left"><small class="text-muted">NB : Silahkan unggah pas foto ukuran 2x3 dengan latar belakang berwarna biru.</small></p>
                                                     </div>
                                                     <!-- </div>
@@ -379,8 +379,8 @@
                                                         </div>
                                                         <div class="col-sm-9"> -->
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="isb_foto_i" id="isb_foto_i">
-                                                        <label for="isb_foto_i" class="custom-file-label required"></label>
+                                                        <input type="file" class="custom-file-input" name="isb_foto_i" id="isb_foto_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('isb_foto_i', 'foto_i')">
+                                                        <label for="isb_foto_i" class="custom-file-label required" id="foto_i"></label>
                                                         <p class="text-left"><small class="text-muted">NB : Silahkan unggah pas foto ukuran 2x3 dengan latar belakang berwarna biru.</small></p>
                                                     </div>
                                                     <!-- </div>
@@ -393,11 +393,22 @@
                                         <h6><i class="step-icon ft-file-text"></i>Data Dokumen Isbat</h6>
                                         <fieldset class="mt-2">
                                             <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <div class="card text-white box-shadow-0 bg-gradient-x-warning">
+                                                        <div class="card-content collapse show">
+                                                            <div class="card-body">
+                                                                <p class="card-text"><i class="ft-alert-triangle"></i>&nbsp; Jenis dokumen berupa file foto yang bertipe <strong>.JPG / .PNG / .JPEG</strong></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label class="col-md-4 label-control" for="isb_docsppa"><?= $question[22]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-8">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="isb_docsppa" id="isb_docsppa">
-                                                        <label for="isb_docsppa" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="isb_docsppa" id="isb_docsppa" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('isb_docsppa', 'sppa')">
+                                                        <label for="isb_docsppa" class="custom-file-label" id="sppa"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -405,14 +416,14 @@
                                                 <label class="col-md-4 label-control" for="isb_docktp"><?= $question[23]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="isb_docktp_s" id="isb_docktp_s">
-                                                        <label for="isb_docktp_s" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="isb_docktp_s" id="isb_docktp_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('isb_docktp_s', 'ktps')">
+                                                        <label for="isb_docktp_s" class="custom-file-label" id="ktps"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="isb_docktp_i" id="isb_docktp_i">
-                                                        <label for="isb_docktp_i" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="isb_docktp_i" id="isb_docktp_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('isb_docktp_i', 'ktpi')">
+                                                        <label for="isb_docktp_i" class="custom-file-label" id="ktpi"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -420,14 +431,14 @@
                                                 <label class="col-md-4 label-control" for="isb_dockk"><?= $question[25]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="isb_dockk_s" id="isb_dockk_s">
-                                                        <label for="isb_dockk_s" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="isb_dockk_s" id="isb_dockk_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('isb_dockk_s', 'kks')">
+                                                        <label for="isb_dockk_s" class="custom-file-label" id="kks"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="isb_dockk_i" id="isb_dockk_i">
-                                                        <label for="isb_dockk_i" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="isb_dockk_i" id="isb_dockk_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('isb_dockk_i', 'kki')">
+                                                        <label for="isb_dockk_i" class="custom-file-label" id="kki"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -435,14 +446,14 @@
                                                 <label class="col-md-4 label-control" for="isb_docakta"><?= $question[27]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="isb_docakta_s" id="isb_docakta_s">
-                                                        <label for="isb_docakta_s" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="isb_docakta_s" id="isb_docakta_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('isb_docakta_s', 'aktas')">
+                                                        <label for="isb_docakta_s" class="custom-file-label" id="aktas"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="isb_docakta_i" id="isb_docakta_i">
-                                                        <label for="isb_docakta_i" class="custom-file-label"></label>
+                                                        <input type="file" class="custom-file-input" name="isb_docakta_i" id="isb_docakta_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('isb_docakta_i', 'aktai')">
+                                                        <label for="isb_docakta_i" class="custom-file-label" id="aktai"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -513,7 +524,7 @@
                     // var tempatAkad_label = '<?= $question[0]->QUESTION_LABEL; ?>';
                     // var tempatAkad_ans = $('#isb_tempat').val();
 
-                    var tanggalAkad_label = '<?= $question[1]->QUESTION_LABEL; ?>';
+                    var tanggalAkad_label = '<?= $question[0]->QUESTION_LABEL; ?>';
                     var tanggalAkad_ans = $('#nkh_tanggal_akad').val() + ' ' + $('#nkh_jam_akad').val();
 
                     var alamatAkad_label = '<?= $question[1]->QUESTION_LABEL; ?>';
@@ -599,20 +610,6 @@
             validateMobilePhone('i');
             initializeJobList('i');
 
-            getFileNameOfImage();
-
-            // VALIDASI TEMPAT AKAD isbat
-            // $('#isb_tempat').change(function() {
-            //     var isb_tempat = $('#isb_tempat').val();
-            //     if ('kua' === isb_tempat) {
-            //         $('#isb_alamat_akad').attr('readonly', true);
-            //         $('#isb_alamat_akad').val('KUA Dawarblandong');
-            //     } else {
-            //         $('#isb_alamat_akad').val('');
-            //         $('#isb_alamat_akad').attr('readonly', false);
-            //     }
-            // });
-
             // CHECK NIK
             $('#isb_btnceknik_s').on('click', function() {
                 var nik = $('#isb_nik_s').val();
@@ -690,11 +687,9 @@
             });
         }
 
-        function getFileNameOfImage() {
-            $('.custom-file-input').on('change', function() {
-                let fileName = $(this).val().split('\\').pop();
-                $(this).next('.custom-file-label').addClass('selected').html(fileName);
-            });
+        function getFileNameOfImage(inputId, id) {
+            let fileName = $('#' + inputId).val().split('\\').pop();
+            $('#' + id).addClass('selected').html(fileName);
         }
 
         function getKewarganegaraan(element, actor) {
