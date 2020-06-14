@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2020 at 05:16 AM
+-- Generation Time: Jun 14, 2020 at 04:41 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -164,6 +164,7 @@ CREATE TABLE `pekerjaan` (
   `PEKERJAAN_ID` int(11) NOT NULL,
   `KODE_PEKERJAAN` varchar(32) NOT NULL,
   `LABEL_PEKERJAAN` varchar(64) NOT NULL,
+  `IS_NEED_AUTH` varchar(1) DEFAULT NULL,
   `DTM_CRT` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -171,96 +172,96 @@ CREATE TABLE `pekerjaan` (
 -- Dumping data for table `pekerjaan`
 --
 
-INSERT INTO `pekerjaan` (`PEKERJAAN_ID`, `KODE_PEKERJAAN`, `LABEL_PEKERJAAN`, `DTM_CRT`) VALUES
-(1, 'akuntan', 'AKUNTAN', '2020-05-23 10:11:56'),
-(2, 'bpk', 'ANGGOTA BPK', '2020-05-23 10:11:56'),
-(3, 'dpd', 'ANGGOTA DPD', '2020-05-23 10:11:56'),
-(4, 'dprri', 'ANGGOTA DPR-RI', '2020-05-23 10:11:56'),
-(5, 'dprdkab', 'ANGGOTA DPRD KABUPATEN/KOTA', '2020-05-23 10:11:56'),
-(6, 'dprdprov', 'ANGGOTA DPRD PROVINSI', '2020-05-23 10:11:56'),
-(7, 'kementerian', 'ANGGOTA KABINET/KEMENTERIAN', '2020-05-23 10:11:56'),
-(8, 'mk', 'ANGGOTA MAHKAMAH KONSTITUSI', '2020-05-23 10:11:56'),
-(9, 'apoteker', 'APOTEKER', '2020-05-23 10:11:56'),
-(10, 'arsitek', 'ARSITEK', '2020-05-23 10:11:56'),
-(11, 'belumbekerja', 'BELUM/TIDAK BEKERJA', '2020-05-23 10:11:56'),
-(12, 'biarawati', 'BIARAWATI', '2020-05-23 10:11:56'),
-(13, 'bidan', 'BIDAN', '2020-05-23 10:11:56'),
-(14, 'bupati', 'BUPATI', '2020-05-23 10:11:56'),
-(15, 'buruhharian', 'BURUH HARIAN LEPAS', '2020-05-23 10:11:56'),
-(16, 'buruhnelayan', 'BURUH NELAYAN/PERIKANAN', '2020-05-23 10:11:56'),
-(17, 'buruhternak', 'BURUH PETERNAKAN', '2020-05-23 10:11:56'),
-(18, 'buruhtani', 'BURUH TANI/PERKEBUNAN', '2020-05-23 10:11:56'),
-(19, 'dokter', 'DOKTER', '2020-05-23 10:11:56'),
-(20, 'dosen', 'DOSEN', '2020-05-23 10:11:56'),
-(21, 'dubes', 'DUTA BESAR', '2020-05-23 10:11:56'),
-(22, 'gubernur', 'GUBERNUR', '2020-05-23 10:11:56'),
-(23, 'guru', 'GURU', '2020-05-23 10:11:56'),
-(24, 'imammasjid', 'IMAM MASJID', '2020-05-23 10:11:56'),
-(25, 'industri', 'INDUSTRI', '2020-05-23 10:11:56'),
-(26, 'jurumasak', 'JURU MASAK', '2020-05-23 10:11:56'),
-(27, 'karbumd', 'KARYAWAN BUMD', '2020-05-23 10:11:56'),
-(28, 'karbumn', 'KARYAWAN BUMN', '2020-05-23 10:11:56'),
-(29, 'karhonorer', 'KARYAWAN HONORER', '2020-05-23 10:11:56'),
-(30, 'karswasta', 'KARYAWAN SWASTA', '2020-05-23 10:11:56'),
-(31, 'kades', 'KEPALA DESA', '2020-05-23 10:11:56'),
-(32, 'polri', 'KEPOLISIAN RI', '2020-05-23 10:11:56'),
-(33, 'konstruksi', 'KONSTRUKSI', '2020-05-23 10:11:56'),
-(34, 'konsultan', 'KONSULTAN', '2020-05-23 10:11:56'),
-(35, 'lainnya', 'LAINNYA', '2020-05-23 10:11:56'),
-(36, 'mekanik', 'MEKANIK', '2020-05-23 10:11:56'),
-(37, 'mengurusrt', 'MENGURUS RUMAH TANGGA', '2020-05-23 10:11:56'),
-(38, 'nelayan', 'NELAYAN/PERIKANAN', '2020-05-23 10:11:56'),
-(39, 'notaris', 'NOTARIS', '2020-05-23 10:11:56'),
-(40, 'paraji', 'PARAJI', '2020-05-23 10:11:56'),
-(41, 'paranormal', 'PARANORMAL', '2020-05-23 10:11:56'),
-(42, 'pastor', 'PASTOR', '2020-05-23 10:11:56'),
-(43, 'pedagang', 'PEDAGANG', '2020-05-23 10:11:56'),
-(44, 'pns', 'PEGAWAI NEGERI SIPIL', '2020-05-23 10:11:56'),
-(45, 'pelajar', 'PELAJAR/MAHASISWA', '2020-05-23 10:11:56'),
-(46, 'pelaut', 'PELAUT', '2020-05-23 10:11:56'),
-(47, 'prt', 'PEMBANTU RUMAH TANGGA', '2020-05-23 10:11:56'),
-(48, 'penatabusana', 'PENATA BUSANA', '2020-05-23 10:11:56'),
-(49, 'penatarambut', 'PENATA RAMBUT', '2020-05-23 10:11:56'),
-(50, 'penatarias', 'PENATA RIAS', '2020-05-23 10:11:56'),
-(51, 'pendeta', 'PENDETA', '2020-05-23 10:11:56'),
-(52, 'peneliti', 'PENELITI', '2020-05-23 10:11:56'),
-(53, 'pengacara', 'PENGACARA', '2020-05-23 10:11:56'),
-(54, 'pensiunan', 'PENSIUNAN', '2020-05-23 10:11:56'),
-(55, 'penterjemah', 'PENTERJEMAH', '2020-05-23 10:11:56'),
-(56, 'penyiarradio', 'PENYIAR RADIO', '2020-05-23 10:11:56'),
-(57, 'penyiartv', 'PENYIAR TELEVISI', '2020-05-23 10:11:56'),
-(58, 'perancangbusana', 'PERANCANG BUSANA', '2020-05-23 10:11:56'),
-(59, 'perangkatdesa', 'PERANGKAT DESA', '2020-05-23 10:11:56'),
-(60, 'perawat', 'PERAWAT', '2020-05-23 10:11:56'),
-(61, 'perdagangan', 'PERDAGANGAN', '2020-05-23 10:11:56'),
-(62, 'petani', 'PETANI/PEKEBUN', '2020-05-23 10:11:56'),
-(63, 'peternak', 'PETERNAK', '2020-05-23 10:11:56'),
-(64, 'pialang', 'PIALANG', '2020-05-23 10:11:56'),
-(65, 'pilot', 'PILOT', '2020-05-23 10:11:56'),
-(66, 'presiden', 'PRESIDEN', '2020-05-23 10:11:56'),
-(67, 'promotor', 'PROMOTOR ACARA', '2020-05-23 10:11:56'),
-(68, 'psikiater', 'PSIKIATER/PSIKOLOG', '2020-05-23 10:11:56'),
-(69, 'seniman', 'SENIMAN', '2020-05-23 10:11:56'),
-(70, 'sopir', 'SOPIR', '2020-05-23 10:11:56'),
-(71, 'tabib', 'TABIB', '2020-05-23 10:11:56'),
-(72, 'tni', 'TENTARA NASIONAL INDONESIA', '2020-05-23 10:11:56'),
-(73, 'transportasi', 'TRANSPORTASI', '2020-05-23 10:11:56'),
-(74, 'tukangbatu', 'TUKANG BATU', '2020-05-23 10:11:56'),
-(75, 'tukangcukur', 'TUKANG CUKUR', '2020-05-23 10:11:56'),
-(76, 'tukanggigi', 'TUKANG GIGI', '2020-05-23 10:11:56'),
-(77, 'tukangjahit', 'TUKANG JAHIT', '2020-05-23 10:11:56'),
-(78, 'tukangkayu', 'TUKANG KAYU', '2020-05-23 10:11:56'),
-(79, 'tukanglas', 'TUKANG LAS/PANDAI BESI', '2020-05-23 10:11:56'),
-(80, 'tukanglistrik', 'TUKANG LISTRIK', '2020-05-23 10:11:56'),
-(81, 'tukangsol', 'TUKANG SOL SEPATU', '2020-05-23 10:11:56'),
-(82, 'ustadz', 'USTADZ/MUBALIGH', '2020-05-23 10:11:56'),
-(83, 'wabup', 'WAKIL BUPATI', '2020-05-23 10:11:56'),
-(84, 'wagub', 'WAKIL GUBERNUR', '2020-05-23 10:11:56'),
-(85, 'wapres', 'WAKIL PRESIDEN', '2020-05-23 10:11:56'),
-(86, 'wawali', 'WAKIL WALIKOTA', '2020-05-23 10:11:56'),
-(87, 'walikota', 'WALIKOTA', '2020-05-23 10:11:56'),
-(88, 'wartawan', 'WARTAWAN', '2020-05-23 10:11:56'),
-(89, 'wiraswasta', 'WIRASWASTA', '2020-05-23 10:11:56');
+INSERT INTO `pekerjaan` (`PEKERJAAN_ID`, `KODE_PEKERJAAN`, `LABEL_PEKERJAAN`, `IS_NEED_AUTH`, `DTM_CRT`) VALUES
+(1, 'akuntan', 'AKUNTAN', '0', '2020-05-23 10:11:56'),
+(2, 'bpk', 'ANGGOTA BPK', '0', '2020-05-23 10:11:56'),
+(3, 'dpd', 'ANGGOTA DPD', '0', '2020-05-23 10:11:56'),
+(4, 'dprri', 'ANGGOTA DPR-RI', '0', '2020-05-23 10:11:56'),
+(5, 'dprdkab', 'ANGGOTA DPRD KABUPATEN/KOTA', '0', '2020-05-23 10:11:56'),
+(6, 'dprdprov', 'ANGGOTA DPRD PROVINSI', '0', '2020-05-23 10:11:56'),
+(7, 'kementerian', 'ANGGOTA KABINET/KEMENTERIAN', '0', '2020-05-23 10:11:56'),
+(8, 'mk', 'ANGGOTA MAHKAMAH KONSTITUSI', '0', '2020-05-23 10:11:56'),
+(9, 'apoteker', 'APOTEKER', '0', '2020-05-23 10:11:56'),
+(10, 'arsitek', 'ARSITEK', '0', '2020-05-23 10:11:56'),
+(11, 'belumbekerja', 'BELUM/TIDAK BEKERJA', '0', '2020-05-23 10:11:56'),
+(12, 'biarawati', 'BIARAWATI', '0', '2020-05-23 10:11:56'),
+(13, 'bidan', 'BIDAN', '0', '2020-05-23 10:11:56'),
+(14, 'bupati', 'BUPATI', '0', '2020-05-23 10:11:56'),
+(15, 'buruhharian', 'BURUH HARIAN LEPAS', '0', '2020-05-23 10:11:56'),
+(16, 'buruhnelayan', 'BURUH NELAYAN/PERIKANAN', '0', '2020-05-23 10:11:56'),
+(17, 'buruhternak', 'BURUH PETERNAKAN', '0', '2020-05-23 10:11:56'),
+(18, 'buruhtani', 'BURUH TANI/PERKEBUNAN', '0', '2020-05-23 10:11:56'),
+(19, 'dokter', 'DOKTER', '0', '2020-05-23 10:11:56'),
+(20, 'dosen', 'DOSEN', '0', '2020-05-23 10:11:56'),
+(21, 'dubes', 'DUTA BESAR', '0', '2020-05-23 10:11:56'),
+(22, 'gubernur', 'GUBERNUR', '0', '2020-05-23 10:11:56'),
+(23, 'guru', 'GURU', '0', '2020-05-23 10:11:56'),
+(24, 'imammasjid', 'IMAM MASJID', '0', '2020-05-23 10:11:56'),
+(25, 'industri', 'INDUSTRI', '0', '2020-05-23 10:11:56'),
+(26, 'jurumasak', 'JURU MASAK', '0', '2020-05-23 10:11:56'),
+(27, 'karbumd', 'KARYAWAN BUMD', '0', '2020-05-23 10:11:56'),
+(28, 'karbumn', 'KARYAWAN BUMN', '0', '2020-05-23 10:11:56'),
+(29, 'karhonorer', 'KARYAWAN HONORER', '0', '2020-05-23 10:11:56'),
+(30, 'karswasta', 'KARYAWAN SWASTA', '0', '2020-05-23 10:11:56'),
+(31, 'kades', 'KEPALA DESA', '0', '2020-05-23 10:11:56'),
+(32, 'polri', 'KEPOLISIAN RI', '1', '2020-05-23 10:11:56'),
+(33, 'konstruksi', 'KONSTRUKSI', '0', '2020-05-23 10:11:56'),
+(34, 'konsultan', 'KONSULTAN', '0', '2020-05-23 10:11:56'),
+(35, 'lainnya', 'LAINNYA', '0', '2020-05-23 10:11:56'),
+(36, 'mekanik', 'MEKANIK', '0', '2020-05-23 10:11:56'),
+(37, 'mengurusrt', 'MENGURUS RUMAH TANGGA', '0', '2020-05-23 10:11:56'),
+(38, 'nelayan', 'NELAYAN/PERIKANAN', '0', '2020-05-23 10:11:56'),
+(39, 'notaris', 'NOTARIS', '0', '2020-05-23 10:11:56'),
+(40, 'paraji', 'PARAJI', '0', '2020-05-23 10:11:56'),
+(41, 'paranormal', 'PARANORMAL', '0', '2020-05-23 10:11:56'),
+(42, 'pastor', 'PASTOR', '0', '2020-05-23 10:11:56'),
+(43, 'pedagang', 'PEDAGANG', '0', '2020-05-23 10:11:56'),
+(44, 'pns', 'PEGAWAI NEGERI SIPIL', '0', '2020-05-23 10:11:56'),
+(45, 'pelajar', 'PELAJAR/MAHASISWA', '0', '2020-05-23 10:11:56'),
+(46, 'pelaut', 'PELAUT', '0', '2020-05-23 10:11:56'),
+(47, 'prt', 'PEMBANTU RUMAH TANGGA', '0', '2020-05-23 10:11:56'),
+(48, 'penatabusana', 'PENATA BUSANA', '0', '2020-05-23 10:11:56'),
+(49, 'penatarambut', 'PENATA RAMBUT', '0', '2020-05-23 10:11:56'),
+(50, 'penatarias', 'PENATA RIAS', '0', '2020-05-23 10:11:56'),
+(51, 'pendeta', 'PENDETA', '0', '2020-05-23 10:11:56'),
+(52, 'peneliti', 'PENELITI', '0', '2020-05-23 10:11:56'),
+(53, 'pengacara', 'PENGACARA', '0', '2020-05-23 10:11:56'),
+(54, 'pensiunan', 'PENSIUNAN', '0', '2020-05-23 10:11:56'),
+(55, 'penterjemah', 'PENTERJEMAH', '0', '2020-05-23 10:11:56'),
+(56, 'penyiarradio', 'PENYIAR RADIO', '0', '2020-05-23 10:11:56'),
+(57, 'penyiartv', 'PENYIAR TELEVISI', '0', '2020-05-23 10:11:56'),
+(58, 'perancangbusana', 'PERANCANG BUSANA', '0', '2020-05-23 10:11:56'),
+(59, 'perangkatdesa', 'PERANGKAT DESA', '0', '2020-05-23 10:11:56'),
+(60, 'perawat', 'PERAWAT', '0', '2020-05-23 10:11:56'),
+(61, 'perdagangan', 'PERDAGANGAN', '0', '2020-05-23 10:11:56'),
+(62, 'petani', 'PETANI/PEKEBUN', '0', '2020-05-23 10:11:56'),
+(63, 'peternak', 'PETERNAK', '0', '2020-05-23 10:11:56'),
+(64, 'pialang', 'PIALANG', '0', '2020-05-23 10:11:56'),
+(65, 'pilot', 'PILOT', '0', '2020-05-23 10:11:56'),
+(66, 'presiden', 'PRESIDEN', '0', '2020-05-23 10:11:56'),
+(67, 'promotor', 'PROMOTOR ACARA', '0', '2020-05-23 10:11:56'),
+(68, 'psikiater', 'PSIKIATER/PSIKOLOG', '0', '2020-05-23 10:11:56'),
+(69, 'seniman', 'SENIMAN', '0', '2020-05-23 10:11:56'),
+(70, 'sopir', 'SOPIR', '0', '2020-05-23 10:11:56'),
+(71, 'tabib', 'TABIB', '0', '2020-05-23 10:11:56'),
+(72, 'tni', 'TENTARA NASIONAL INDONESIA', '1', '2020-05-23 10:11:56'),
+(73, 'transportasi', 'TRANSPORTASI', '0', '2020-05-23 10:11:56'),
+(74, 'tukangbatu', 'TUKANG BATU', '0', '2020-05-23 10:11:56'),
+(75, 'tukangcukur', 'TUKANG CUKUR', '0', '2020-05-23 10:11:56'),
+(76, 'tukanggigi', 'TUKANG GIGI', '0', '2020-05-23 10:11:56'),
+(77, 'tukangjahit', 'TUKANG JAHIT', '0', '2020-05-23 10:11:56'),
+(78, 'tukangkayu', 'TUKANG KAYU', '0', '2020-05-23 10:11:56'),
+(79, 'tukanglas', 'TUKANG LAS/PANDAI BESI', '0', '2020-05-23 10:11:56'),
+(80, 'tukanglistrik', 'TUKANG LISTRIK', '0', '2020-05-23 10:11:56'),
+(81, 'tukangsol', 'TUKANG SOL SEPATU', '0', '2020-05-23 10:11:56'),
+(82, 'ustadz', 'USTADZ/MUBALIGH', '0', '2020-05-23 10:11:56'),
+(83, 'wabup', 'WAKIL BUPATI', '0', '2020-05-23 10:11:56'),
+(84, 'wagub', 'WAKIL GUBERNUR', '0', '2020-05-23 10:11:56'),
+(85, 'wapres', 'WAKIL PRESIDEN', '0', '2020-05-23 10:11:56'),
+(86, 'wawali', 'WAKIL WALIKOTA', '0', '2020-05-23 10:11:56'),
+(87, 'walikota', 'WALIKOTA', '0', '2020-05-23 10:11:56'),
+(88, 'wartawan', 'WARTAWAN', '0', '2020-05-23 10:11:56'),
+(89, 'wiraswasta', 'WIRASWASTA', '0', '2020-05-23 10:11:56');
 
 -- --------------------------------------------------------
 
@@ -325,7 +326,9 @@ INSERT INTO `question` (`QUESTION_ID`, `IS_ACTIVE`, `REF_ID`, `QUESTION_LABEL`, 
 (40, '1', 'TGL_CERAI', 'Tanggal Cerai', '0', '1', '2020-05-25 03:33:35'),
 (41, '1', 'MASA_IDAH', 'Masa Idah', '1', '1', '2020-05-25 03:33:35'),
 (42, '1', 'STATUS_CERAI', 'Status Cerai', '1', '1', '2020-05-25 03:33:35'),
-(43, '1', 'FILE_AKTA_CERAI', 'Akta Cerai', '0', '1', '2020-05-25 03:33:35');
+(43, '1', 'FILE_AKTA_CERAI', 'Akta Cerai', '0', '1', '2020-05-25 03:33:35'),
+(44, '1', 'FILE_ADDITIONAL_DOC_S', 'Surat Pernyataan dari Atasan', '0', '0', '2020-06-11 02:00:00'),
+(45, '1', 'FILE_ADDITIONAL_DOC_I', 'Surat Pernyataan dari Atasan', '0', '0', '2020-06-11 02:00:00');
 
 -- --------------------------------------------------------
 
@@ -356,7 +359,8 @@ INSERT INTO `questiongroup_of_form` (`QUESTIONGROUPOFFORM_ID`, `FORM_ID`, `QUEST
 (9, 3, 4, '2020-05-25 04:56:35'),
 (10, 3, 5, '2020-05-25 04:56:35'),
 (11, 3, 7, '2020-05-25 04:56:35'),
-(12, 3, 10, '2020-05-25 04:56:35');
+(12, 3, 10, '2020-05-25 04:56:35'),
+(13, 1, 11, '2020-06-11 02:00:00');
 
 -- --------------------------------------------------------
 
@@ -386,7 +390,8 @@ INSERT INTO `question_group` (`QUESTIONGROUP_ID`, `IS_ACTIVE`, `QUESTIONGROUP_LA
 (7, '1', 'Data Header Isbat', 50, '2020-05-25 04:00:57'),
 (8, '1', 'Data Header Rujuk', 15, '2020-05-25 04:00:57'),
 (9, '1', 'Data Dokumen Rujuk', 90, '2020-05-25 04:00:57'),
-(10, '1', 'Data Dokumen Isbat', 80, '2020-05-25 04:00:57');
+(10, '1', 'Data Dokumen Isbat', 80, '2020-05-25 04:00:57'),
+(11, '1', 'Data Dokumen Pendukung', 100, '2020-06-11 02:00:00');
 
 -- --------------------------------------------------------
 
@@ -479,7 +484,9 @@ INSERT INTO `question_of_group` (`QUESTIONOFGROUP_ID`, `QUESTIONGROUP_ID`, `QUES
 (71, 9, 30, 40, '2020-05-25 04:01:32'),
 (72, 9, 31, 50, '2020-05-25 04:01:32'),
 (73, 9, 32, 60, '2020-05-25 04:01:32'),
-(74, 9, 33, 70, '2020-05-25 04:01:32');
+(74, 9, 33, 70, '2020-05-25 04:01:32'),
+(75, 11, 44, 10, '2020-06-11 02:00:00'),
+(76, 11, 45, 20, '2020-06-11 02:00:00');
 
 -- --------------------------------------------------------
 
@@ -507,9 +514,8 @@ CREATE TABLE `registration` (
 --
 
 INSERT INTO `registration` (`REG_ID`, `REG_CODE`, `DTM_CRT`, `DTM_UPD`, `USR_UPD`, `FORM_ID`, `STATUS_ID`, `VALIDATION_DATE`, `CHECKED_DATE`, `VERIFIED_DATE`, `SCHEDULE`, `PARTICIPANT_ID`) VALUES
-(47, '1/Ahm/20200529070155', '2020-05-29 00:01:58', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, 1),
-(51, '1/Ahm/20200529074048', '2020-05-29 00:41:00', NULL, NULL, 3, 1, NULL, NULL, NULL, NULL, 1),
-(53, '1/Ahm/20200529100529', '2020-05-29 03:05:36', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, 1);
+(100, '1/Ahm/20200613225105', '2020-06-13 15:51:09', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, 1),
+(102, '1/Ahm/20200614201946', '2020-06-14 13:19:51', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -533,117 +539,45 @@ CREATE TABLE `registration_detail` (
 --
 
 INSERT INTO `registration_detail` (`REG_DETAIL_ID`, `DTM_CRT`, `DTM_UPD`, `USR_UPD`, `REG_ID`, `QUESTION_ID`, `QUESTION_LABEL`, `ANSWER`) VALUES
-(199, '2020-05-29 00:01:59', NULL, NULL, 47, 1, 'Tempat Akad Nikah', 'kua'),
-(200, '2020-05-29 00:01:59', NULL, NULL, 47, 2, 'Tanggal Akad Nikah', '05-06-2020 07:01:57'),
-(201, '2020-05-29 00:01:59', NULL, NULL, 47, 3, 'Alamat Lokasi Akad Nikah', 'KUA Dawarblandong'),
-(202, '2020-05-29 00:03:18', NULL, NULL, 47, 4, 'Kewarganegaraan', 'wni'),
-(203, '2020-05-29 00:03:18', NULL, NULL, 47, 6, 'NIK Calon Suami', '3515072206970001'),
-(204, '2020-05-29 00:03:19', NULL, NULL, 47, 8, 'Nama Calon Suami', 'Rizky Febian'),
-(205, '2020-05-29 00:03:19', NULL, NULL, 47, 10, 'Tempat & Tanggal Lahir', 'Mojokerto, 22-06-1997'),
-(206, '2020-05-29 00:03:19', NULL, NULL, 47, 12, 'Umur', '23'),
-(207, '2020-05-29 00:03:19', NULL, NULL, 47, 14, 'Status Calon Suami', 'jejaka'),
-(208, '2020-05-29 00:03:19', NULL, NULL, 47, 16, 'Agama', 'Islam'),
-(209, '2020-05-29 00:03:19', NULL, NULL, 47, 18, 'Alamat', 'Jalan Gajah Mada RT 001 RW 001 Dawarblandong Dawarblandong Mojokerto'),
-(210, '2020-05-29 00:03:19', NULL, NULL, 47, 20, 'Pekerjaan', 'DOKTER'),
-(211, '2020-05-29 00:03:19', NULL, NULL, 47, 22, 'Nomor HP / WA', '081234567890'),
-(212, '2020-05-29 00:03:19', NULL, NULL, 47, 24, 'Foto', '47_Rizky_Febian_20200529070318_foto'),
-(213, '2020-05-29 00:03:19', NULL, NULL, 47, 5, 'Kewarganegaraan', 'wni'),
-(214, '2020-05-29 00:03:19', NULL, NULL, 47, 7, 'NIK Calon Istri', '3515072206970002'),
-(215, '2020-05-29 00:03:19', NULL, NULL, 47, 9, 'Nama Calon Istri', 'Savira Alifa'),
-(216, '2020-05-29 00:03:19', NULL, NULL, 47, 11, 'Tempat & Tanggal Lahir', 'Surabaya, 22-12-1999'),
-(217, '2020-05-29 00:03:19', NULL, NULL, 47, 13, 'Umur', '21'),
-(218, '2020-05-29 00:03:19', NULL, NULL, 47, 15, 'Status Calon Istri', 'perawan'),
-(219, '2020-05-29 00:03:19', NULL, NULL, 47, 17, 'Agama', 'Islam'),
-(220, '2020-05-29 00:03:19', NULL, NULL, 47, 19, 'Alamat', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto'),
-(221, '2020-05-29 00:03:20', NULL, NULL, 47, 21, 'Pekerjaan', 'GURU'),
-(222, '2020-05-29 00:03:20', NULL, NULL, 47, 23, 'Nomor HP / WA', '081234567890'),
-(223, '2020-05-29 00:03:20', NULL, NULL, 47, 25, 'Foto', '47_Savira_Alifa_20200529070318_foto'),
-(224, '2020-05-29 00:03:20', NULL, NULL, 47, 26, 'Surat Keterangan Untuk Nikah N1 (Dari Kelurahan)', '47_Rizky_Febian_20200529070318_N1'),
-(225, '2020-05-29 00:03:20', NULL, NULL, 47, 27, 'Surat Persetujuan Mempelai N3', '47_Rizky_Febian_20200529070318_N3'),
-(226, '2020-05-29 00:03:20', NULL, NULL, 47, 28, 'Kartu Tanda Penduduk', '47_Rizky_Febian_20200529070318_ktp'),
-(227, '2020-05-29 00:03:20', NULL, NULL, 47, 29, 'Kartu Tanda Penduduk', '47_Savira_Alifa_20200529070318_ktp'),
-(228, '2020-05-29 00:03:20', NULL, NULL, 47, 30, 'Kartu Keluarga', '47_Rizky_Febian_20200529070318_kk'),
-(229, '2020-05-29 00:03:20', NULL, NULL, 47, 31, 'Kartu Keluarga', '47_Savira_Alifa_20200529070318_kk'),
-(230, '2020-05-29 00:03:20', NULL, NULL, 47, 32, 'Akta Lahir', '47_Rizky_Febian_20200529070318_aktalahir'),
-(231, '2020-05-29 00:03:20', NULL, NULL, 47, 33, 'Akta Lahir', '47_Savira_Alifa_20200529070318_aktalahir'),
-(232, '2020-05-29 00:42:22', NULL, NULL, 51, 4, 'Kewarganegaraan', 'wni'),
-(233, '2020-05-29 00:42:22', NULL, NULL, 51, 36, 'NIK Suami', '3515072206970001'),
-(234, '2020-05-29 00:42:22', NULL, NULL, 51, 34, 'Nama Suami', 'Rizky Febian'),
-(235, '2020-05-29 00:42:22', NULL, NULL, 51, 10, 'Tempat & Tanggal Lahir', 'Mojokerto, 22-06-1997'),
-(236, '2020-05-29 00:42:22', NULL, NULL, 51, 12, 'Umur', '23'),
-(237, '2020-05-29 00:42:22', NULL, NULL, 51, 16, 'Agama', 'Islam'),
-(238, '2020-05-29 00:42:22', NULL, NULL, 51, 18, 'Alamat', 'Jalan Gajah Mada RT 001 RW 001 Dawarblandong Dawarblandong Mojokerto'),
-(239, '2020-05-29 00:42:22', NULL, NULL, 51, 20, 'Pekerjaan', 'DOKTER'),
-(240, '2020-05-29 00:42:22', NULL, NULL, 51, 22, 'Nomor HP / WA', '081234567890'),
-(241, '2020-05-29 00:42:22', NULL, NULL, 51, 24, 'Foto', '51_Rizky_Febian_20200529074221_foto'),
-(242, '2020-05-29 00:42:22', NULL, NULL, 51, 4, 'Kewarganegaraan', 'wni'),
-(243, '2020-05-29 00:42:22', NULL, NULL, 51, 37, 'NIK Istri', '3515072206970002'),
-(244, '2020-05-29 00:42:22', NULL, NULL, 51, 35, 'Nama Istri', 'Savira Alifa'),
-(245, '2020-05-29 00:42:22', NULL, NULL, 51, 11, 'Tempat & Tanggal Lahir', 'Surabaya, 22-12-1999'),
-(246, '2020-05-29 00:42:23', NULL, NULL, 51, 13, 'Umur', '21'),
-(247, '2020-05-29 00:42:23', NULL, NULL, 51, 17, 'Agama', 'Islam'),
-(248, '2020-05-29 00:42:23', NULL, NULL, 51, 19, 'Alamat', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto'),
-(249, '2020-05-29 00:42:23', NULL, NULL, 51, 21, 'Pekerjaan', 'GURU'),
-(250, '2020-05-29 00:42:23', NULL, NULL, 51, 23, 'Nomor HP / WA', '081234567890'),
-(251, '2020-05-29 00:42:23', NULL, NULL, 51, 25, 'Foto', '51_Savira_Alifa_20200529074221_foto'),
-(252, '2020-05-29 00:42:23', NULL, NULL, 51, 38, 'Surat Penetapan dari Pengadilan Agama', '51_Rizky_Febian_20200529074221_SPPA'),
-(253, '2020-05-29 00:42:23', NULL, NULL, 51, 28, 'Kartu Tanda Penduduk', '51_Rizky_Febian_20200529074221_ktp'),
-(254, '2020-05-29 00:42:23', NULL, NULL, 51, 29, 'Kartu Tanda Penduduk', '51_Savira_Alifa_20200529074221_ktp'),
-(255, '2020-05-29 00:42:23', NULL, NULL, 51, 30, 'Kartu Keluarga', '51_Rizky_Febian_20200529074221_kk'),
-(256, '2020-05-29 00:42:23', NULL, NULL, 51, 31, 'Kartu Keluarga', '51_Savira_Alifa_20200529074222_kk'),
-(257, '2020-05-29 00:42:23', NULL, NULL, 51, 32, 'Akta Lahir', '51_Rizky_Febian_20200529074222_aktalahir'),
-(258, '2020-05-29 00:42:23', NULL, NULL, 51, 33, 'Akta Lahir', '51_Savira_Alifa_20200529074222_aktalahir'),
-(259, '2020-05-29 03:05:36', NULL, NULL, 53, 39, 'Tanggal Daftar Rujuk', '29-05-2020'),
-(260, '2020-05-29 03:05:36', NULL, NULL, 53, 40, 'Tanggal Cerai', '01-12-2019'),
-(261, '2020-05-29 03:05:36', NULL, NULL, 53, 41, 'Masa Idah', '180 hari'),
-(262, '2020-05-29 03:05:36', NULL, NULL, 53, 42, 'Status Cerai', 'Cerai Raj\'i'),
-(263, '2020-05-29 03:06:41', NULL, NULL, 53, 4, 'Kewarganegaraan', 'wni'),
-(264, '2020-05-29 03:06:41', NULL, NULL, 53, 36, 'NIK Suami', '3515072206970001'),
-(265, '2020-05-29 03:06:41', NULL, NULL, 53, 34, 'Nama Suami', 'Rizky Febian'),
-(266, '2020-05-29 03:06:41', NULL, NULL, 53, 10, 'Tempat & Tanggal Lahir', 'Mojokerto, 22-06-1997'),
-(267, '2020-05-29 03:06:41', NULL, NULL, 53, 12, 'Umur', '23'),
-(268, '2020-05-29 03:06:41', NULL, NULL, 53, 16, 'Agama', 'Islam'),
-(269, '2020-05-29 03:06:41', NULL, NULL, 53, 18, 'Alamat', 'Jalan Gajah Mada RT 001 RW 001 Dawarblandong Dawarblandong Mojokerto'),
-(270, '2020-05-29 03:06:41', NULL, NULL, 53, 20, 'Pekerjaan', 'DOKTER'),
-(271, '2020-05-29 03:06:41', NULL, NULL, 53, 22, 'Nomor HP / WA', '081234567890'),
-(272, '2020-05-29 03:06:41', NULL, NULL, 53, 24, 'Foto', '53_Rizky_Febian_20200529100641_foto'),
-(273, '2020-05-29 03:06:41', NULL, NULL, 53, 4, 'Kewarganegaraan', 'wni'),
-(274, '2020-05-29 03:06:42', NULL, NULL, 53, 37, 'NIK Istri', '3515072206970002'),
-(275, '2020-05-29 03:06:42', NULL, NULL, 53, 35, 'Nama Istri', 'Savira Alifa'),
-(276, '2020-05-29 03:06:42', NULL, NULL, 53, 11, 'Tempat & Tanggal Lahir', 'Surabaya, 22-12-1999'),
-(277, '2020-05-29 03:06:42', NULL, NULL, 53, 13, 'Umur', '21'),
-(278, '2020-05-29 03:06:42', NULL, NULL, 53, 17, 'Agama', 'Islam'),
-(279, '2020-05-29 03:06:42', NULL, NULL, 53, 19, 'Alamat', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto'),
-(280, '2020-05-29 03:06:42', NULL, NULL, 53, 21, 'Pekerjaan', 'GURU'),
-(281, '2020-05-29 03:06:42', NULL, NULL, 53, 23, 'Nomor HP / WA', '081234567890'),
-(282, '2020-05-29 03:06:42', NULL, NULL, 53, 25, 'Foto', '53_Savira_Alifa_20200529100641_foto'),
-(283, '2020-05-29 03:07:30', NULL, NULL, 53, 4, 'Kewarganegaraan', 'wni'),
-(284, '2020-05-29 03:07:30', NULL, NULL, 53, 36, 'NIK Suami', '3515072206970001'),
-(285, '2020-05-29 03:07:30', NULL, NULL, 53, 34, 'Nama Suami', 'Rizky Febian'),
-(286, '2020-05-29 03:07:30', NULL, NULL, 53, 10, 'Tempat & Tanggal Lahir', 'Mojokerto, 22-06-1997'),
-(287, '2020-05-29 03:07:30', NULL, NULL, 53, 12, 'Umur', '23'),
-(288, '2020-05-29 03:07:30', NULL, NULL, 53, 16, 'Agama', 'Islam'),
-(289, '2020-05-29 03:07:30', NULL, NULL, 53, 18, 'Alamat', 'Jalan Gajah Mada RT 001 RW 001 Dawarblandong Dawarblandong Mojokerto'),
-(290, '2020-05-29 03:07:30', NULL, NULL, 53, 20, 'Pekerjaan', 'DOKTER'),
-(291, '2020-05-29 03:07:30', NULL, NULL, 53, 22, 'Nomor HP / WA', '081234567890'),
-(292, '2020-05-29 03:07:30', NULL, NULL, 53, 24, 'Foto', '53_Rizky_Febian_20200529100730_foto'),
-(293, '2020-05-29 03:07:30', NULL, NULL, 53, 4, 'Kewarganegaraan', 'wni'),
-(294, '2020-05-29 03:07:30', NULL, NULL, 53, 37, 'NIK Istri', '3515072206970002'),
-(295, '2020-05-29 03:07:31', NULL, NULL, 53, 35, 'Nama Istri', 'Savira Alifa'),
-(296, '2020-05-29 03:07:31', NULL, NULL, 53, 11, 'Tempat & Tanggal Lahir', 'Surabaya, 22-12-1999'),
-(297, '2020-05-29 03:07:31', NULL, NULL, 53, 13, 'Umur', '21'),
-(298, '2020-05-29 03:07:31', NULL, NULL, 53, 17, 'Agama', 'Islam'),
-(299, '2020-05-29 03:07:31', NULL, NULL, 53, 19, 'Alamat', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto'),
-(300, '2020-05-29 03:07:31', NULL, NULL, 53, 21, 'Pekerjaan', 'GURU'),
-(301, '2020-05-29 03:07:31', NULL, NULL, 53, 23, 'Nomor HP / WA', '081234567890'),
-(302, '2020-05-29 03:07:31', NULL, NULL, 53, 25, 'Foto', '53_Savira_Alifa_20200529100730_foto'),
-(303, '2020-05-29 03:07:31', NULL, NULL, 53, 43, 'Akta Cerai', '53_Rizky_Febian_20200529100730_aktacerai'),
-(304, '2020-05-29 03:07:31', NULL, NULL, 53, 28, 'Kartu Tanda Penduduk', '53_Rizky_Febian_20200529100730_ktp'),
-(305, '2020-05-29 03:07:31', NULL, NULL, 53, 29, 'Kartu Tanda Penduduk', '53_Savira_Alifa_20200529100730_ktp'),
-(306, '2020-05-29 03:07:31', NULL, NULL, 53, 30, 'Kartu Keluarga', '53_Rizky_Febian_20200529100730_kk'),
-(307, '2020-05-29 03:07:31', NULL, NULL, 53, 31, 'Kartu Keluarga', '53_Savira_Alifa_20200529100730_kk'),
-(308, '2020-05-29 03:07:31', NULL, NULL, 53, 32, 'Akta Lahir', '53_Rizky_Febian_20200529100730_aktalahir'),
-(309, '2020-05-29 03:07:31', NULL, NULL, 53, 33, 'Akta Lahir', '53_Savira_Alifa_20200529100730_aktalahir');
+(532, '2020-06-13 15:51:09', NULL, NULL, 100, 1, 'Tempat Akad Nikah', 'kua'),
+(533, '2020-06-13 15:51:09', NULL, NULL, 100, 2, 'Tanggal Akad Nikah', '15-06-2020 22:51:08'),
+(534, '2020-06-13 15:51:10', NULL, NULL, 100, 3, 'Alamat Lokasi Akad Nikah', 'KUA Dawarblandong'),
+(535, '2020-06-13 15:52:50', NULL, NULL, 100, 4, 'Kewarganegaraan', 'wni'),
+(536, '2020-06-13 15:52:50', NULL, NULL, 100, 6, 'NIK Calon Suami', '3515072206970001'),
+(537, '2020-06-13 15:52:50', NULL, NULL, 100, 8, 'Nama Calon Suami', 'Rizky Febian'),
+(538, '2020-06-13 15:52:50', NULL, NULL, 100, 10, 'Tempat & Tanggal Lahir', 'Mojokerto, 22-06-1997'),
+(539, '2020-06-13 15:52:50', NULL, NULL, 100, 12, 'Umur', '23'),
+(540, '2020-06-13 15:52:50', NULL, NULL, 100, 14, 'Status Calon Suami', 'jejaka'),
+(541, '2020-06-13 15:52:50', NULL, NULL, 100, 16, 'Agama', 'Islam'),
+(542, '2020-06-13 15:52:50', NULL, NULL, 100, 18, 'Alamat', 'Jalan Gajah Mada RT 001 RW 001 Dawarblandong Dawarblandong Mojokerto'),
+(543, '2020-06-13 15:52:50', NULL, NULL, 100, 20, 'Pekerjaan', 'TENTARA NASIONAL INDONESIA'),
+(544, '2020-06-13 15:52:50', NULL, NULL, 100, 22, 'Nomor HP / WA', '081234567890'),
+(545, '2020-06-13 15:52:50', NULL, NULL, 100, 24, 'Foto', '100_Rizky_Febian_20200613225250_foto'),
+(546, '2020-06-13 15:52:50', NULL, NULL, 100, 5, 'Kewarganegaraan', 'wni'),
+(547, '2020-06-13 15:52:50', NULL, NULL, 100, 7, 'NIK Calon Istri', '3515072206970002'),
+(548, '2020-06-13 15:52:50', NULL, NULL, 100, 9, 'Nama Calon Istri', 'Savira Alifa'),
+(549, '2020-06-13 15:52:51', NULL, NULL, 100, 11, 'Tempat & Tanggal Lahir', 'Surabaya, 22-12-1999'),
+(550, '2020-06-13 15:52:51', NULL, NULL, 100, 13, 'Umur', '21'),
+(551, '2020-06-13 15:52:51', NULL, NULL, 100, 15, 'Status Calon Istri', 'perawan'),
+(552, '2020-06-13 15:52:51', NULL, NULL, 100, 17, 'Agama', 'Islam'),
+(553, '2020-06-13 15:52:51', NULL, NULL, 100, 19, 'Alamat', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto'),
+(554, '2020-06-13 15:52:51', NULL, NULL, 100, 21, 'Pekerjaan', 'GURU'),
+(555, '2020-06-13 15:52:51', NULL, NULL, 100, 23, 'Nomor HP / WA', '081234567890'),
+(556, '2020-06-13 15:52:51', NULL, NULL, 100, 25, 'Foto', '100_Savira_Alifa_20200613225250_foto'),
+(557, '2020-06-13 15:52:51', NULL, NULL, 100, 26, 'Surat Keterangan Untuk Nikah N1 (Dari Kelurahan)', '100_20200613225250_N1'),
+(558, '2020-06-13 15:52:51', NULL, NULL, 100, 27, 'Surat Persetujuan Mempelai N3', '100_20200613225250_N3'),
+(559, '2020-06-13 15:52:51', NULL, NULL, 100, 28, 'Kartu Tanda Penduduk', '100_Rizky_Febian_20200613225250_ktp'),
+(560, '2020-06-13 15:52:51', NULL, NULL, 100, 29, 'Kartu Tanda Penduduk', '100_Savira_Alifa_20200613225250_ktp'),
+(561, '2020-06-13 15:52:51', NULL, NULL, 100, 30, 'Kartu Keluarga', '100_Rizky_Febian_20200613225250_kk'),
+(562, '2020-06-13 15:52:52', NULL, NULL, 100, 31, 'Kartu Keluarga', '100_Savira_Alifa_20200613225250_kk'),
+(563, '2020-06-13 15:52:52', NULL, NULL, 100, 32, 'Akta Lahir', '100_Rizky_Febian_20200613225250_aktalahir'),
+(564, '2020-06-13 15:52:52', NULL, NULL, 100, 33, 'Akta Lahir', '100_Savira_Alifa_20200613225250_aktalahir'),
+(565, '2020-06-13 15:52:52', NULL, NULL, 100, 44, 'Surat Pernyataan dari Atasan', '100_Rizky_Febian_20200613225250_pendukung'),
+(566, '2020-06-13 15:52:52', NULL, NULL, 100, 45, 'Surat Pernyataan dari Atasan', ''),
+(570, '2020-06-14 13:19:51', NULL, NULL, 102, 39, 'Tanggal Daftar Rujuk', '14-06-2020'),
+(571, '2020-06-14 13:19:51', NULL, NULL, 102, 40, 'Tanggal Cerai', '04-06-2020'),
+(572, '2020-06-14 13:19:51', NULL, NULL, 102, 41, 'Masa Idah', '10 hari'),
+(573, '2020-06-14 13:19:51', NULL, NULL, 102, 42, 'Status Cerai', 'Cerai Raj\'i');
 
 -- --------------------------------------------------------
 
@@ -829,31 +763,31 @@ ALTER TABLE `pekerjaan`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `QUESTION_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `QUESTION_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `question_group`
 --
 ALTER TABLE `question_group`
-  MODIFY `QUESTIONGROUP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `QUESTIONGROUP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `question_of_group`
 --
 ALTER TABLE `question_of_group`
-  MODIFY `QUESTIONOFGROUP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `QUESTIONOFGROUP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `REG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `REG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `registration_detail`
 --
 ALTER TABLE `registration_detail`
-  MODIFY `REG_DETAIL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=310;
+  MODIFY `REG_DETAIL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=574;
 
 --
 -- AUTO_INCREMENT for table `registration_status`
