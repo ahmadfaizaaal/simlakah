@@ -851,14 +851,29 @@
                 response.KELURAHAN + ' ' + response.KECAMATAN + ' ' +
                 response.KABUPATEN_KOTA;
 
-            $('#nkh_nama_' + actor).val(response.NAMA);
-            $('#nkh_ttl_' + actor).val(response.TEMPAT_LAHIR);
-            $('#nkh_ttl2_' + actor).val(day + '-' + month + '-' + year);
-            $('#nkh_umur_' + actor).val(umur);
-            $('#nkh_agama_' + actor).val(response.AGAMA);
-            $('#nkh_alamat_' + actor).val(alamat);
-            $('#nkh_pekerjaan_' + actor).val(response.PEKERJAAN);
-            $('#nkh_pekerjaan_' + actor).trigger('change');
+            var isSameGender = false;
+            var msg = '';
+            if ('s' == actor) {
+                isSameGender = 'Laki-laki' == response.JENIS_KELAMIN ? true : false;
+                msg = 'Calon suami harus berjenis kelamin laki-laki!';
+            } else if ('i' == actor) {
+                isSameGender = 'Perempuan' == response.JENIS_KELAMIN ? true : false;
+                msg = 'Calon istri harus berjenis kelamin perempuan!';
+            }
+
+            if (isSameGender) {
+                $('#nkh_nama_' + actor).val(response.NAMA);
+                $('#nkh_ttl_' + actor).val(response.TEMPAT_LAHIR);
+                $('#nkh_ttl2_' + actor).val(day + '-' + month + '-' + year);
+                $('#nkh_umur_' + actor).val(umur);
+                $('#nkh_agama_' + actor).val(response.AGAMA);
+                $('#nkh_alamat_' + actor).val(alamat);
+                $('#nkh_pekerjaan_' + actor).val(response.PEKERJAAN);
+                $('#nkh_pekerjaan_' + actor).trigger('change');
+            } else {
+                swal(msg, "Error!", "error");
+            }
+
         }
 
         function validateMobilePhone(actor) {
