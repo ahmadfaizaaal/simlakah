@@ -612,15 +612,15 @@
                                 $('#cancelRegistration').show();
                                 $('#nextToDetail').attr('disabled', true);
                             } else {
-                                swal("Gagal submit data header nikah!", "Error!", "error");
+                                swal("Error!", "Gagal submit data header nikah!", "error");
                             }
                         },
                         error: function() {
-                            swal("Internal Server error 500!", "Error!", "error");
+                            swal("Error!", "Internal Server error 500!", "error");
                         }
                     });
                 } else {
-                    swal("Isi field yang kosong!", "Error!", "error");
+                    swal("Error!", "Isi field yang kosong!", "error");
                 }
             });
 

@@ -255,7 +255,7 @@
         $('#showDataPenghulu').on('click', '.viewPenghulu', function() {
             var offId = $(this).attr('data');
             $('#modalPenghulu').modal('show');
-            $('#modalPenghulu').find('.modal-title').text('UBAH DATA PENGHULU');
+            $('#modalPenghulu').find('.modal-title').text('LIHAT DATA PENGHULU');
             $('#btnSave').hide();
             $.ajax({
                 type: 'ajax',
@@ -357,7 +357,7 @@
                     $('[data-toggle="tooltip"]').tooltip();
                 },
                 error: function() {
-                    swal("Could not get Data from Database!", "Error!", "error");
+                    swal("Error!", "Could not get Data from Database!", "error");
                 }
             });
         }

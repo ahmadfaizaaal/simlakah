@@ -272,7 +272,11 @@
 
         //VALIDATE DATA
         $('#showDataRegistrasi').on('click', '.validate', function() {
-            var regId = $(this).attr('data');
+            var data = $(this).attr('data');
+            var param = data.split('^');
+            var regId = param[0];
+            var lokasiAkad = param[1];
+            var formName = param[2];
             swal({
                 title: 'Apakah anda yakin data sudah sesuai?',
                 type: 'warning',
@@ -289,7 +293,9 @@
                         method: 'post',
                         url: '<?= BASE_URL . 'registration/validateRegistration/'; ?>',
                         data: {
-                            regId: regId
+                            regId: regId,
+                            lokasiAkad: lokasiAkad,
+                            formName: formName
                         },
                         async: false,
                         dataType: 'json',
@@ -386,7 +392,7 @@
                             '<td style="width: 40%;">';
 
                         if (data[i].STATUS_CODE == 'P') {
-                            html += '<a href="javascript:;" class="btn btn-sm round btn-success mr-1 validate" data-toggle="tooltip" data-placement="bottom" title="Valid" data="' + data[i].REG_ID + '" style="margin-left:5px;">Valid</a>' +
+                            html += '<a href="javascript:;" class="btn btn-sm round btn-success mr-1 validate" data-toggle="tooltip" data-placement="bottom" title="Valid" data="' + data[i].REG_ID + '^' + lokasiAkad + '^' + data[i].FORM_NAME + '" style="margin-left:5px;">Valid</a>' +
                                 '<a href="javascript:;" class="btn btn-sm round btn-danger mr-1 reject" data-toggle="tooltip" data-placement="bottom" title="Tolak" data="' + data[i].REG_ID + '" style="margin-left:5px;">Tolak</a>';
                         } else if (data[i].STATUS_CODE == 'V') {
                             if (lokasiAkad == 'KUA') {

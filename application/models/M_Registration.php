@@ -72,6 +72,13 @@ class M_Registration extends CI_Model
         return $result->REG_ID;
     }
 
+    public function getIdQuestion($refId)
+    {
+        $sql = $this->db->get_where('question', ['REF_ID' => $refId]);
+        $result = $sql->row();
+        return $result->QUESTION_ID;
+    }
+
     public function getQuestionId($questionLabel)
     {
         $sql = $this->db->get_where('question', ['QUESTION_LABEL' => $questionLabel]);
@@ -79,16 +86,34 @@ class M_Registration extends CI_Model
         return $result->QUESTION_ID;
     }
 
-    public function getDataRegistration()
+    public function getDataRegistration($statusCode, $formName)
     {
-        $statusCode = array('P', 'V', 'R');
-        $this->db->select('rd.*, f.FORM_NAME, st.*');
+        $this->db->select('rd.*, f.FORM_NAME, st.*, DATE_FORMAT(r.SCHEDULE, "%d-%m-%Y %H:%i:%s") as SCHEDULE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR');
         $this->db->from('registration r');
         $this->db->join('regdetail_tr rd', 'r.REG_ID = rd.REG_ID');
         $this->db->join('form f', 'r.FORM_ID = f.FORM_ID');
         $this->db->join('registration_status st', 'r.STATUS_ID = st.STATUS_ID');
+        if ($formName != null) {
+            $this->db->where_in('f.FORM_NAME', $formName);
+        }
         $this->db->where_in('st.STATUS_CODE', $statusCode);
-        $this->db->order_by('DTM_CRT', 'desc');
+        $this->db->order_by('r.DTM_CRT', 'desc');
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        } else {
+            return false;
+        }
+    }
+
+    public function getDetailRegistration($regId)
+    {
+        $this->db->select('rd.*, f.FORM_NAME, st.*, DATE_FORMAT(r.SCHEDULE, "%d-%m-%Y %H:%i:%s") as SCHEDULE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR');
+        $this->db->from('registration r');
+        $this->db->join('regdetail_tr rd', 'r.REG_ID = rd.REG_ID');
+        $this->db->join('form f', 'r.FORM_ID = f.FORM_ID');
+        $this->db->join('registration_status st', 'r.STATUS_ID = st.STATUS_ID');
+        $this->db->where('r.REG_ID', $regId);
         $result = $this->db->get();
         if ($result->num_rows() > 0) {
             return $result->result();
@@ -184,6 +209,7 @@ class M_Registration extends CI_Model
     {
         $this->db->set('STATUS_ID', $statusId);
         $this->db->set('DTM_UPD', date('Y-m-d H:i:s'));
+        $this->db->set('VALIDATION_DATE', date('Y-m-d H:i:s'));
         $this->db->set('USR_UPD', $this->session->userdata('officer_id'));
         $this->db->where('REG_ID', $regId);
         $this->db->update('registration');

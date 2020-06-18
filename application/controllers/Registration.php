@@ -379,7 +379,19 @@ class Registration extends CI_Controller
     public function validateRegistration()
     {
         $regId = $this->input->post('regId');
-        $statusId = $this->registration->getStatusId('Valid');
+        $lokasiAkad = $this->input->post('lokasiAkad');
+        $formName = $this->input->post('formName');
+        $statusId = '';
+
+        if ('Nikah' == $formName) {
+            if ('KUA' == $lokasiAkad) {
+                $statusId = $this->registration->getStatusId('Valid');
+            } else {
+                $statusId = $this->registration->getStatusId('To be verif');
+            }
+        } else {
+            $statusId = $this->registration->getStatusId('To be verif');
+        }
         $result = $this->registration->updateStatusRegistration($regId, $statusId);
         setResponse($result, 'valid');
     }
