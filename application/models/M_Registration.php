@@ -54,6 +54,17 @@ class M_Registration extends CI_Model
         return $result->FORM_ID;
     }
 
+    public function getFormName($regId)
+    {
+        $this->db->select('f.FORM_NAME');
+        $this->db->from('registration r');
+        $this->db->join('form f', 'r.FORM_ID = f.FORM_ID');
+        $this->db->where('r.REG_ID', $regId);
+        $sql = $this->db->get();
+        $result = $sql->result();
+        return $result[0]->FORM_NAME;
+    }
+
     public function getRegistrationId($regCode)
     {
         $sql = $this->db->get_where('registration', ['REG_CODE' => $regCode]);
@@ -66,6 +77,41 @@ class M_Registration extends CI_Model
         $sql = $this->db->get_where('question', ['QUESTION_LABEL' => $questionLabel]);
         $result = $sql->row();
         return $result->QUESTION_ID;
+    }
+
+    public function getDataRegistration()
+    {
+        $statusCode = array('P', 'V', 'R');
+        $this->db->select('rd.*, f.FORM_NAME, st.*');
+        $this->db->from('registration r');
+        $this->db->join('regdetail_tr rd', 'r.REG_ID = rd.REG_ID');
+        $this->db->join('form f', 'r.FORM_ID = f.FORM_ID');
+        $this->db->join('registration_status st', 'r.STATUS_ID = st.STATUS_ID');
+        $this->db->where_in('st.STATUS_CODE', $statusCode);
+        $this->db->order_by('DTM_CRT', 'desc');
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        } else {
+            return false;
+        }
+    }
+
+    public function getFiles($column, $regId)
+    {
+        $this->db->select('r.REG_CODE, rd.QUESTION_LABEL, rd.ANSWER, f.FORM_NAME');
+        $this->db->from('registration r');
+        $this->db->join('registration_detail rd', 'r.REG_ID = rd.REG_ID');
+        $this->db->join('form f', 'r.FORM_ID = f.FORM_ID');
+        $this->db->join('question q', 'rd.QUESTION_ID = q.QUESTION_ID');
+        $this->db->where('r.REG_ID', $regId);
+        $this->db->where_in('q.REF_ID', $column);
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        } else {
+            return false;
+        }
     }
 
     public function insertRegistration($regCode, $formID, $statusID, $participantID)
@@ -102,10 +148,45 @@ class M_Registration extends CI_Model
         }
     }
 
+    public function insertHeader($data)
+    {
+        $this->db->insert('regdetail_tr', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function insertDetail($regId, $data)
+    {
+        $this->db->where('REG_ID', $regId);
+        $this->db->update('regdetail_tr', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function deleteRegistration($regID)
     {
         $this->db->where('REG_ID', $regID);
         $this->db->delete('registration');
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateStatusRegistration($regId, $statusId)
+    {
+        $this->db->set('STATUS_ID', $statusId);
+        $this->db->set('DTM_UPD', date('Y-m-d H:i:s'));
+        $this->db->set('USR_UPD', $this->session->userdata('officer_id'));
+        $this->db->where('REG_ID', $regId);
+        $this->db->update('registration');
         if ($this->db->affected_rows() > 0) {
             return true;
         } else {

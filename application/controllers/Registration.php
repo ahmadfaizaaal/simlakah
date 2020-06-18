@@ -30,6 +30,9 @@ class Registration extends CI_Controller
         //DO INSERT
         $inserted = $this->registration->insertRegistration($regCode, $formID, $statusID, $participantID);
 
+        //GET REG ID
+        $regID = $this->registration->getRegistrationId($regCode);
+
         if ($inserted) {
             //INITIALIZE PARAM DETAIL
             $params = array();
@@ -39,11 +42,26 @@ class Registration extends CI_Controller
                 $objAlamatAkad = explode("^", $this->input->post('alamatAkad'));
 
                 array_push($params, $objTempatAkad, $objTanggalAkad, $objAlamatAkad);
+
+                $dataHeaderNikah = array(
+                    'REG_ID' => $regID,
+                    'TMP_NIKAH' => $params[0][1],
+                    'TGL_AKAD' => $params[1][1],
+                    'ALMT_AKAD' => $params[2][1]
+                );
+                $this->registration->insertHeader($dataHeaderNikah);
             } else if ('isbat' == $type) {
                 $objTanggalAkad = explode("^", $this->input->post('tanggalAkad'));
                 $objAlamatAkad = explode("^", $this->input->post('alamatAkad'));
 
                 array_push($params, $objTanggalAkad, $objAlamatAkad);
+
+                $dataHeaderIsbat = array(
+                    'REG_ID' => $regID,
+                    'TGL_AKAD' => $params[0][1],
+                    'ALMT_AKAD' => $params[1][1]
+                );
+                $this->registration->insertHeader($dataHeaderIsbat);
             } elseif ('rujuk' == $type) {
                 $objTanggalDaftarRujuk = explode("^", $this->input->post('tanggalDaftarRujuk'));
                 $objTanggalCerai = explode("^", $this->input->post('tanggalCerai'));
@@ -51,10 +69,16 @@ class Registration extends CI_Controller
                 $objStatusCerai = explode("^", $this->input->post('statusCerai'));
 
                 array_push($params, $objTanggalDaftarRujuk, $objTanggalCerai, $objMasaidah, $objStatusCerai);
-            }
 
-            //GET REG ID
-            $regID = $this->registration->getRegistrationId($regCode);
+                $dataHeaderRujuk = array(
+                    'REG_ID' => $regID,
+                    'TGL_RUJUK' => $params[0][1],
+                    'TGL_CERAI' => $params[1][1],
+                    'MASA_IDAH' => $params[2][1],
+                    'STATUS_CERAI' => $params[3][1]
+                );
+                $this->registration->insertHeader($dataHeaderRujuk);
+            }
 
             $insertedDetail = 0;
             for ($i = 0; $i < count($params); $i++) {
@@ -84,7 +108,7 @@ class Registration extends CI_Controller
 
         if ('nikah' == $type) {
             //suami
-            $kwn_s = $this->input->post('nkh_kewarganegaraan_s');
+            $kwn_s = strtoupper($this->input->post('nkh_kewarganegaraan_s'));
             $nik_s = $this->input->post('nkh_nik_s');
             $nama_s = $this->input->post('nkh_nama_s');
             $ttl_s = $this->input->post('nkh_ttl_s') . ', ' . $this->input->post('nkh_ttl2_s');
@@ -101,7 +125,7 @@ class Registration extends CI_Controller
             }
 
             //istri
-            $kwn_i = $this->input->post('nkh_kewarganegaraan_i');
+            $kwn_i = strtoupper($this->input->post('nkh_kewarganegaraan_i'));
             $nik_i = $this->input->post('nkh_nik_i');
             $nama_i = $this->input->post('nkh_nama_i');
             $ttl_i = $this->input->post('nkh_ttl_i') . ', ' . $this->input->post('nkh_ttl2_i');
@@ -130,10 +154,48 @@ class Registration extends CI_Controller
             array_push($params, $kwn_s, $nik_s, $nama_s, $ttl_s, $umur_s, $status_s, $agama_s, $alamat_s, $pekerjaan_s, $nohp_s, $foto_s);
             array_push($params, $kwn_i, $nik_i, $nama_i, $ttl_i, $umur_i, $status_i, $agama_i, $alamat_i, $pekerjaan_i, $nohp_i, $foto_i);
             array_push($params, $n1, $n3, $ktp_s, $ktp_i, $kk_s, $kk_i, $akta_s, $akta_i, $pendukung_s, $pendukung_i);
+
             $startIndex = 3;
+
+            $dataDetailNikah = array(
+                'KEWARGANEGARAAN_S' => $kwn_s,
+                'NIK_CAL_S' => $nik_s,
+                'NAMA_CAL_S' => $nama_s,
+                'TTL_S' => $ttl_s,
+                'UMUR_S' => $umur_s,
+                'STATUS_CAL_S' => $status_s,
+                'AGAMA_S' => $agama_s,
+                'ALMT_S' =>  $alamat_s,
+                'PEKERJAAN_S' => $pekerjaan_s,
+                'NO_HP_S' => $nohp_s,
+                'FOTO_S' => $foto_s,
+                'KEWARGANEGARAAN_I' => $kwn_i,
+                'NIK_CAL_I' => $nik_i,
+                'NAMA_CAL_I' => $nama_i,
+                'TTL_I' => $ttl_i,
+                'UMUR_I' => $umur_i,
+                'STATUS_CAL_I' => $status_i,
+                'AGAMA_I' => $agama_i,
+                'ALMT_I' =>  $alamat_i,
+                'PEKERJAAN_I' => $pekerjaan_i,
+                'NO_HP_I' => $nohp_i,
+                'FOTO_I' => $foto_i,
+                'FILE_SKUN_N1' => $n1,
+                'FILE_SPM_N3' => $n3,
+                'FILE_KTP_S' => $ktp_s,
+                'FILE_KTP_I' => $ktp_i,
+                'FILE_KK_S' => $kk_s,
+                'FILE_KK_I' => $kk_i,
+                'FILE_AKTA_LAHIR_S' => $akta_s,
+                'FILE_AKTA_LAHIR_I' => $akta_i,
+                'FILE_ADDITIONAL_DOC_S' => $pendukung_s,
+                'FILE_ADDITIONAL_DOC_I' => $pendukung_i
+            );
+
+            $this->registration->insertDetail($regID, $dataDetailNikah);
         } else if ('isbat' == $type) {
             //suami
-            $kwn_s = $this->input->post('isb_kewarganegaraan_s');
+            $kwn_s = strtoupper($this->input->post('isb_kewarganegaraan_s'));
             $nik_s = $this->input->post('isb_nik_s');
             $nama_s = $this->input->post('isb_nama_s');
             $ttl_s = $this->input->post('isb_ttl_s') . ', ' . $this->input->post('isb_ttl2_s');
@@ -145,7 +207,7 @@ class Registration extends CI_Controller
             $foto_s = $this->uploadFile('isb_foto_s', 'foto', $nama_s, $type, $regID);
 
             //istri
-            $kwn_i = $this->input->post('isb_kewarganegaraan_i');
+            $kwn_i = strtoupper($this->input->post('isb_kewarganegaraan_i'));
             $nik_i = $this->input->post('isb_nik_i');
             $nama_i = $this->input->post('isb_nama_i');
             $ttl_i = $this->input->post('isb_ttl_i') . ', ' . $this->input->post('isb_ttl2_i');
@@ -168,10 +230,43 @@ class Registration extends CI_Controller
             array_push($params, $kwn_s, $nik_s, $nama_s, $ttl_s, $umur_s, $agama_s, $alamat_s, $pekerjaan_s, $nohp_s, $foto_s);
             array_push($params, $kwn_i, $nik_i, $nama_i, $ttl_i, $umur_i, $agama_i, $alamat_i, $pekerjaan_i, $nohp_i, $foto_i);
             array_push($params, $sppa, $ktp_s, $ktp_i, $kk_s, $kk_i, $akta_s, $akta_i);
+
             $startIndex = 2;
-        } else {
+
+            $dataDetailIsbat = array(
+                'KEWARGANEGARAAN_S' => $kwn_s,
+                'NIK_S' => $nik_s,
+                'NAMA_S' => $nama_s,
+                'TTL_S' => $ttl_s,
+                'UMUR_S' => $umur_s,
+                'AGAMA_S' => $agama_s,
+                'ALMT_S' =>  $alamat_s,
+                'PEKERJAAN_S' => $pekerjaan_s,
+                'NO_HP_S' => $nohp_s,
+                'FOTO_S' => $foto_s,
+                'KEWARGANEGARAAN_I' => $kwn_i,
+                'NIK_I' => $nik_i,
+                'NAMA_I' => $nama_i,
+                'TTL_I' => $ttl_i,
+                'UMUR_I' => $umur_i,
+                'AGAMA_I' => $agama_i,
+                'ALMT_I' =>  $alamat_i,
+                'PEKERJAAN_I' => $pekerjaan_i,
+                'NO_HP_I' => $nohp_i,
+                'FOTO_I' => $foto_i,
+                'FILE_SPPA' => $sppa,
+                'FILE_KTP_S' => $ktp_s,
+                'FILE_KTP_I' => $ktp_i,
+                'FILE_KK_S' => $kk_s,
+                'FILE_KK_I' => $kk_i,
+                'FILE_AKTA_LAHIR_S' => $akta_s,
+                'FILE_AKTA_LAHIR_I' => $akta_i
+            );
+
+            $this->registration->insertDetail($regID, $dataDetailIsbat);
+        } else if ('rujuk' == $type) {
             //suami
-            $kwn_s = $this->input->post('rjk_kewarganegaraan_s');
+            $kwn_s = strtoupper($this->input->post('rjk_kewarganegaraan_s'));
             $nik_s = $this->input->post('rjk_nik_s');
             $nama_s = $this->input->post('rjk_nama_s');
             $ttl_s = $this->input->post('rjk_ttl_s') . ', ' . $this->input->post('rjk_ttl2_s');
@@ -183,7 +278,7 @@ class Registration extends CI_Controller
             $foto_s = $this->uploadFile('rjk_foto_s', 'foto', $nama_s, $type, $regID);
 
             //istri
-            $kwn_i = $this->input->post('rjk_kewarganegaraan_i');
+            $kwn_i = strtoupper($this->input->post('rjk_kewarganegaraan_i'));
             $nik_i = $this->input->post('rjk_nik_i');
             $nama_i = $this->input->post('rjk_nama_i');
             $ttl_i = $this->input->post('rjk_ttl_i') . ', ' . $this->input->post('rjk_ttl2_i');
@@ -206,7 +301,40 @@ class Registration extends CI_Controller
             array_push($params, $kwn_s, $nik_s, $nama_s, $ttl_s, $umur_s, $agama_s, $alamat_s, $pekerjaan_s, $nohp_s, $foto_s);
             array_push($params, $kwn_i, $nik_i, $nama_i, $ttl_i, $umur_i, $agama_i, $alamat_i, $pekerjaan_i, $nohp_i, $foto_i);
             array_push($params, $aktacerai, $ktp_s, $ktp_i, $kk_s, $kk_i, $akta_s, $akta_i);
+
             $startIndex = 4;
+
+            $dataDetailRujuk = array(
+                'KEWARGANEGARAAN_S' => $kwn_s,
+                'NIK_S' => $nik_s,
+                'NAMA_S' => $nama_s,
+                'TTL_S' => $ttl_s,
+                'UMUR_S' => $umur_s,
+                'AGAMA_S' => $agama_s,
+                'ALMT_S' =>  $alamat_s,
+                'PEKERJAAN_S' => $pekerjaan_s,
+                'NO_HP_S' => $nohp_s,
+                'FOTO_S' => $foto_s,
+                'KEWARGANEGARAAN_I' => $kwn_i,
+                'NIK_I' => $nik_i,
+                'NAMA_I' => $nama_i,
+                'TTL_I' => $ttl_i,
+                'UMUR_I' => $umur_i,
+                'AGAMA_I' => $agama_i,
+                'ALMT_I' =>  $alamat_i,
+                'PEKERJAAN_I' => $pekerjaan_i,
+                'NO_HP_I' => $nohp_i,
+                'FOTO_I' => $foto_i,
+                'FILE_AKTA_CERAI' => $aktacerai,
+                'FILE_KTP_S' => $ktp_s,
+                'FILE_KTP_I' => $ktp_i,
+                'FILE_KK_S' => $kk_s,
+                'FILE_KK_I' => $kk_i,
+                'FILE_AKTA_LAHIR_S' => $akta_s,
+                'FILE_AKTA_LAHIR_I' => $akta_i
+            );
+
+            $this->registration->insertDetail($regID, $dataDetailRujuk);
         }
 
         $insertedDetail = 0;
@@ -248,6 +376,22 @@ class Registration extends CI_Controller
         }
     }
 
+    public function validateRegistration()
+    {
+        $regId = $this->input->post('regId');
+        $statusId = $this->registration->getStatusId('Valid');
+        $result = $this->registration->updateStatusRegistration($regId, $statusId);
+        setResponse($result, 'valid');
+    }
+
+    public function rejectRegistration()
+    {
+        $regId = $this->input->post('regId');
+        $statusId = $this->registration->getStatusId('Rejected');
+        $result = $this->registration->updateStatusRegistration($regId, $statusId);
+        setResponse($result, 'rejected');
+    }
+
     public function rollbackRegistration($regID)
     {
         $result = $this->registration->deleteRegistration($regID);
@@ -282,9 +426,9 @@ class Registration extends CI_Controller
         $new_fileName = '';
 
         if ($nama == '') {
-            $new_fileName = $regID . '_' . date('YmdHis') . '_' . $fileType;
+            $new_fileName = $fileType . '_' . $regID . '_' . date('YmdHis');
         } else {
-            $new_fileName = $regID . '_' . str_replace(" ", "_", $nama) . '_' . date('YmdHis') . '_' . $fileType;
+            $new_fileName = $fileType . '_' . $regID . '_' . str_replace(" ", "", $nama) . '_' . date('YmdHis');
         }
 
         if ($file) {
@@ -297,7 +441,7 @@ class Registration extends CI_Controller
             $this->upload->initialize($config);
 
             if ($this->upload->do_upload($fileName)) {
-                return $new_fileName;
+                return $new_fileName . $this->upload->data('file_ext');
             } else {
                 $this->registration->deleteRegistration($regID);
                 $this->session->set_flashdata(

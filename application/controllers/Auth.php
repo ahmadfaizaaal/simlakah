@@ -20,6 +20,14 @@ class Auth extends CI_Controller
             redirect('home');
         }
 
+        if ($this->session->userdata('username')) {
+            if ('1' == $this->session->userdata('role_id')) {
+                redirect('staff');
+            } else if ('2' == $this->session->userdata('role_id')) {
+                redirect('penghulu');
+            }
+        }
+
         $this->form_validation->set_rules('nik', 'No. KTP', 'required|trim', [
             'required' => "No. KTP harus diisi!"
         ]);
@@ -73,6 +81,12 @@ class Auth extends CI_Controller
                     'nik' => $userLogin->NIK,
                     'last_time_login' => time()
                 ];
+                $this->session->set_userdata($data);
+                if ('general' == $param) {
+                    redirect('home');
+                } else {
+                    redirect('home/registration/' . $param);
+                }
             } else if ('officer' == $role) {
                 $data = [
                     'officer_id' => $userLogin->OFFICER_ID,
@@ -80,14 +94,23 @@ class Auth extends CI_Controller
                     'role_id' => $userLogin->ROLE_ID,
                     'last_time_login' => time()
                 ];
+                $this->session->set_userdata($data);
+                if ('1' == $userLogin->ROLE_ID) {
+                    redirect('staff');
+                } else if ('2' == $userLogin->ROLE_ID) {
+                    redirect('staff');
+                }
             }
-            $this->session->set_userdata($data);
-            // echo 'Logged in as' . $role;
-            if ('general' == $param) {
-                redirect('home');
-            } else {
-                redirect('home/registration/' . $param);
-            }
+            // $this->session->set_userdata($data);
+            // if ('user' == $role) {
+            //     if ('general' == $param) {
+            //         redirect('home');
+            //     } else {
+            //         redirect('home/registration/' . $param);
+            //     }
+            // } else if ('officer' == $role) {
+
+            // }
         } else {
             $this->session->set_flashdata(
                 'message',

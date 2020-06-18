@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="<?= BASE_THEME ?>adm/app-assets/css/pages/timeline.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_THEME ?>adm/app-assets/css/plugins/forms/wizard.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_THEME ?>adm/app-assets/vendors/css/forms/selects/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="<?= BASE_THEME ?>adm/app-assets/fonts/simple-line-icons/style.min.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="<?= BASE_THEME ?>adm/assets/css/style.css">
@@ -73,7 +74,7 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mr-auto">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="<?= BASE_URL ?>">
                         <img class="brand-logo" alt="Simlakah admin logo" src="<?= BASE_THEME ?>adm/app-assets/images/logo/logosimlakahsm.png" />
                         <img class="brand-logo-custom" alt="Simlakah admin logo" src="<?= BASE_THEME ?>adm/app-assets/images/logo/simlakahlabel.png" />
                     </a>
@@ -141,8 +142,8 @@
                                             <div class="col-md-9">
                                                 <select id="nkh_tempat" name="nkh_tempat" class="form-control">
                                                     <option value="none" selected="" disabled="">Pilih salah satu</option>
-                                                    <option value="kua">Di KUA</option>
-                                                    <option value="nonkua">Di Luar KUA</option>
+                                                    <option value="KUA">Di KUA</option>
+                                                    <option value="Di Luar KUA">Di Luar KUA</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -676,7 +677,7 @@
             // VALIDASI TEMPAT AKAD NIKAH
             $('#nkh_tempat').change(function() {
                 var nkh_tempat = $('#nkh_tempat').val();
-                if ('kua' === nkh_tempat) {
+                if ('KUA' === nkh_tempat) {
                     $('#nkh_alamat_akad').attr('readonly', true);
                     $('#nkh_alamat_akad').val('KUA Dawarblandong');
                 } else {

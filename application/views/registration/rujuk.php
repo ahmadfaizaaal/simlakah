@@ -73,7 +73,7 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mr-auto">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="<?= BASE_URL ?>">
                         <img class="brand-logo" alt="Simlakah admin logo" src="<?= BASE_THEME ?>adm/app-assets/images/logo/logosimlakahsm.png" />
                         <img class="brand-logo-custom" alt="Simlakah admin logo" src="<?= BASE_THEME ?>adm/app-assets/images/logo/simlakahlabel.png" />
                     </a>
@@ -205,7 +205,7 @@
                                         <?= form_open_multipart('registration/submitDetail', 'class="steps-validation" id="form"'); ?>
                                         <!-- <form action="<?= BASE_URL . 'registration/submitDetail' ?>" method="post" class="steps-validation" id="form"> -->
                                         <input type="hidden" id="regID" name="regID">
-                                        <input type="hidden" id="type" name="type" value="Rujuk">
+                                        <input type="hidden" id="type" name="type" value="rujuk">
                                         <!-- Step 1 -->
                                         <h6><i class="step-icon ft-user"></i> Data Calon Suami</h6>
                                         <fieldset class="mt-2">

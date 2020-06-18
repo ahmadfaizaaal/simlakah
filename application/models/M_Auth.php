@@ -9,6 +9,20 @@ class M_Auth extends CI_Model
         date_default_timezone_set('Asia/Bangkok');
     }
 
+    public function listMenu($roleId)
+    {
+        $this->db->select('*');
+        $this->db->from('menu');
+        $this->db->where('ROLE_ID', $roleId);
+        $this->db->where('PARENTMENU_ID', null);
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        } else {
+            return null;
+        }
+    }
+
     public function getDataByNIK($nik)
     {
         $result = $this->db->get_where('dukcapil', ['nik' => $nik]);

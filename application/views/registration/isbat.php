@@ -73,7 +73,7 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mr-auto">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="<?= BASE_URL ?>">
                         <img class="brand-logo" alt="Simlakah admin logo" src="<?= BASE_THEME ?>adm/app-assets/images/logo/logosimlakahsm.png" />
                         <img class="brand-logo-custom" alt="Simlakah admin logo" src="<?= BASE_THEME ?>adm/app-assets/images/logo/simlakahlabel.png" />
                     </a>
@@ -525,7 +525,7 @@
                     // var tempatAkad_ans = $('#isb_tempat').val();
 
                     var tanggalAkad_label = '<?= $question[0]->QUESTION_LABEL; ?>';
-                    var tanggalAkad_ans = $('#nkh_tanggal_akad').val() + ' ' + $('#nkh_jam_akad').val();
+                    var tanggalAkad_ans = $('#isb_tanggal_akad').val() + ' ' + $('#isb_jam_akad').val();
 
                     var alamatAkad_label = '<?= $question[1]->QUESTION_LABEL; ?>';
                     var alamatAkad_ans = $('#isb_alamat_akad').val();
@@ -645,7 +645,7 @@
             $('#isb_tanggal_akad').datetimepicker({
                 locale: 'id',
                 format: 'DD-MM-YYYY',
-                minDate: tomorrow
+                maxDate: moment().add(0, 'days')
             });
 
             $('#isb_jam_akad').datetimepicker({

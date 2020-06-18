@@ -14,6 +14,13 @@ class Home extends CI_Controller
 
     public function index()
     {
+        if ($this->session->userdata('username')) {
+            if ('1' == $this->session->userdata('role_id')) {
+                redirect('staff');
+            } else if ('2' == $this->session->userdata('role_id')) {
+                redirect('penghulu');
+            }
+        }
         $data['title'] = "Sistem Manajemen Layanan Pernikahan";
         $this->load->view('home/index', $data);
     }
@@ -28,13 +35,6 @@ class Home extends CI_Controller
         $data['type'] = $type;
         $data['question'] = $this->registration->getListQuestion($type);
         $this->load->view('registration/' . $type, $data);
-
-        // if ("nikah" == $type) {
-        // } else if ("isbat" == $type) {
-
-        // } else if ("rujuk" == $type) {
-
-        // }
     }
 
     public function listJob()
@@ -43,14 +43,14 @@ class Home extends CI_Controller
         echo json_encode($job);
     }
 
-    public function test()
-    {
-        $data['title'] = "Sistem Manajemen Layanan Pernikahan";
-        $this->load->view('registration/test', $data);
-    }
+    // public function test()
+    // {
+    //     $data['title'] = "Sistem Manajemen Layanan Pernikahan";
+    //     $this->load->view('registration/test', $data);
+    // }
 
-    public function picker()
-    {
-        $this->load->view('registration/datetime');
-    }
+    // public function picker()
+    // {
+    //     $this->load->view('registration/datetime');
+    // }
 }
