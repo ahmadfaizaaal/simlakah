@@ -351,17 +351,7 @@
         $('#btnSave').click(function() {
             var url = $('#formAddEditPernikahan').attr('action');
             var data = $('#formAddEditPernikahan').serialize();
-            //validate form
-            // var nip = $('input[name=nip]');
-            // var nama = $('input[name=nama]');
-            // var alamat = $('input[name=alamat]');
-            // var noTelp = $('input[name=noTelp]');
-            // var email = $('input[name=email]');
-            // var username = $('input[name=username]');
-            // var password = $('input[name=password]');
 
-            // if (nip.val() != '' && nama.val() != '' && alamat.val() != '' &&
-            //     noTelp.val() != '' && email.val() != '' && username.val() != '' && password.val() != '') {
             $.ajax({
                 type: 'ajax',
                 method: 'post',
@@ -451,7 +441,7 @@
             $('#nkh_btnceknik_i').show();
             $('#modalPernikahan').modal('show');
             $('#modalPernikahan').find('.modal-title').text('UBAH DATA PENGHULU');
-            $('#formAddEditPernikahan').attr('action', '<?= BASE_URL . 'staff/submitRegistration/NikahByOfficer^edit^' ?>' + regId);
+            $('#formAddEditPernikahan').attr('action', '<?= BASE_URL . 'staff/submitRegistration/NikahByOfficer^update^' ?>' + regId);
             $.ajax({
                 type: 'ajax',
                 method: 'post',

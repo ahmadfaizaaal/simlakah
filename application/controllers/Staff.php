@@ -92,93 +92,14 @@ class Staff extends CI_Controller
 
             //GET REG ID
             $regID = $this->registration->getRegistrationId($regCode);
-        }
-
-        if ($inserted) {
-            //INITIALIZE PARAM DETAIL
-            $params = array();
-            if ('NikahByOfficer' == $formName) {
-                $params = array(
-                    array('TMP_NIKAH', $this->input->post('nkh_tempat')),
-                    array('TGL_AKAD', $this->input->post('nkh_tanggal_akad') . ' ' . $this->input->post('nkh_jam_akad')),
-                    array('ALMT_AKAD', $this->input->post('nkh_alamat_akad'))
-                );
-                // array_push($params, $tmpAkad, $tanggalAkad, $alamatAkad);
-
-                $dataHeaderNikah = array(
-                    'REG_ID' => $regID,
-                    'TMP_NIKAH' => $params[0][1],
-                    'TGL_AKAD' => $params[1][1],
-                    'ALMT_AKAD' => $params[2][1]
-                );
-                if ('add' == $action) {
-                    $this->registration->insertHeader($dataHeaderNikah);
-                } else if ('edit' == $action) {
-                    $this->registration->updateHeader($regID, $dataHeaderNikah);
-                }
-            } else if ('IsbatByOfficer' == $formName) {
-                $params = array(
-                    array('TGL_AKAD', $this->input->post('isb_tanggal_akad') . ' ' . $this->input->post('isb_jam_akad')),
-                    array('ALMT_AKAD', $this->input->post('isb_alamat_akad'))
-                );
-
-                // array_push($params, $tanggalAkad, $alamatAkad);
-
-                $dataHeaderIsbat = array(
-                    'REG_ID' => $regID,
-                    'TGL_AKAD' => $params[0][1],
-                    'ALMT_AKAD' => $params[1][1]
-                );
-                if ('add' == $action) {
-                    $this->registration->insertHeader($dataHeaderIsbat);
-                } else if ('edit' == $action) {
-                    $this->registration->updateHeader($regID, $dataHeaderIsbat);
-                }
-            } elseif ('RujukByOfficer' == $formName) {
-                $params = array(
-                    array('TGL_RUJUK', $this->input->post('rjk_tanggal_daftar_rujuk')),
-                    array('TGL_CERAI', $this->input->post('rjk_tanggal_cerai')),
-                    array('MASA_IDAH', $this->input->post('rjk_masa_idah')),
-                    array('STATUS_CERAI', $this->input->post('rjk_status_cerai'))
-                );
-
-                // array_push($params, $tglDaftarRujuk, $tglCerai, $masaIdah, $statusCerai);
-
-                $dataHeaderRujuk = array(
-                    'REG_ID' => $regID,
-                    'TGL_RUJUK' => $params[0][1],
-                    'TGL_CERAI' => $params[1][1],
-                    'MASA_IDAH' => $params[2][1],
-                    'STATUS_CERAI' => $params[3][1]
-                );
-                if ('add' == $action) {
-                    $this->registration->insertHeader($dataHeaderRujuk);
-                } else if ('edit' == $action) {
-                    $this->registration->updateHeader($regID, $dataHeaderRujuk);
-                }
-            }
-
-            $insertedDetail = 0;
-            for ($i = 0; $i < count($params); $i++) {
-                // INDEX 0: LABEL, 1: ANSWER
-                $questionID = $this->registration->getIdQuestion($params[$i][0]);
-                if ('add' == $action) {
-                    $success = $this->registration->insertRegistrationDetail($regID, $questionID, $params[$i][0], $params[$i][1]);
-                } else if ('edit' == $action) {
-                    $success = $this->registration->updateRegistrationDetail($regID, $questionID, $params[$i][0], $params[$i][1]);
-                }
-                if ($success) {
-                    $insertedDetail++;
-                }
-            }
+        } else {
+            $regID = $regIdSubmitted;
         }
 
         $params = array();
         $startIndex = 0;
-        $paramReturn = '';
 
         if ('NikahByOfficer' == $formName) {
-            $paramReturn = 'nikah';
             //header
             $tmpNikah = $this->input->post('nkh_tempat');
             $tglAkad = $this->input->post('nkh_tanggal_akad') . ' ' . $this->input->post('nkh_jam_akad');
@@ -339,10 +260,10 @@ class Staff extends CI_Controller
 
             $dataDetailRujuk = array(
                 'REG_ID' => $regID,
-                'TGL_RUJUK' => $params[0][1],
-                'TGL_CERAI' => $params[1][1],
-                'MASA_IDAH' => $params[2][1],
-                'STATUS_CERAI' => $params[3][1],
+                'TGL_RUJUK' => $tglDaftarRujuk,
+                'TGL_CERAI' => $tglCerai,
+                'MASA_IDAH' => $masaIdah,
+                'STATUS_CERAI' => $statusCerai,
                 'KEWARGANEGARAAN_S' => $kwn_s,
                 'NIK_S' => $nik_s,
                 'NAMA_S' => $nama_s,
@@ -377,8 +298,7 @@ class Staff extends CI_Controller
             }
         }
 
-        setResponse(true, 'add');
-        // redirect('staff/' . $paramReturn);
+        setResponse(true, $action);
     }
 
     //----------------------PENGHULU-------------------------

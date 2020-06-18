@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2020 at 04:41 PM
+-- Generation Time: Jun 18, 2020 at 07:32 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -54,6 +54,8 @@ CREATE TABLE `dukcapil` (
 --
 
 INSERT INTO `dukcapil` (`NIK`, `NAMA`, `TEMPAT_LAHIR`, `TANGGAL_LAHIR`, `JENIS_KELAMIN`, `ALAMAT`, `RT`, `RW`, `KELURAHAN`, `KECAMATAN`, `KABUPATEN_KOTA`, `PROVINSI`, `AGAMA`, `STATUS_KAWIN`, `PEKERJAAN`, `KEWARGANEGARAAN`, `MASA_BERLAKU`, `TANGGAL_BUAT`) VALUES
+('3515010101970001', 'Andhika Pratama', 'Mojokerto', '1997-01-01 02:00:00', 'Laki-laki', 'Jalan Hayam Wuruk', '002', '003', 'Klurak', 'Candi', 'Mojokerto', 'Jawa Timur', 'Islam', 'Belum Menikah', 'PILOT', 'Indonesia', '', NULL),
+('3515010202970001', 'Ussy Sulistiowati', 'Mojokerto', '1997-02-02 02:00:00', 'Perempuan', 'Jalan Majapahit', '001', '003', 'Bligo', 'Candi', 'Mojokerto', 'Jawa Timur', 'Islam', 'Belum Menikah', 'PENGACARA', 'Indonesia', '', NULL),
 ('3515072206970001', 'Rizky Febian', 'Mojokerto', '1997-06-22 06:30:00', 'Laki-laki', 'Jalan Gajah Mada', '001', '001', 'Dawarblandong', 'Dawarblandong', 'Mojokerto', 'Jawa Timur', 'Islam', 'Belum Menikah', 'DOKTER', 'Indonesia', 'Seumur Hidup', '2020-05-18 00:12:00'),
 ('3515072206970002', 'Savira Alifa', 'Surabaya', '1999-12-22 11:22:00', 'Perempuan', 'Jalan Yos Sudarso 22 A', '001', '001', 'Jolotundo', 'Jetis', 'Mojokerto', 'Jawa Timur', 'Islam', 'Belum Menikah', 'GURU', 'Indonesia', 'Seumur Hidup', '2020-05-24 17:00:00');
 
@@ -77,7 +79,10 @@ CREATE TABLE `form` (
 INSERT INTO `form` (`FORM_ID`, `FORM_NAME`, `FORM_DESC`, `DTM_CRT`) VALUES
 (1, 'Nikah', 'ini adalah deskripsi syarat ketika hendak mendaftarkan diri untuk proses nikah', '2020-05-25 04:52:25'),
 (2, 'Rujuk', 'ini adalah deskripsi syarat ketika hendak mendaftarkan diri untuk proses rujuk', '2020-05-25 04:52:25'),
-(3, 'Isbat', 'ini adalah deskripsi syarat ketika hendak mendaftarkan diri untuk proses isbat', '2020-05-25 04:52:25');
+(3, 'Isbat', 'ini adalah deskripsi syarat ketika hendak mendaftarkan diri untuk proses isbat', '2020-05-25 04:52:25'),
+(4, 'NikahByOfficer', 'ini adalah deskripsi nikah dari officer', '2020-06-18 02:00:00'),
+(5, 'RujukByOfficer', 'ini adalah deskripsi', '2020-06-18 02:00:00'),
+(6, 'IsbatByOfficer', 'ini adalah deskripsi', '2020-06-18 02:00:00');
 
 -- --------------------------------------------------------
 
@@ -87,7 +92,7 @@ INSERT INTO `form` (`FORM_ID`, `FORM_NAME`, `FORM_DESC`, `DTM_CRT`) VALUES
 
 CREATE TABLE `menu` (
   `MENU_ID` int(11) NOT NULL,
-  `PARENTMENU_ID` int(11) NOT NULL,
+  `PARENTMENU_ID` int(11) DEFAULT NULL,
   `ROLE_ID` int(11) NOT NULL,
   `TITLE` varchar(64) NOT NULL,
   `URL` varchar(64) NOT NULL,
@@ -97,6 +102,28 @@ CREATE TABLE `menu` (
   `DTM_CRT` timestamp NULL DEFAULT NULL,
   `DTM_UPD` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`MENU_ID`, `PARENTMENU_ID`, `ROLE_ID`, `TITLE`, `URL`, `ICON`, `SEQ`, `IS_ACTIVE`, `DTM_CRT`, `DTM_UPD`) VALUES
+(1, NULL, 2, 'Dashboard', 'penghulu/', 'ft-bar-chart-2', 10, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(2, NULL, 2, 'Pernikahan', 'penghulu/nikah', 'ft-users', 20, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(3, NULL, 2, 'Rujuk', 'penghulu/rujuk', 'ft-user-plus', 30, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(4, 2, 2, 'Calon Suami', 'penghulu/verif/suami', 'icon-symbol-male', 10, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(5, 2, 2, 'Calon Istri', 'penghulu/verif/istri', 'icon-symbol-female', 20, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(6, 2, 2, 'Wali Akad', 'penghulu/verif/wali', 'icon-user', 30, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(7, 2, 2, 'Wakil Wali Akad', 'penghulu/verif/wakilwali', 'icon-users', 40, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(8, 2, 2, 'Mas Kawin', 'penghulu/verif/mahar', 'icon-diamond', 50, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(9, 2, 2, 'Perjanjian Nikah', 'penghulu/verif/janji', 'icon-book-open', 60, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(10, 2, 2, 'Petugas Pemeriksa', 'penghulu/verif/petugasperiksa', 'icon-user-following', 70, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(11, NULL, 1, 'Dashboard', 'staff/', 'ft-bar-chart-2', 10, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(12, NULL, 1, 'Pernikahan', 'staff/nikah', 'ft-users', 20, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(13, NULL, 1, 'Rujuk', 'staff/rujuk', 'ft-user-plus', 30, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(14, NULL, 1, 'Isbat', 'staff/isbat', 'ft-user-check', 40, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(15, NULL, 1, 'Penghulu', 'staff/penghulu', 'ft-user', 50, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28'),
+(16, NULL, 1, 'Validasi Berkas', 'staff/validasi', 'ft-check-square', 60, '1', '2020-06-16 07:29:09', '2020-06-16 07:30:28');
 
 -- --------------------------------------------------------
 
@@ -114,6 +141,7 @@ CREATE TABLE `officer` (
   `ADDRESS` varchar(256) NOT NULL,
   `USERNAME` varchar(128) NOT NULL,
   `PASSWORD` varchar(512) NOT NULL,
+  `PASSWORD_LABEL` varchar(64) DEFAULT NULL,
   `DTM_CRT` timestamp NULL DEFAULT NULL,
   `DTM_UPD` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -122,8 +150,11 @@ CREATE TABLE `officer` (
 -- Dumping data for table `officer`
 --
 
-INSERT INTO `officer` (`OFFICER_ID`, `ROLE_ID`, `NIP`, `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `USERNAME`, `PASSWORD`, `DTM_CRT`, `DTM_UPD`) VALUES
-(1, 1, '1234567890', 'Admin', '081234567890', 'admin@gmail.com', 'Perumahan Dinoyo Permai Lowokwaru Malang', 'sysadmin', '$2y$10$cOBZWZJkACpmbRO3h914wuEwIndld3xo56pc3SkaK9Bu5Ts/CdTBa', '2020-05-19 17:00:00', NULL);
+INSERT INTO `officer` (`OFFICER_ID`, `ROLE_ID`, `NIP`, `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `USERNAME`, `PASSWORD`, `PASSWORD_LABEL`, `DTM_CRT`, `DTM_UPD`) VALUES
+(1, 1, '1234567890', 'Admin', '081234567890', 'admin@gmail.com', 'Perumahan Dinoyo Permai Lowokwaru Malang', 'sysadmin', '$2y$10$cOBZWZJkACpmbRO3h914wuEwIndld3xo56pc3SkaK9Bu5Ts/CdTBa', 'bismillah', '2020-05-19 17:00:00', NULL),
+(2, 1, '1234567890123456', 'Budi Dharmawan', '081234567890', 'budidhar@gmail.com', 'Jalan Gajah Mada', 'budidhar', '$2y$10$cOBZWZJkACpmbRO3h914wuEwIndld3xo56pc3SkaK9Bu5Ts/CdTBa', 'bismillah', '2020-06-15 17:00:00', NULL),
+(3, 2, '123456789', 'Iqbal Ramadhan, S.Ag.', '081234567890', 'iqbalram@gmail.com', 'Jalan Hayam Wuruk', 'iqbalram', '$2y$10$cOBZWZJkACpmbRO3h914wuEwIndld3xo56pc3SkaK9Bu5Ts/CdTBa', 'bismillah', '2020-06-17 17:00:00', NULL),
+(4, 2, '01234567890', 'Muhammad Shodiq, S.Ag', '089876543211', 'shodiq@gmail.com', 'Jalan Mayjend Sungkono', 'shodiq', '$2y$10$FAy3MeGR3EjxyQRlqycIrOtbBQMVhqBw2CcjqqIx1xg.Qf.SzoHEi', 'bismillah', '2020-06-18 00:18:55', '2020-06-18 00:41:21');
 
 -- --------------------------------------------------------
 
@@ -152,7 +183,8 @@ CREATE TABLE `participant` (
 --
 
 INSERT INTO `participant` (`PARTICIPANT_ID`, `NIK`, `NAME`, `GENDER`, `BIRTH_PLACE`, `BIRTH_DATE`, `JOB`, `PHONE`, `EMAIL`, `ADDRESS`, `PASSWORD`, `DTM_CRT`, `DTM_UPD`) VALUES
-(1, '3515072206970001', 'Ahmad Faizal', 'Laki-laki', 'Sidoarjo', '1997-06-22 06:30:00', 'Mahasiswa', '085645990100', 'ahmadfaizaaal@gmail.com', 'Jalan Madu Seno RT 001 RW 001 Klurak Candi Sidoarjo', '$2y$10$cOBZWZJkACpmbRO3h914wuEwIndld3xo56pc3SkaK9Bu5Ts/CdTBa', '2020-05-18 05:50:31', NULL);
+(1, '3515072206970001', 'Ahmad Faizal', 'Laki-laki', 'Sidoarjo', '1997-06-22 06:30:00', 'Mahasiswa', '085645990100', 'ahmadfaizaaal@gmail.com', 'Jalan Madu Seno RT 001 RW 001 Klurak Candi Sidoarjo', '$2y$10$cOBZWZJkACpmbRO3h914wuEwIndld3xo56pc3SkaK9Bu5Ts/CdTBa', '2020-05-18 05:50:31', NULL),
+(2, '3515010101970001', 'Andhika Pratama', 'Laki-laki', 'Mojokerto', '1997-01-01 02:00:00', 'Pilot', '081234567890', 'andhika@gmail.com', 'Jalan Majapahit RT 001 RW 001', '$2y$10$cOBZWZJkACpmbRO3h914wuEwIndld3xo56pc3SkaK9Bu5Ts/CdTBa', '2020-06-16 02:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -295,8 +327,8 @@ INSERT INTO `question` (`QUESTION_ID`, `IS_ACTIVE`, `REF_ID`, `QUESTION_LABEL`, 
 (9, '1', 'NAMA_CAL_I', 'Nama Calon Istri', '0', '1', '2020-05-25 03:33:35'),
 (10, '1', 'TTL_S', 'Tempat & Tanggal Lahir', '0', '1', '2020-05-25 03:33:35'),
 (11, '1', 'TTL_I', 'Tempat & Tanggal Lahir', '0', '1', '2020-05-25 03:33:35'),
-(12, '1', 'UMUR_S', 'Umur', '0', '1', '2020-05-25 03:33:35'),
-(13, '1', 'UMUR_I', 'Umur', '0', '1', '2020-05-25 03:33:35'),
+(12, '1', 'UMUR_S', 'Umur (tahun)', '0', '1', '2020-05-25 03:33:35'),
+(13, '1', 'UMUR_I', 'Umur (tahun)', '0', '1', '2020-05-25 03:33:35'),
 (14, '1', 'STATUS_CAL_S', 'Status Calon Suami', '0', '1', '2020-05-25 03:33:35'),
 (15, '1', 'STATUS_CAL_I', 'Status Calon Istri', '0', '1', '2020-05-25 03:33:35'),
 (16, '1', 'AGAMA_S', 'Agama', '1', '1', '2020-05-25 03:33:35'),
@@ -360,7 +392,16 @@ INSERT INTO `questiongroup_of_form` (`QUESTIONGROUPOFFORM_ID`, `FORM_ID`, `QUEST
 (10, 3, 5, '2020-05-25 04:56:35'),
 (11, 3, 7, '2020-05-25 04:56:35'),
 (12, 3, 10, '2020-05-25 04:56:35'),
-(13, 1, 11, '2020-06-11 02:00:00');
+(13, 1, 11, '2020-06-11 02:00:00'),
+(14, 4, 12, '2020-06-11 02:00:00'),
+(15, 4, 13, '2020-06-11 02:00:00'),
+(16, 4, 14, '2020-06-11 02:00:00'),
+(17, 5, 15, '2020-06-11 02:00:00'),
+(18, 5, 16, '2020-06-11 02:00:00'),
+(19, 5, 17, '2020-06-11 02:00:00'),
+(20, 6, 18, '2020-06-11 02:00:00'),
+(21, 6, 16, '2020-06-11 02:00:00'),
+(22, 6, 17, '2020-06-11 02:00:00');
 
 -- --------------------------------------------------------
 
@@ -391,7 +432,14 @@ INSERT INTO `question_group` (`QUESTIONGROUP_ID`, `IS_ACTIVE`, `QUESTIONGROUP_LA
 (8, '1', 'Data Header Rujuk', 15, '2020-05-25 04:00:57'),
 (9, '1', 'Data Dokumen Rujuk', 90, '2020-05-25 04:00:57'),
 (10, '1', 'Data Dokumen Isbat', 80, '2020-05-25 04:00:57'),
-(11, '1', 'Data Dokumen Pendukung', 100, '2020-06-11 02:00:00');
+(11, '1', 'Data Dokumen Pendukung', 100, '2020-06-11 02:00:00'),
+(12, '1', 'Data Header Nikah Officer', 10, '2020-06-11 02:00:00'),
+(13, '1', 'Data Calon Suami', 20, '2020-06-11 02:00:00'),
+(14, '1', 'Data Calon Istri', 30, '2020-06-11 02:00:00'),
+(15, '1', 'Data Header Rujuk Officer', 15, '2020-06-11 02:00:00'),
+(16, '1', 'Data Suami Officer', 60, '2020-06-11 02:00:00'),
+(17, '1', 'Data Istri Officer', 70, '2020-06-11 02:00:00'),
+(18, '1', 'Data Header Isbat Officer', 50, '2020-06-11 02:00:00');
 
 -- --------------------------------------------------------
 
@@ -457,7 +505,7 @@ INSERT INTO `question_of_group` (`QUESTIONOFGROUP_ID`, `QUESTIONGROUP_ID`, `QUES
 (44, 4, 34, 30, '2020-05-25 04:01:32'),
 (45, 4, 36, 20, '2020-05-25 04:01:32'),
 (46, 4, 24, 100, '2020-05-25 04:01:32'),
-(47, 5, 4, 10, '2020-05-25 04:01:32'),
+(47, 5, 5, 10, '2020-05-25 04:01:32'),
 (48, 5, 37, 20, '2020-05-25 04:01:32'),
 (49, 5, 35, 30, '2020-05-25 04:01:32'),
 (50, 5, 11, 40, '2020-05-25 04:01:32'),
@@ -486,7 +534,120 @@ INSERT INTO `question_of_group` (`QUESTIONOFGROUP_ID`, `QUESTIONGROUP_ID`, `QUES
 (73, 9, 32, 60, '2020-05-25 04:01:32'),
 (74, 9, 33, 70, '2020-05-25 04:01:32'),
 (75, 11, 44, 10, '2020-06-11 02:00:00'),
-(76, 11, 45, 20, '2020-06-11 02:00:00');
+(76, 11, 45, 20, '2020-06-11 02:00:00'),
+(77, 13, 4, 10, '2020-06-18 12:21:08'),
+(78, 13, 6, 20, '2020-06-18 12:21:08'),
+(79, 13, 8, 30, '2020-06-18 12:21:08'),
+(80, 13, 10, 40, '2020-06-18 12:21:08'),
+(81, 13, 12, 50, '2020-06-18 12:21:08'),
+(82, 13, 14, 60, '2020-06-18 12:21:08'),
+(83, 13, 16, 70, '2020-06-18 12:21:08'),
+(84, 13, 18, 80, '2020-06-18 12:21:08'),
+(85, 13, 20, 90, '2020-06-18 12:21:08'),
+(86, 13, 22, 100, '2020-06-18 12:21:08'),
+(88, 14, 5, 10, '2020-06-18 12:21:09'),
+(89, 14, 7, 20, '2020-06-18 12:21:09'),
+(90, 14, 9, 30, '2020-06-18 12:21:09'),
+(91, 14, 11, 40, '2020-06-18 12:21:09'),
+(92, 14, 13, 50, '2020-06-18 12:21:09'),
+(93, 14, 15, 60, '2020-06-18 12:21:09'),
+(94, 14, 17, 70, '2020-06-18 12:21:09'),
+(95, 14, 19, 80, '2020-06-18 12:21:09'),
+(96, 14, 21, 90, '2020-06-18 12:21:09'),
+(97, 14, 23, 100, '2020-06-18 12:21:09'),
+(99, 12, 1, 10, '2020-06-18 12:21:09'),
+(100, 12, 2, 20, '2020-06-18 12:21:09'),
+(101, 12, 3, 30, '2020-06-18 12:21:09'),
+(102, 15, 39, 10, '2020-06-18 12:35:22'),
+(103, 15, 40, 20, '2020-06-18 12:35:22'),
+(104, 15, 41, 30, '2020-06-18 12:35:22'),
+(105, 15, 42, 30, '2020-06-18 12:35:22'),
+(106, 16, 4, 10, '2020-06-18 12:35:22'),
+(107, 16, 10, 40, '2020-06-18 12:35:22'),
+(108, 16, 12, 50, '2020-06-18 12:35:22'),
+(109, 16, 16, 60, '2020-06-18 12:35:22'),
+(110, 16, 18, 70, '2020-06-18 12:35:22'),
+(111, 16, 20, 80, '2020-06-18 12:35:22'),
+(112, 16, 22, 90, '2020-06-18 12:35:22'),
+(114, 16, 34, 30, '2020-06-18 12:35:22'),
+(115, 16, 36, 20, '2020-06-18 12:35:22'),
+(116, 17, 5, 10, '2020-06-18 12:35:22'),
+(117, 17, 37, 20, '2020-06-18 12:35:22'),
+(118, 17, 35, 30, '2020-06-18 12:35:22'),
+(119, 17, 11, 40, '2020-06-18 12:35:22'),
+(120, 17, 13, 50, '2020-06-18 12:35:23'),
+(121, 17, 17, 60, '2020-06-18 12:35:23'),
+(122, 17, 19, 70, '2020-06-18 12:35:23'),
+(123, 17, 21, 80, '2020-06-18 12:35:23'),
+(124, 17, 23, 90, '2020-06-18 12:35:23'),
+(125, 18, 2, 10, '2020-06-18 12:36:12'),
+(126, 18, 3, 20, '2020-06-18 12:36:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `regdetail_tr`
+--
+
+CREATE TABLE `regdetail_tr` (
+  `REGDETAIL_TR_ID` int(11) NOT NULL,
+  `REG_ID` int(11) DEFAULT NULL,
+  `DTM_CRT` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `TMP_NIKAH` varchar(128) DEFAULT NULL,
+  `TGL_AKAD` varchar(128) DEFAULT NULL,
+  `ALMT_AKAD` varchar(128) DEFAULT NULL,
+  `KEWARGANEGARAAN_S` varchar(128) DEFAULT NULL,
+  `KEWARGANEGARAAN_I` varchar(128) DEFAULT NULL,
+  `NIK_CAL_S` varchar(128) DEFAULT NULL,
+  `NIK_CAL_I` varchar(128) DEFAULT NULL,
+  `NAMA_CAL_S` varchar(128) DEFAULT NULL,
+  `NAMA_CAL_I` varchar(128) DEFAULT NULL,
+  `TTL_S` varchar(128) DEFAULT NULL,
+  `TTL_I` varchar(128) DEFAULT NULL,
+  `UMUR_S` varchar(128) DEFAULT NULL,
+  `UMUR_I` varchar(128) DEFAULT NULL,
+  `STATUS_CAL_S` varchar(128) DEFAULT NULL,
+  `STATUS_CAL_I` varchar(128) DEFAULT NULL,
+  `AGAMA_S` varchar(128) DEFAULT NULL,
+  `AGAMA_I` varchar(128) DEFAULT NULL,
+  `ALMT_S` varchar(128) DEFAULT NULL,
+  `ALMT_I` varchar(128) DEFAULT NULL,
+  `PEKERJAAN_S` varchar(128) DEFAULT NULL,
+  `PEKERJAAN_I` varchar(128) DEFAULT NULL,
+  `NO_HP_S` varchar(128) DEFAULT NULL,
+  `NO_HP_I` varchar(128) DEFAULT NULL,
+  `FOTO_S` varchar(128) DEFAULT NULL,
+  `FOTO_I` varchar(128) DEFAULT NULL,
+  `FILE_SKUN_N1` varchar(128) DEFAULT NULL,
+  `FILE_SPM_N3` varchar(128) DEFAULT NULL,
+  `FILE_KTP_S` varchar(128) DEFAULT NULL,
+  `FILE_KTP_I` varchar(128) DEFAULT NULL,
+  `FILE_KK_S` varchar(128) DEFAULT NULL,
+  `FILE_KK_I` varchar(128) DEFAULT NULL,
+  `FILE_AKTA_LAHIR_S` varchar(128) DEFAULT NULL,
+  `FILE_AKTA_LAHIR_I` varchar(128) DEFAULT NULL,
+  `NAMA_S` varchar(128) DEFAULT NULL,
+  `NAMA_I` varchar(128) DEFAULT NULL,
+  `NIK_S` varchar(128) DEFAULT NULL,
+  `NIK_I` varchar(128) DEFAULT NULL,
+  `FILE_SPPA` varchar(128) DEFAULT NULL,
+  `TGL_RUJUK` varchar(128) DEFAULT NULL,
+  `TGL_CERAI` varchar(128) DEFAULT NULL,
+  `MASA_IDAH` varchar(128) DEFAULT NULL,
+  `STATUS_CERAI` varchar(128) DEFAULT NULL,
+  `FILE_AKTA_CERAI` varchar(128) DEFAULT NULL,
+  `FILE_ADDITIONAL_DOC_S` varchar(128) DEFAULT NULL,
+  `FILE_ADDITIONAL_DOC_I` varchar(128) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `regdetail_tr`
+--
+
+INSERT INTO `regdetail_tr` (`REGDETAIL_TR_ID`, `REG_ID`, `DTM_CRT`, `TMP_NIKAH`, `TGL_AKAD`, `ALMT_AKAD`, `KEWARGANEGARAAN_S`, `KEWARGANEGARAAN_I`, `NIK_CAL_S`, `NIK_CAL_I`, `NAMA_CAL_S`, `NAMA_CAL_I`, `TTL_S`, `TTL_I`, `UMUR_S`, `UMUR_I`, `STATUS_CAL_S`, `STATUS_CAL_I`, `AGAMA_S`, `AGAMA_I`, `ALMT_S`, `ALMT_I`, `PEKERJAAN_S`, `PEKERJAAN_I`, `NO_HP_S`, `NO_HP_I`, `FOTO_S`, `FOTO_I`, `FILE_SKUN_N1`, `FILE_SPM_N3`, `FILE_KTP_S`, `FILE_KTP_I`, `FILE_KK_S`, `FILE_KK_I`, `FILE_AKTA_LAHIR_S`, `FILE_AKTA_LAHIR_I`, `NAMA_S`, `NAMA_I`, `NIK_S`, `NIK_I`, `FILE_SPPA`, `TGL_RUJUK`, `TGL_CERAI`, `MASA_IDAH`, `STATUS_CERAI`, `FILE_AKTA_CERAI`, `FILE_ADDITIONAL_DOC_S`, `FILE_ADDITIONAL_DOC_I`) VALUES
+(17, 126, '2020-06-18 05:00:23', 'KUA', '20-06-2020 11:59:07', 'KUA Dawarblandong', 'WNI', 'WNI', '3515010101970001', '3515010202970001', 'Andhika Pratama', 'Ussy Sulistiowati', 'Mojokerto, 01-01-1997', 'Mojokerto, 02-02-1997', '23', '23', 'jejaka', 'perawan', 'Islam', 'Islam', 'Jalan Hayam Wuruk RT 002 RW 003 Klurak Candi Mojokerto', 'Jalan Majapahit RT 001 RW 003 Bligo Candi Mojokerto', 'PILOT', 'PENGACARA', '081234567890', '081234567890', 'foto_126_AndhikaPratama_20200618120023.jpg', 'foto_126_UssySulistiowati_20200618120023.jpg', 'N1_126_20200618120023.png', 'N3_126_20200618120023.png', 'ktp_126_AndhikaPratama_20200618120023.png', 'ktp_126_UssySulistiowati_20200618120023.png', 'kk_126_AndhikaPratama_20200618120023.png', 'kk_126_UssySulistiowati_20200618120023.png', 'aktalahir_126_AndhikaPratama_20200618120023.png', 'aktalahir_126_UssySulistiowati_20200618120023.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', ''),
+(19, 128, '2020-06-18 09:33:11', 'Di Luar KUA', '20-06-2020 16:31:54', 'Masjid Sabilillah', 'WNI', 'WNI', '3515072206970001', '3515072206970002', 'Rizky Febian', 'Savira Alifa', 'Mojokerto, 22-06-1997', 'Surabaya, 22-12-1999', '23', '21', 'jejaka', 'perawan', 'Islam', 'Islam', 'Jalan Gajah Mada RT 001 RW 001 Dawarblandong Dawarblandong Mojokerto', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto', 'DOKTER', 'GURU', '081234567890', '081234567890', 'foto_128_RizkyFebian_20200618163311.png', 'foto_128_SaviraAlifa_20200618163311.png', 'N1_128_20200618163311.png', 'N3_128_20200618163311.png', 'ktp_128_RizkyFebian_20200618163311.png', 'ktp_128_SaviraAlifa_20200618163311.png', 'kk_128_RizkyFebian_20200618163311.png', 'kk_128_SaviraAlifa_20200618163311.png', 'aktalahir_128_RizkyFebian_20200618163311.png', 'aktalahir_128_SaviraAlifa_20200618163311.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', ''),
+(20, 129, '2020-06-18 10:10:05', NULL, NULL, NULL, 'WNI', 'WNI', NULL, NULL, NULL, NULL, 'Mojokerto, 01-01-1997', 'Surabaya, 22-12-1999', '23', '21', NULL, NULL, 'Islam', 'Islam', 'Jalan Hayam Wuruk RT 002 RW 003 Klurak Candi Mojokerto', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto', 'PILOT', 'GURU', '081234567890', '081234567890', 'foto_129_AndhikaPratama_20200618171005.png', 'foto_129_SaviraAlifa_20200618171005.png', NULL, NULL, 'ktp_129_AndhikaPratama_20200618171005.jpg', 'ktp_129_SaviraAlifa_20200618171005.jpg', 'kk_129_AndhikaPratama_20200618171005.jpg', 'kk_129_SaviraAlifa_20200618171005.jpg', 'aktalahir_129_AndhikaPratama_20200618171005.jpg', 'aktalahir_129_SaviraAlifa_20200618171005.jpg', 'Andhika Pratama', 'Savira Alifa', '3515010101970001', '3515072206970002', NULL, '18-06-2020', '02-04-2020', '77 hari', 'Cerai Raj\'i', 'aktacerai_129_20200618171005.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -506,7 +667,7 @@ CREATE TABLE `registration` (
   `CHECKED_DATE` timestamp NULL DEFAULT NULL,
   `VERIFIED_DATE` timestamp NULL DEFAULT NULL,
   `SCHEDULE` timestamp NULL DEFAULT NULL,
-  `PARTICIPANT_ID` int(11) NOT NULL
+  `PARTICIPANT_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -514,8 +675,9 @@ CREATE TABLE `registration` (
 --
 
 INSERT INTO `registration` (`REG_ID`, `REG_CODE`, `DTM_CRT`, `DTM_UPD`, `USR_UPD`, `FORM_ID`, `STATUS_ID`, `VALIDATION_DATE`, `CHECKED_DATE`, `VERIFIED_DATE`, `SCHEDULE`, `PARTICIPANT_ID`) VALUES
-(100, '1/Ahm/20200613225105', '2020-06-13 15:51:09', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, 1),
-(102, '1/Ahm/20200614201946', '2020-06-14 13:19:51', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, 1);
+(126, '2/And/20200618115905', '2020-06-18 04:59:08', '2020-06-18 05:19:44', 2, 1, 4, '2020-06-18 05:19:44', NULL, NULL, NULL, 2),
+(128, '1/Ahm/20200618163146', '2020-06-18 09:32:23', '2020-06-18 09:39:20', 2, 1, 4, '2020-06-18 09:39:20', NULL, NULL, NULL, 1),
+(129, '1/Ahm/20200618164850', '2020-06-18 10:09:02', '2020-06-18 10:11:01', 2, 2, 4, '2020-06-18 10:11:01', NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -539,45 +701,107 @@ CREATE TABLE `registration_detail` (
 --
 
 INSERT INTO `registration_detail` (`REG_DETAIL_ID`, `DTM_CRT`, `DTM_UPD`, `USR_UPD`, `REG_ID`, `QUESTION_ID`, `QUESTION_LABEL`, `ANSWER`) VALUES
-(532, '2020-06-13 15:51:09', NULL, NULL, 100, 1, 'Tempat Akad Nikah', 'kua'),
-(533, '2020-06-13 15:51:09', NULL, NULL, 100, 2, 'Tanggal Akad Nikah', '15-06-2020 22:51:08'),
-(534, '2020-06-13 15:51:10', NULL, NULL, 100, 3, 'Alamat Lokasi Akad Nikah', 'KUA Dawarblandong'),
-(535, '2020-06-13 15:52:50', NULL, NULL, 100, 4, 'Kewarganegaraan', 'wni'),
-(536, '2020-06-13 15:52:50', NULL, NULL, 100, 6, 'NIK Calon Suami', '3515072206970001'),
-(537, '2020-06-13 15:52:50', NULL, NULL, 100, 8, 'Nama Calon Suami', 'Rizky Febian'),
-(538, '2020-06-13 15:52:50', NULL, NULL, 100, 10, 'Tempat & Tanggal Lahir', 'Mojokerto, 22-06-1997'),
-(539, '2020-06-13 15:52:50', NULL, NULL, 100, 12, 'Umur', '23'),
-(540, '2020-06-13 15:52:50', NULL, NULL, 100, 14, 'Status Calon Suami', 'jejaka'),
-(541, '2020-06-13 15:52:50', NULL, NULL, 100, 16, 'Agama', 'Islam'),
-(542, '2020-06-13 15:52:50', NULL, NULL, 100, 18, 'Alamat', 'Jalan Gajah Mada RT 001 RW 001 Dawarblandong Dawarblandong Mojokerto'),
-(543, '2020-06-13 15:52:50', NULL, NULL, 100, 20, 'Pekerjaan', 'TENTARA NASIONAL INDONESIA'),
-(544, '2020-06-13 15:52:50', NULL, NULL, 100, 22, 'Nomor HP / WA', '081234567890'),
-(545, '2020-06-13 15:52:50', NULL, NULL, 100, 24, 'Foto', '100_Rizky_Febian_20200613225250_foto'),
-(546, '2020-06-13 15:52:50', NULL, NULL, 100, 5, 'Kewarganegaraan', 'wni'),
-(547, '2020-06-13 15:52:50', NULL, NULL, 100, 7, 'NIK Calon Istri', '3515072206970002'),
-(548, '2020-06-13 15:52:50', NULL, NULL, 100, 9, 'Nama Calon Istri', 'Savira Alifa'),
-(549, '2020-06-13 15:52:51', NULL, NULL, 100, 11, 'Tempat & Tanggal Lahir', 'Surabaya, 22-12-1999'),
-(550, '2020-06-13 15:52:51', NULL, NULL, 100, 13, 'Umur', '21'),
-(551, '2020-06-13 15:52:51', NULL, NULL, 100, 15, 'Status Calon Istri', 'perawan'),
-(552, '2020-06-13 15:52:51', NULL, NULL, 100, 17, 'Agama', 'Islam'),
-(553, '2020-06-13 15:52:51', NULL, NULL, 100, 19, 'Alamat', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto'),
-(554, '2020-06-13 15:52:51', NULL, NULL, 100, 21, 'Pekerjaan', 'GURU'),
-(555, '2020-06-13 15:52:51', NULL, NULL, 100, 23, 'Nomor HP / WA', '081234567890'),
-(556, '2020-06-13 15:52:51', NULL, NULL, 100, 25, 'Foto', '100_Savira_Alifa_20200613225250_foto'),
-(557, '2020-06-13 15:52:51', NULL, NULL, 100, 26, 'Surat Keterangan Untuk Nikah N1 (Dari Kelurahan)', '100_20200613225250_N1'),
-(558, '2020-06-13 15:52:51', NULL, NULL, 100, 27, 'Surat Persetujuan Mempelai N3', '100_20200613225250_N3'),
-(559, '2020-06-13 15:52:51', NULL, NULL, 100, 28, 'Kartu Tanda Penduduk', '100_Rizky_Febian_20200613225250_ktp'),
-(560, '2020-06-13 15:52:51', NULL, NULL, 100, 29, 'Kartu Tanda Penduduk', '100_Savira_Alifa_20200613225250_ktp'),
-(561, '2020-06-13 15:52:51', NULL, NULL, 100, 30, 'Kartu Keluarga', '100_Rizky_Febian_20200613225250_kk'),
-(562, '2020-06-13 15:52:52', NULL, NULL, 100, 31, 'Kartu Keluarga', '100_Savira_Alifa_20200613225250_kk'),
-(563, '2020-06-13 15:52:52', NULL, NULL, 100, 32, 'Akta Lahir', '100_Rizky_Febian_20200613225250_aktalahir'),
-(564, '2020-06-13 15:52:52', NULL, NULL, 100, 33, 'Akta Lahir', '100_Savira_Alifa_20200613225250_aktalahir'),
-(565, '2020-06-13 15:52:52', NULL, NULL, 100, 44, 'Surat Pernyataan dari Atasan', '100_Rizky_Febian_20200613225250_pendukung'),
-(566, '2020-06-13 15:52:52', NULL, NULL, 100, 45, 'Surat Pernyataan dari Atasan', ''),
-(570, '2020-06-14 13:19:51', NULL, NULL, 102, 39, 'Tanggal Daftar Rujuk', '14-06-2020'),
-(571, '2020-06-14 13:19:51', NULL, NULL, 102, 40, 'Tanggal Cerai', '04-06-2020'),
-(572, '2020-06-14 13:19:51', NULL, NULL, 102, 41, 'Masa Idah', '10 hari'),
-(573, '2020-06-14 13:19:51', NULL, NULL, 102, 42, 'Status Cerai', 'Cerai Raj\'i');
+(1132, '2020-06-18 04:59:08', NULL, NULL, 126, 1, 'Tempat Akad Nikah', 'KUA'),
+(1133, '2020-06-18 04:59:08', NULL, NULL, 126, 2, 'Tanggal Akad Nikah', '20-06-2020 11:59:07'),
+(1134, '2020-06-18 04:59:09', NULL, NULL, 126, 3, 'Alamat Lokasi Akad Nikah', 'KUA Dawarblandong'),
+(1135, '2020-06-18 05:00:23', NULL, NULL, 126, 4, 'Kewarganegaraan', 'WNI'),
+(1136, '2020-06-18 05:00:23', NULL, NULL, 126, 6, 'NIK Calon Suami', '3515010101970001'),
+(1137, '2020-06-18 05:00:23', NULL, NULL, 126, 8, 'Nama Calon Suami', 'Andhika Pratama'),
+(1138, '2020-06-18 05:00:24', NULL, NULL, 126, 10, 'Tempat & Tanggal Lahir', 'Mojokerto, 01-01-1997'),
+(1139, '2020-06-18 05:00:24', NULL, NULL, 126, 12, 'Umur (tahun)', '23'),
+(1140, '2020-06-18 05:00:24', NULL, NULL, 126, 14, 'Status Calon Suami', 'jejaka'),
+(1141, '2020-06-18 05:00:24', NULL, NULL, 126, 16, 'Agama', 'Islam'),
+(1142, '2020-06-18 05:00:24', NULL, NULL, 126, 18, 'Alamat', 'Jalan Hayam Wuruk RT 002 RW 003 Klurak Candi Mojokerto'),
+(1143, '2020-06-18 05:00:24', NULL, NULL, 126, 20, 'Pekerjaan', 'PILOT'),
+(1144, '2020-06-18 05:00:25', NULL, NULL, 126, 22, 'Nomor HP / WA', '081234567890'),
+(1145, '2020-06-18 05:00:25', NULL, NULL, 126, 24, 'Foto', 'foto_126_AndhikaPratama_20200618120023.jpg'),
+(1146, '2020-06-18 05:00:25', NULL, NULL, 126, 5, 'Kewarganegaraan', 'WNI'),
+(1147, '2020-06-18 05:00:25', NULL, NULL, 126, 7, 'NIK Calon Istri', '3515010202970001'),
+(1148, '2020-06-18 05:00:25', NULL, NULL, 126, 9, 'Nama Calon Istri', 'Ussy Sulistiowati'),
+(1149, '2020-06-18 05:00:25', NULL, NULL, 126, 11, 'Tempat & Tanggal Lahir', 'Mojokerto, 02-02-1997'),
+(1150, '2020-06-18 05:00:25', NULL, NULL, 126, 13, 'Umur (tahun)', '23'),
+(1151, '2020-06-18 05:00:25', NULL, NULL, 126, 15, 'Status Calon Istri', 'perawan'),
+(1152, '2020-06-18 05:00:25', NULL, NULL, 126, 17, 'Agama', 'Islam'),
+(1153, '2020-06-18 05:00:26', NULL, NULL, 126, 19, 'Alamat', 'Jalan Majapahit RT 001 RW 003 Bligo Candi Mojokerto'),
+(1154, '2020-06-18 05:00:26', NULL, NULL, 126, 21, 'Pekerjaan', 'PENGACARA'),
+(1155, '2020-06-18 05:00:27', NULL, NULL, 126, 23, 'Nomor HP / WA', '081234567890'),
+(1156, '2020-06-18 05:00:27', NULL, NULL, 126, 25, 'Foto', 'foto_126_UssySulistiowati_20200618120023.jpg'),
+(1157, '2020-06-18 05:00:27', NULL, NULL, 126, 26, 'Surat Keterangan Untuk Nikah N1 (Dari Kelurahan)', 'N1_126_20200618120023.png'),
+(1158, '2020-06-18 05:00:28', NULL, NULL, 126, 27, 'Surat Persetujuan Mempelai N3', 'N3_126_20200618120023.png'),
+(1159, '2020-06-18 05:00:28', NULL, NULL, 126, 28, 'Kartu Tanda Penduduk', 'ktp_126_AndhikaPratama_20200618120023.png'),
+(1160, '2020-06-18 05:00:28', NULL, NULL, 126, 29, 'Kartu Tanda Penduduk', 'ktp_126_UssySulistiowati_20200618120023.png'),
+(1161, '2020-06-18 05:00:28', NULL, NULL, 126, 30, 'Kartu Keluarga', 'kk_126_AndhikaPratama_20200618120023.png'),
+(1162, '2020-06-18 05:00:28', NULL, NULL, 126, 31, 'Kartu Keluarga', 'kk_126_UssySulistiowati_20200618120023.png'),
+(1163, '2020-06-18 05:00:29', NULL, NULL, 126, 32, 'Akta Lahir', 'aktalahir_126_AndhikaPratama_20200618120023.png'),
+(1164, '2020-06-18 05:00:29', NULL, NULL, 126, 33, 'Akta Lahir', 'aktalahir_126_UssySulistiowati_20200618120023.png'),
+(1165, '2020-06-18 05:00:29', NULL, NULL, 126, 44, 'Surat Pernyataan dari Atasan', ''),
+(1166, '2020-06-18 05:00:29', NULL, NULL, 126, 45, 'Surat Pernyataan dari Atasan', ''),
+(1170, '2020-06-18 09:32:23', NULL, NULL, 128, 1, 'Tempat Akad Nikah', 'Di Luar KUA'),
+(1171, '2020-06-18 09:32:23', NULL, NULL, 128, 2, 'Tanggal Akad Nikah', '20-06-2020 16:31:54'),
+(1172, '2020-06-18 09:32:23', NULL, NULL, 128, 3, 'Alamat Lokasi Akad Nikah', 'Masjid Sabilillah'),
+(1173, '2020-06-18 09:33:11', NULL, NULL, 128, 4, 'Kewarganegaraan', 'WNI'),
+(1174, '2020-06-18 09:33:11', NULL, NULL, 128, 6, 'NIK Calon Suami', '3515072206970001'),
+(1175, '2020-06-18 09:33:11', NULL, NULL, 128, 8, 'Nama Calon Suami', 'Rizky Febian'),
+(1176, '2020-06-18 09:33:11', NULL, NULL, 128, 10, 'Tempat & Tanggal Lahir', 'Mojokerto, 22-06-1997'),
+(1177, '2020-06-18 09:33:12', NULL, NULL, 128, 12, 'Umur (tahun)', '23'),
+(1178, '2020-06-18 09:33:12', NULL, NULL, 128, 14, 'Status Calon Suami', 'jejaka'),
+(1179, '2020-06-18 09:33:12', NULL, NULL, 128, 16, 'Agama', 'Islam'),
+(1180, '2020-06-18 09:33:12', NULL, NULL, 128, 18, 'Alamat', 'Jalan Gajah Mada RT 001 RW 001 Dawarblandong Dawarblandong Mojokerto'),
+(1181, '2020-06-18 09:33:12', NULL, NULL, 128, 20, 'Pekerjaan', 'DOKTER'),
+(1182, '2020-06-18 09:33:12', NULL, NULL, 128, 22, 'Nomor HP / WA', '081234567890'),
+(1183, '2020-06-18 09:33:12', NULL, NULL, 128, 24, 'Foto', 'foto_128_RizkyFebian_20200618163311.png'),
+(1184, '2020-06-18 09:33:12', NULL, NULL, 128, 5, 'Kewarganegaraan', 'WNI'),
+(1185, '2020-06-18 09:33:12', NULL, NULL, 128, 7, 'NIK Calon Istri', '3515072206970002'),
+(1186, '2020-06-18 09:33:12', NULL, NULL, 128, 9, 'Nama Calon Istri', 'Savira Alifa'),
+(1187, '2020-06-18 09:33:12', NULL, NULL, 128, 11, 'Tempat & Tanggal Lahir', 'Surabaya, 22-12-1999'),
+(1188, '2020-06-18 09:33:12', NULL, NULL, 128, 13, 'Umur (tahun)', '21'),
+(1189, '2020-06-18 09:33:12', NULL, NULL, 128, 15, 'Status Calon Istri', 'perawan'),
+(1190, '2020-06-18 09:33:12', NULL, NULL, 128, 17, 'Agama', 'Islam'),
+(1191, '2020-06-18 09:33:12', NULL, NULL, 128, 19, 'Alamat', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto'),
+(1192, '2020-06-18 09:33:12', NULL, NULL, 128, 21, 'Pekerjaan', 'GURU'),
+(1193, '2020-06-18 09:33:12', NULL, NULL, 128, 23, 'Nomor HP / WA', '081234567890'),
+(1194, '2020-06-18 09:33:12', NULL, NULL, 128, 25, 'Foto', 'foto_128_SaviraAlifa_20200618163311.png'),
+(1195, '2020-06-18 09:33:12', NULL, NULL, 128, 26, 'Surat Keterangan Untuk Nikah N1 (Dari Kelurahan)', 'N1_128_20200618163311.png'),
+(1196, '2020-06-18 09:33:12', NULL, NULL, 128, 27, 'Surat Persetujuan Mempelai N3', 'N3_128_20200618163311.png'),
+(1197, '2020-06-18 09:33:12', NULL, NULL, 128, 28, 'Kartu Tanda Penduduk', 'ktp_128_RizkyFebian_20200618163311.png'),
+(1198, '2020-06-18 09:33:12', NULL, NULL, 128, 29, 'Kartu Tanda Penduduk', 'ktp_128_SaviraAlifa_20200618163311.png'),
+(1199, '2020-06-18 09:33:13', NULL, NULL, 128, 30, 'Kartu Keluarga', 'kk_128_RizkyFebian_20200618163311.png'),
+(1200, '2020-06-18 09:33:13', NULL, NULL, 128, 31, 'Kartu Keluarga', 'kk_128_SaviraAlifa_20200618163311.png'),
+(1201, '2020-06-18 09:33:13', NULL, NULL, 128, 32, 'Akta Lahir', 'aktalahir_128_RizkyFebian_20200618163311.png'),
+(1202, '2020-06-18 09:33:13', NULL, NULL, 128, 33, 'Akta Lahir', 'aktalahir_128_SaviraAlifa_20200618163311.png'),
+(1203, '2020-06-18 09:33:13', NULL, NULL, 128, 44, 'Surat Pernyataan dari Atasan', ''),
+(1204, '2020-06-18 09:33:13', NULL, NULL, 128, 45, 'Surat Pernyataan dari Atasan', ''),
+(1205, '2020-06-18 10:09:03', NULL, NULL, 129, 39, 'Tanggal Daftar Rujuk', '18-06-2020'),
+(1206, '2020-06-18 10:09:03', NULL, NULL, 129, 40, 'Tanggal Cerai', '02-04-2020'),
+(1207, '2020-06-18 10:09:03', NULL, NULL, 129, 41, 'Masa Idah', '77 hari'),
+(1208, '2020-06-18 10:09:03', NULL, NULL, 129, 42, 'Status Cerai', 'Cerai Raj\'i'),
+(1209, '2020-06-18 10:10:05', NULL, NULL, 129, 4, 'Kewarganegaraan', 'WNI'),
+(1210, '2020-06-18 10:10:05', NULL, NULL, 129, 36, 'NIK Suami', '3515010101970001'),
+(1211, '2020-06-18 10:10:05', NULL, NULL, 129, 34, 'Nama Suami', 'Andhika Pratama'),
+(1212, '2020-06-18 10:10:05', NULL, NULL, 129, 10, 'Tempat & Tanggal Lahir', 'Mojokerto, 01-01-1997'),
+(1213, '2020-06-18 10:10:05', NULL, NULL, 129, 12, 'Umur (tahun)', '23'),
+(1214, '2020-06-18 10:10:05', NULL, NULL, 129, 16, 'Agama', 'Islam'),
+(1215, '2020-06-18 10:10:06', NULL, NULL, 129, 18, 'Alamat', 'Jalan Hayam Wuruk RT 002 RW 003 Klurak Candi Mojokerto'),
+(1216, '2020-06-18 10:10:06', NULL, NULL, 129, 20, 'Pekerjaan', 'PILOT'),
+(1217, '2020-06-18 10:10:06', NULL, NULL, 129, 22, 'Nomor HP / WA', '081234567890'),
+(1218, '2020-06-18 10:10:06', NULL, NULL, 129, 24, 'Foto', 'foto_129_AndhikaPratama_20200618171005.png'),
+(1219, '2020-06-18 10:10:06', NULL, NULL, 129, 5, 'Kewarganegaraan', 'WNI'),
+(1220, '2020-06-18 10:10:06', NULL, NULL, 129, 37, 'NIK Istri', '3515072206970002'),
+(1221, '2020-06-18 10:10:06', NULL, NULL, 129, 35, 'Nama Istri', 'Savira Alifa'),
+(1222, '2020-06-18 10:10:06', NULL, NULL, 129, 11, 'Tempat & Tanggal Lahir', 'Surabaya, 22-12-1999'),
+(1223, '2020-06-18 10:10:06', NULL, NULL, 129, 13, 'Umur (tahun)', '21'),
+(1224, '2020-06-18 10:10:07', NULL, NULL, 129, 17, 'Agama', 'Islam'),
+(1225, '2020-06-18 10:10:07', NULL, NULL, 129, 19, 'Alamat', 'Jalan Yos Sudarso 22 A RT 001 RW 001 Jolotundo Jetis Mojokerto'),
+(1226, '2020-06-18 10:10:07', NULL, NULL, 129, 21, 'Pekerjaan', 'GURU'),
+(1227, '2020-06-18 10:10:07', NULL, NULL, 129, 23, 'Nomor HP / WA', '081234567890'),
+(1228, '2020-06-18 10:10:07', NULL, NULL, 129, 25, 'Foto', 'foto_129_SaviraAlifa_20200618171005.png'),
+(1229, '2020-06-18 10:10:07', NULL, NULL, 129, 43, 'Akta Cerai', 'aktacerai_129_20200618171005.jpg'),
+(1230, '2020-06-18 10:10:07', NULL, NULL, 129, 28, 'Kartu Tanda Penduduk', 'ktp_129_AndhikaPratama_20200618171005.jpg'),
+(1231, '2020-06-18 10:10:07', NULL, NULL, 129, 29, 'Kartu Tanda Penduduk', 'ktp_129_SaviraAlifa_20200618171005.jpg'),
+(1232, '2020-06-18 10:10:07', NULL, NULL, 129, 30, 'Kartu Keluarga', 'kk_129_AndhikaPratama_20200618171005.jpg'),
+(1233, '2020-06-18 10:10:07', NULL, NULL, 129, 31, 'Kartu Keluarga', 'kk_129_SaviraAlifa_20200618171005.jpg'),
+(1234, '2020-06-18 10:10:07', NULL, NULL, 129, 32, 'Akta Lahir', 'aktalahir_129_AndhikaPratama_20200618171005.jpg'),
+(1235, '2020-06-18 10:10:07', NULL, NULL, 129, 33, 'Akta Lahir', 'aktalahir_129_SaviraAlifa_20200618171005.jpg');
 
 -- --------------------------------------------------------
 
@@ -602,7 +826,7 @@ INSERT INTO `registration_status` (`STATUS_ID`, `STATUS_DESC`, `STATUS_CODE`) VA
 (4, 'To be verif', 'TVR'),
 (5, 'Verified', 'VR'),
 (6, 'To be validate', 'TV'),
-(7, 'Valid', 'VR'),
+(7, 'Valid', 'V'),
 (8, 'Rejected', 'R'),
 (9, 'Done', 'D');
 
@@ -646,7 +870,6 @@ ALTER TABLE `form`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`MENU_ID`),
-  ADD KEY `FK_MENU` (`PARENTMENU_ID`),
   ADD KEY `FK_ROLE` (`ROLE_ID`);
 
 --
@@ -697,6 +920,13 @@ ALTER TABLE `question_of_group`
   ADD KEY `FK_QUESTION` (`QUESTION_ID`);
 
 --
+-- Indexes for table `regdetail_tr`
+--
+ALTER TABLE `regdetail_tr`
+  ADD PRIMARY KEY (`REGDETAIL_TR_ID`),
+  ADD KEY `regdetail_tr_ibfk_1` (`REG_ID`);
+
+--
 -- Indexes for table `registration`
 --
 ALTER TABLE `registration`
@@ -733,25 +963,25 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `form`
 --
 ALTER TABLE `form`
-  MODIFY `FORM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `FORM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `MENU_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MENU_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `officer`
 --
 ALTER TABLE `officer`
-  MODIFY `OFFICER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `OFFICER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `participant`
 --
 ALTER TABLE `participant`
-  MODIFY `PARTICIPANT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `PARTICIPANT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pekerjaan`
@@ -769,25 +999,31 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `question_group`
 --
 ALTER TABLE `question_group`
-  MODIFY `QUESTIONGROUP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `QUESTIONGROUP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `question_of_group`
 --
 ALTER TABLE `question_of_group`
-  MODIFY `QUESTIONOFGROUP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `QUESTIONOFGROUP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+
+--
+-- AUTO_INCREMENT for table `regdetail_tr`
+--
+ALTER TABLE `regdetail_tr`
+  MODIFY `REGDETAIL_TR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `REG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `REG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT for table `registration_detail`
 --
 ALTER TABLE `registration_detail`
-  MODIFY `REG_DETAIL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=574;
+  MODIFY `REG_DETAIL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1259;
 
 --
 -- AUTO_INCREMENT for table `registration_status`
@@ -809,7 +1045,6 @@ ALTER TABLE `role`
 -- Constraints for table `menu`
 --
 ALTER TABLE `menu`
-  ADD CONSTRAINT `FK_MENU` FOREIGN KEY (`PARENTMENU_ID`) REFERENCES `menu` (`MENU_ID`),
   ADD CONSTRAINT `FK_ROLE` FOREIGN KEY (`ROLE_ID`) REFERENCES `role` (`ROLE_ID`);
 
 --
@@ -831,6 +1066,12 @@ ALTER TABLE `questiongroup_of_form`
 ALTER TABLE `question_of_group`
   ADD CONSTRAINT `FK_QUESTION` FOREIGN KEY (`QUESTION_ID`) REFERENCES `question` (`QUESTION_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_QUESTIONGROUP` FOREIGN KEY (`QUESTIONGROUP_ID`) REFERENCES `question_group` (`QUESTIONGROUP_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `regdetail_tr`
+--
+ALTER TABLE `regdetail_tr`
+  ADD CONSTRAINT `regdetail_tr_ibfk_1` FOREIGN KEY (`REG_ID`) REFERENCES `registration` (`REG_ID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `registration`
