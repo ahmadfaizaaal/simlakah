@@ -67,7 +67,7 @@ class Staff extends CI_Controller
     public function submitRegistration($type)
     {
         //INITIALIZE PARAM FROM VIEW
-        $param = explode('^', $type);
+        $param = explode('%5E', $type);
         $formName = $param[0];
         $action = $param[1];
         $regIdSubmitted = $param[2];
@@ -97,7 +97,6 @@ class Staff extends CI_Controller
         }
 
         $params = array();
-        $startIndex = 0;
 
         if ('NikahByOfficer' == $formName) {
             //header
@@ -133,8 +132,6 @@ class Staff extends CI_Controller
             array_push($params, $kwn_s, $nik_s, $nama_s, $ttl_s, $umur_s, $status_s, $agama_s, $alamat_s, $pekerjaan_s, $nohp_s);
             array_push($params, $kwn_i, $nik_i, $nama_i, $ttl_i, $umur_i, $status_i, $agama_i, $alamat_i, $pekerjaan_i, $nohp_i);
 
-            $startIndex = 3;
-
             $dataDetailNikah = array(
                 'REG_ID' => $regID,
                 'TMP_NIKAH' => $tmpNikah,
@@ -162,9 +159,12 @@ class Staff extends CI_Controller
                 'NO_HP_I' => $nohp_i
             );
 
-            $this->registration->insertDetail($regID, $dataDetailNikah);
+            if ('add' == $action) {
+                $this->registration->insertDetail($dataDetailNikah);
+            } else {
+                $this->registration->updateDetail($regID, $dataDetailNikah);
+            }
         } else if ('IsbatByOfficer' == $formName) {
-            $paramReturn = 'isbat';
             //header
             $tglAkad = $this->input->post('isb_tanggal_akad') . ' ' . $this->input->post('isb_jam_akad');
             $alamatAkad = $this->input->post('isb_alamat_akad');
@@ -221,9 +221,12 @@ class Staff extends CI_Controller
                 'NO_HP_I' => $nohp_i
             );
 
-            $this->registration->insertDetail($regID, $dataDetailIsbat);
+            if ('add' == $action) {
+                $this->registration->insertDetail($dataDetailIsbat);
+            } else {
+                $this->registration->updateDetail($regID, $dataDetailIsbat);
+            }
         } else if ('RujukByOfficer' == $formName) {
-            $paramReturn = 'rujuk';
             //header
             $tglDaftarRujuk = $this->input->post('rjk_tanggal_daftar_rujuk');
             $tglCerai = $this->input->post('rjk_tanggal_cerai');
@@ -256,8 +259,6 @@ class Staff extends CI_Controller
             array_push($params, $kwn_s, $nik_s, $nama_s, $ttl_s, $umur_s, $agama_s, $alamat_s, $pekerjaan_s, $nohp_s);
             array_push($params, $kwn_i, $nik_i, $nama_i, $ttl_i, $umur_i, $agama_i, $alamat_i, $pekerjaan_i, $nohp_i);
 
-            $startIndex = 4;
-
             $dataDetailRujuk = array(
                 'REG_ID' => $regID,
                 'TGL_RUJUK' => $tglDaftarRujuk,
@@ -284,18 +285,17 @@ class Staff extends CI_Controller
                 'NO_HP_I' => $nohp_i
             );
 
-            $this->registration->insertDetail($regID, $dataDetailRujuk);
+            if ('add' == $action) {
+                $this->registration->insertDetail($dataDetailRujuk);
+            } else {
+                $this->registration->updateDetail($regID, $dataDetailRujuk);
+            }
         }
 
-        $insertedDetail = 0;
         $question = $this->registration->getListQuestion($formName);
 
         for ($i = 0; $i < count($params); $i++) {
-            $success = $this->registration->insertRegistrationDetail($regID, $question[$startIndex]->QUESTION_ID, $question[$startIndex]->QUESTION_LABEL, $params[$i]);
-            if ($success) {
-                $insertedDetail++;
-                $startIndex++;
-            }
+            $success = $this->registration->insertRegistrationDetail($regID, $question[$i]->QUESTION_ID, $question[$i]->QUESTION_LABEL, $params[$i]);
         }
 
         setResponse(true, $action);

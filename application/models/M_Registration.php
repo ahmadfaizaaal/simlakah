@@ -173,6 +173,24 @@ class M_Registration extends CI_Model
         }
     }
 
+    public function updateRegistrationDetail($regID, $questionID, $questionLabel, $answer)
+    {
+        $data = array(
+            'DTM_UPD' => date('Y-m-d H:i:s'),
+            'USR_UPD' => $this->session->userdata('officer_id'),
+            'REG_ID' => $regID,
+            'QUESTION_ID' => $questionID,
+            'QUESTION_LABEL' => $questionLabel,
+            'ANSWER' => $answer
+        );
+        $this->db->update('registration_detail', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function insertHeader($data)
     {
         $this->db->insert('regdetail_tr', $data);
@@ -183,8 +201,20 @@ class M_Registration extends CI_Model
         }
     }
 
-    public function insertDetail($regId, $data)
+    public function insertDetail($data)
     {
+        $this->db->insert('regdetail_tr', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateDetail($regId, $data)
+    {
+        $this->db->set('DTM_UPD', date('Y-m-d H:i:s'));
+        $this->db->set('USR_UPD', $this->session->userdata('officer_id'));
         $this->db->where('REG_ID', $regId);
         $this->db->update('regdetail_tr', $data);
         if ($this->db->affected_rows() > 0) {

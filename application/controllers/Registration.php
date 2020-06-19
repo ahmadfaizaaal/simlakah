@@ -384,7 +384,7 @@ class Registration extends CI_Controller
         $statusId = '';
 
         if ('Nikah' == $formName) {
-            if ('KUA' == $lokasiAkad) {
+            if ('KUA' != $lokasiAkad) {
                 $statusId = $this->registration->getStatusId('Valid');
             } else {
                 $statusId = $this->registration->getStatusId('To be verif');

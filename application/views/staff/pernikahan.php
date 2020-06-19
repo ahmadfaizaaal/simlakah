@@ -100,7 +100,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_tempat"><?= $question[0]->QUESTION_LABEL ?></label>
                         <div class="col-md-9">
-                            <select id="nkh_tempat" name="nkh_tempat" class="form-control">
+                            <select id="nkh_tempat" name="nkh_tempat" class="form-control" required>
                                 <option value="0" selected="" disabled="">Pilih salah satu</option>
                                 <option value="KUA">Di KUA</option>
                                 <option value="Di Luar KUA">Di Luar KUA</option>
@@ -112,7 +112,7 @@
                         <label class="col-md-3 label-control" for="nkh_tanggal_akad"><?= $question[1]->QUESTION_LABEL ?></label>
                         <div class="col-md-5">
                             <div class="position-relative has-icon-left datepicker">
-                                <input type="text" autocomplete="off" id="nkh_tanggal_akad" class="form-control" name="nkh_tanggal_akad">
+                                <input type="text" autocomplete="off" id="nkh_tanggal_akad" class="form-control" name="nkh_tanggal_akad" required>
                                 <div class="form-control-position">
                                     <i class="ft-calendar"></i>
                                 </div>
@@ -120,7 +120,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative has-icon-left">
-                                <input type="text" id="nkh_jam_akad" class="form-control" name="nkh_jam_akad">
+                                <input type="text" id="nkh_jam_akad" class="form-control" name="nkh_jam_akad" required>
                                 <div class="form-control-position">
                                     <i class="ft-clock"></i>
                                 </div>
@@ -131,7 +131,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_alamat_akad"><?= $question[2]->QUESTION_LABEL ?></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_alamat_akad" class="form-control" placeholder="" name="nkh_alamat_akad">
+                            <input type="text" id="nkh_alamat_akad" class="form-control" placeholder="" name="nkh_alamat_akad" required>
                         </div>
                     </div>
 
@@ -150,7 +150,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_kewarganegaraan_s"><?= $question[3]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <select id="nkh_kewarganegaraan_s" name="nkh_kewarganegaraan_s" class="form-control required">
+                            <select id="nkh_kewarganegaraan_s" name="nkh_kewarganegaraan_s" class="form-control required" required>
                                 <option value="0" selected="" disabled="">Pilih salah satu</option>
                                 <option value="WNI">WNI</option>
                                 <option value="WNA">WNA</option>
@@ -160,7 +160,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_nik_s"><?= $question[4]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-7">
-                            <input type="text" id="nkh_nik_s" class="form-control required" placeholder="" name="nkh_nik_s">
+                            <input type="text" id="nkh_nik_s" class="form-control required" placeholder="" name="nkh_nik_s" required>
                         </div>
                         <div class="col-md-2">
                             <input type="button" class="btn btn-info btn-min-width" value="Cek NIK" id="nkh_btnceknik_s" style="margin-left: -20px;">
@@ -169,17 +169,17 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_nama_s"><?= $question[5]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_nama_s" class="form-control required" placeholder="" name="nkh_nama_s">
+                            <input type="text" id="nkh_nama_s" class="form-control required" placeholder="" name="nkh_nama_s" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_ttl_s"><?= $question[6]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-5">
-                            <input type="text" id="nkh_ttl_s" class="form-control required" placeholder="" name="nkh_ttl_s">
+                            <input type="text" id="nkh_ttl_s" class="form-control required" placeholder="" name="nkh_ttl_s" required>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative has-icon-left">
-                                <input type="text" id="nkh_ttl2_s" class="form-control required" name="nkh_ttl2_s">
+                                <input type="text" id="nkh_ttl2_s" class="form-control required" name="nkh_ttl2_s" required>
                                 <div class="form-control-position">
                                     <i class="ft-calendar"></i>
                                 </div>
@@ -189,13 +189,13 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_umur_s"><?= $question[7]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_umur_s" class="form-control required" placeholder="" name="nkh_umur_s">
+                            <input type="text" id="nkh_umur_s" class="form-control required" placeholder="" name="nkh_umur_s" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_status_s"><?= $question[8]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <select id="nkh_status_s" name="nkh_status_s" class="form-control required">
+                            <select id="nkh_status_s" name="nkh_status_s" class="form-control required" required>
                                 <option value="0" selected="" disabled="">Pilih salah satu</option>
                                 <option value="jejaka">Jejaka</option>
                                 <option value="beristri">Beristri</option>
@@ -207,25 +207,25 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_agama_s"><?= $question[9]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_agama_s" class="form-control required" placeholder="" name="nkh_agama_s" value="Islam" <?= $question[9]->IS_READONLY; ?>>
+                            <input type="text" id="nkh_agama_s" class="form-control required" placeholder="" name="nkh_agama_s" value="Islam" <?= $question[9]->IS_READONLY; ?> required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_alamat_s"><?= $question[10]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_alamat_s" class="form-control required" placeholder="" name="nkh_alamat_s">
+                            <input type="text" id="nkh_alamat_s" class="form-control required" placeholder="" name="nkh_alamat_s" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_pekerjaan_s"><?= $question[11]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" style="width: 100%" id="nkh_pekerjaan_s" class="select2 job form-control required" placeholder="" name="nkh_pekerjaan_s">
+                            <input type="text" style="width: 100%" id="nkh_pekerjaan_s" class="select2 job form-control required" placeholder="" name="nkh_pekerjaan_s" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_nohp_s"><?= $question[12]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_nohp_s" class="form-control required" placeholder="" name="nkh_nohp_s">
+                            <input type="text" id="nkh_nohp_s" class="form-control required" placeholder="" name="nkh_nohp_s" required>
                         </div>
                     </div>
                     <!-- END DETAIL CALON SUAMI -->
@@ -245,7 +245,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_kewarganegaraan_i"><?= $question[14]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <select id="nkh_kewarganegaraan_i" name="nkh_kewarganegaraan_i" class="form-control required">
+                            <select id="nkh_kewarganegaraan_i" name="nkh_kewarganegaraan_i" class="form-control required" required>
                                 <option value="0" selected="" disabled="">Pilih salah satu</option>
                                 <option value="WNI">WNI</option>
                                 <option value="WNA">WNA</option>
@@ -255,7 +255,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_nik_i"><?= $question[15]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-7">
-                            <input type="text" id="nkh_nik_i" class="form-control required" placeholder="" name="nkh_nik_i">
+                            <input type="text" id="nkh_nik_i" class="form-control required" placeholder="" name="nkh_nik_i" required>
                         </div>
                         <div class="col-md-2">
                             <input type="button" class="btn btn-info btn-min-width" value="Cek NIK" id="nkh_btnceknik_i" style="margin-left: -20px;">
@@ -264,17 +264,17 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_nama_i"><?= $question[16]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_nama_i" class="form-control required" placeholder="" name="nkh_nama_i">
+                            <input type="text" id="nkh_nama_i" class="form-control required" placeholder="" name="nkh_nama_i" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_ttl_i"><?= $question[17]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-5">
-                            <input type="text" id="nkh_ttl_i" class="form-control required" placeholder="" name="nkh_ttl_i">
+                            <input type="text" id="nkh_ttl_i" class="form-control required" placeholder="" name="nkh_ttl_i" required>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative has-icon-left">
-                                <input type="text" id="nkh_ttl2_i" class="form-control required" name="nkh_ttl2_i">
+                                <input type="text" id="nkh_ttl2_i" class="form-control required" name="nkh_ttl2_i" required>
                                 <div class="form-control-position">
                                     <i class="ft-calendar"></i>
                                 </div>
@@ -284,13 +284,13 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_umur_i"><?= $question[18]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_umur_i" class="form-control required" placeholder="" name="nkh_umur_i">
+                            <input type="text" id="nkh_umur_i" class="form-control required" placeholder="" name="nkh_umur_i" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_status_i"><?= $question[19]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <select id="nkh_status_i" name="nkh_status_i" class="form-control required">
+                            <select id="nkh_status_i" name="nkh_status_i" class="form-control required" required>
                                 <option value="0" selected="" disabled="">Pilih salah satu</option>
                                 <option value="perawan">Perawan</option>
                                 <option value="ceraimati">Cerai Mati</option>
@@ -301,25 +301,25 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_agama_i"><?= $question[20]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_agama_i" class="form-control required" placeholder="" name="nkh_agama_i" value="Islam" <?= $question[20]->IS_READONLY; ?>>
+                            <input type="text" id="nkh_agama_i" class="form-control required" placeholder="" name="nkh_agama_i" value="Islam" <?= $question[20]->IS_READONLY; ?> required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_alamat_i"><?= $question[21]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_alamat_i" class="form-control required" placeholder="" name="nkh_alamat_i">
+                            <input type="text" id="nkh_alamat_i" class="form-control required" placeholder="" name="nkh_alamat_i" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_pekerjaan_i"><?= $question[22]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" style="width: 100%" id="nkh_pekerjaan_i" class="select2 job form-control required" placeholder="" name="nkh_pekerjaan_i">
+                            <input type="text" style="width: 100%" id="nkh_pekerjaan_i" class="select2 job form-control required" placeholder="" name="nkh_pekerjaan_i" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_nohp_i"><?= $question[23]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="text" id="nkh_nohp_i" class="form-control required" placeholder="" name="nkh_nohp_i">
+                            <input type="text" id="nkh_nohp_i" class="form-control required" placeholder="" name="nkh_nohp_i" required>
                         </div>
                     </div>
                     <!-- END DETAIL CALON ISTRI -->
@@ -351,7 +351,6 @@
         $('#btnSave').click(function() {
             var url = $('#formAddEditPernikahan').attr('action');
             var data = $('#formAddEditPernikahan').serialize();
-
             $.ajax({
                 type: 'ajax',
                 method: 'post',
@@ -371,11 +370,11 @@
                         swal("Selamat!", "Data calon pengantin berhasil " + type + "!", "success");
                         showDataPernikahan();
                     } else {
-                        swal("Internal Server error 500!", "Error!", "error");
+                        swal("Error!", "Internal Server error 500!", "error");
                     }
                 },
                 error: function() {
-                    swal("Gagal menambahkan data calon pengantin!", "Error!", "error");
+                    swal("Error!", "Gagal menambahkan data calon pengantin!", "error");
                 }
             });
             // } else {
