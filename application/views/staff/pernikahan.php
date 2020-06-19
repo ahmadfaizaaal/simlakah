@@ -377,9 +377,6 @@
                     swal("Error!", "Gagal menambahkan data calon pengantin!", "error");
                 }
             });
-            // } else {
-            //     swal("Field tidak boleh kosong!", "Error!", "error");
-            // }
         });
 
         //ADD CALON PENGANTIN
@@ -439,7 +436,7 @@
             $('#nkh_btnceknik_s').show();
             $('#nkh_btnceknik_i').show();
             $('#modalPernikahan').modal('show');
-            $('#modalPernikahan').find('.modal-title').text('UBAH DATA PENGHULU');
+            $('#modalPernikahan').find('.modal-title').text('UBAH DATA CALON PENGANTIN');
             $('#formAddEditPernikahan').attr('action', '<?= BASE_URL . 'staff/submitRegistration/NikahByOfficer^update^' ?>' + regId);
             $.ajax({
                 type: 'ajax',
