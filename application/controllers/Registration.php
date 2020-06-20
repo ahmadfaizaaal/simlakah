@@ -404,6 +404,25 @@ class Registration extends CI_Controller
         setResponse($result, 'rejected');
     }
 
+    public function updateSchedule()
+    {
+        $regCode = $this->input->post('regCode');
+        $schedule = $this->input->post('schedule');
+        $time = $this->input->post('time');
+
+        $eventType = $this->registration->getEventName($regCode);
+        $statusId = $this->registration->getStatusId('Verified');
+        $result = $this->registration->updateScheduleRegistration($regCode, $schedule . ' ' . $time . ':00', $statusId);
+        if ($result) {
+            $data['redirect_url'] = BASE_URL . 'staff/' . $eventType;
+            $data['success'] = $result;
+            echo json_encode($data);
+        } else {
+            $data['success'] = $result;
+            echo json_encode($data);
+        }
+    }
+
     public function rollbackRegistration($regID)
     {
         $result = $this->registration->deleteRegistration($regID);

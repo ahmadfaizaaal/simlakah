@@ -71,7 +71,7 @@
 </div>
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-<!-- MODAL VIEW BERKAS -->
+<!-- MODAL PENGHULU -->
 <div class="modal fade" id="modalPenghulu" tabindex="-1" role="dialog" aria-labelledby="modalPenghuluLabel" aria-hidden="true">
     <div class="modal-dialog " role="document">
         <div class="modal-content">

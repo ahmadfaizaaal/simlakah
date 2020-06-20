@@ -100,6 +100,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="nkh_tempat"><?= $question[0]->QUESTION_LABEL ?></label>
                         <div class="col-md-9">
+                            <input type="hidden" name="nkh_tempat" id="nkh_tempat_edit" value="">
                             <select id="nkh_tempat" name="nkh_tempat" class="form-control" required>
                                 <option value="0" selected="" disabled="">Pilih salah satu</option>
                                 <option value="KUA">Di KUA</option>
@@ -120,7 +121,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative has-icon-left">
-                                <input type="text" id="nkh_jam_akad" class="form-control" name="nkh_jam_akad" required>
+                                <input type="text" autocomplete="off" id="nkh_jam_akad" class="form-control" name="nkh_jam_akad" required>
                                 <div class="form-control-position">
                                     <i class="ft-clock"></i>
                                 </div>
@@ -326,8 +327,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" id="btnSave" class="btn btn-success">Simpan</button>
             </div>
         </div>
     </div>
@@ -335,6 +336,8 @@
 
 <script>
     var numberLength = 0;
+    var listAkad = <?= json_encode($listDateAkad); ?>;
+
     $(function() {
         showDataPernikahan();
 
@@ -385,7 +388,7 @@
             $('#nkh_btnceknik_i').show();
             //header
             $('select[name=nkh_tempat]').val('0');
-            $('select[name=nkh_tempat]').removeAttr('readonly');
+            $('select[name=nkh_tempat]').removeAttr('disabled');
             $('input[name=nkh_tanggal_akad]').removeAttr('readonly');
             $('input[name=nkh_jam_akad]').removeAttr('readonly');
             $('input[name=nkh_alamat_akad]').removeAttr('readonly');
@@ -450,15 +453,7 @@
                 success: function(data) {
                     for (i = 0; i < data.length; i++) {
                         //header
-                        $('select[name=nkh_tempat]').val(data[i].TMP_NIKAH);
-                        var objTgl = data[i].TGL_AKAD;
-                        var tgl = objTgl.split(' ');
-                        $('input[name=nkh_tanggal_akad]').val(tgl[0]);
-                        $('input[name=nkh_jam_akad]').val(tgl[1]);
-                        $('input[name=nkh_alamat_akad]').val(data[i].ALMT_AKAD);
-
-                        //header
-                        $('select[name=nkh_tempat]').removeAttr('readonly');
+                        $('select[name=nkh_tempat]').attr('disabled', true);
                         $('input[name=nkh_tanggal_akad]').removeAttr('readonly');
                         $('input[name=nkh_jam_akad]').removeAttr('readonly');
                         $('input[name=nkh_alamat_akad]').removeAttr('readonly');
@@ -488,6 +483,15 @@
                         $('input[name=nkh_alamat_i]').removeAttr('readonly');
                         $('input[name=nkh_pekerjaan_i]').removeAttr('readonly');
                         $('input[name=nkh_nohp_i]').removeAttr('readonly');
+
+                        //header
+                        $('select[name=nkh_tempat]').val(data[i].TMP_NIKAH);
+                        $('#nkh_tempat_edit').val(data[i].TMP_NIKAH);
+                        var objTgl = data[i].TGL_AKAD;
+                        var tgl = objTgl.split(' ');
+                        $('input[name=nkh_tanggal_akad]').val(tgl[0]);
+                        $('input[name=nkh_jam_akad]').val(tgl[1]);
+                        $('input[name=nkh_alamat_akad]').val(data[i].ALMT_AKAD);
 
                         //suami
                         $('select[name=nkh_kewarganegaraan_s]').val(data[i].KEWARGANEGARAAN_S);
@@ -546,7 +550,7 @@
                 success: function(data) {
                     for (i = 0; i < data.length; i++) {
                         //header
-                        $('select[name=nkh_tempat]').attr('readonly', true);
+                        $('select[name=nkh_tempat]').attr('disabled', true);
                         $('select[name=nkh_tempat]').val(data[i].TMP_NIKAH);
                         var objTgl = data[i].TGL_AKAD;
                         var tgl = objTgl.split(' ');
@@ -616,7 +620,7 @@
             });
         });
 
-        //DELETE PENGHULU
+        //DELETE PERNIKAHAN
         $('#showDataPernikahan').on('click', '.deleteDataNikah', function() {
             var regId = $(this).attr('data');
             swal({
@@ -675,7 +679,7 @@
                             '<td scope="col" style="width: 10%;">' + data[i].NAMA_CAL_S + '</td>' +
                             '<td scope="col" style="width: 10%;">';
                         if (data[i].SCHEDULE == null || data[i].SCHEDULE == '') {
-                            html += '<a href="javascript:;" class="btn btn-sm round btn-info mr-1" data-toggle="tooltip" data-placement="bottom" title="Jadwalkan" data="' + data[i].REG_ID + '">Jadwalkan</a>' +
+                            html += '<a href="<?= BASE_URL . 'jadwal/aturjadwal/'; ?>' + data[i].REG_CODE.replace(/\//g, "~") + '^' + data[i].NAMA_CAL_S + '^' + data[i].FORM_NAME + '" class="btn btn-sm round btn-info mr-1" data-toggle="tooltip" data-placement="bottom" title="Jadwalkan" data="' + data[i].REG_CODE + '^' + data[i].NAMA_CAL_S + '">Jadwalkan</a>' +
                                 '<td scope="col" style="width: 10%;">-</td>';
                         } else {
                             html += 'Terjadwal</td>' +
@@ -692,7 +696,7 @@
                     $('[data-toggle="tooltip"]').tooltip();
                 },
                 error: function() {
-                    swal("Error!", "Could not get Data from Database!", "error");
+                    swal("Error!", "Gagal memuat data dari database!", "error");
                 }
             });
         }
@@ -750,7 +754,8 @@
         $('#nkh_tanggal_akad').datetimepicker({
             locale: 'id',
             format: 'DD-MM-YYYY',
-            minDate: tomorrow
+            minDate: tomorrow,
+            disabledDates: listAkad
         });
 
         $('#nkh_jam_akad').datetimepicker({

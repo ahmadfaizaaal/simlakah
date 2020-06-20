@@ -97,8 +97,7 @@
                         <?php } ?>
                         <a href="<?= BASE_URL . $menu->URL; ?>"><i class="<?= $menu->ICON; ?>"></i><span class="menu-title" data-i18n=""><?= $menu->TITLE; ?></span></a>
                         <?php
-                        // if ($menu->TITLE == 'Pernikahan' && $menu->ROLE_ID == '2') {
-                        if ($menu->HAS_CHILD == '1') {
+                        if ($menu->TITLE == 'Pernikahan' && $menu->ROLE_ID == '2') {
                             $role_id = $this->session->userdata('role_id');
                             $query = "SELECT * FROM menu
                                     where ROLE_ID = '$role_id' and PARENTMENU_ID is not null

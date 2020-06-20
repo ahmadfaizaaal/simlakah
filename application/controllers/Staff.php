@@ -38,6 +38,12 @@ class Staff extends CI_Controller
         $data['title'] = 'Pernikahan';
         $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
         $data['question'] = $this->registration->getListQuestion('nikah');
+        $result = $this->registration->getListAkad();
+        $listAkad = array();
+        foreach ($result as $val) {
+            array_push($listAkad, date_format(date_create($val->TGL_AKAD), "Y-m-d"));
+        }
+        $data['listDateAkad'] = $listAkad;
 
         $this->load->view('component/headerstaff', $data);
         $this->load->view('staff/pernikahan');
@@ -46,7 +52,7 @@ class Staff extends CI_Controller
 
     public function showDataPernikahan()
     {
-        $statusCode = array('TVR');
+        $statusCode = array('TVR', 'VR');
         $formName = array('Nikah', 'NikahByOfficer');
         $result = $this->registration->getDataRegistration($statusCode, $formName);
         echo json_encode($result);
@@ -299,6 +305,72 @@ class Staff extends CI_Controller
         }
 
         setResponse(true, $action);
+    }
+
+    //----------------------ISBAT---------------------------
+    public function isbat()
+    {
+        $data['title'] = 'Isbat';
+        $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
+        $data['question'] = $this->registration->getListQuestion('isbat');
+        $result = $this->registration->getListAkad();
+
+        $this->load->view('component/headerstaff', $data);
+        $this->load->view('staff/isbat');
+        $this->load->view('component/footerstaff');
+    }
+
+    public function showDataIsbat()
+    {
+        $statusCode = array('TVR', 'VR');
+        $formName = array('Isbat', 'IsbatByOfficer');
+        $result = $this->registration->getDataRegistration($statusCode, $formName);
+        echo json_encode($result);
+    }
+
+    public function getDetailIsbat()
+    {
+        $result = $this->registration->getDetailRegistration($this->input->post('regId'));
+        echo json_encode($result);
+    }
+
+    public function deleteIsbat()
+    {
+        $result = $this->registration->deleteRegistration($this->input->post('regId'));
+        setResponse($result, 'delete');
+    }
+
+    //----------------------RUJUK---------------------------
+    public function rujuk()
+    {
+        $data['title'] = 'Rujuk';
+        $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
+        $data['question'] = $this->registration->getListQuestion('rujuk');
+        $result = $this->registration->getListAkad();
+
+        $this->load->view('component/headerstaff', $data);
+        $this->load->view('staff/rujuk');
+        $this->load->view('component/footerstaff');
+    }
+
+    public function showDataRujuk()
+    {
+        $statusCode = array('TVR', 'VR');
+        $formName = array('Rujuk', 'RujukByOfficer');
+        $result = $this->registration->getDataRegistration($statusCode, $formName);
+        echo json_encode($result);
+    }
+
+    public function getDetailRujuk()
+    {
+        $result = $this->registration->getDetailRegistration($this->input->post('regId'));
+        echo json_encode($result);
+    }
+
+    public function deleteRujuk()
+    {
+        $result = $this->registration->deleteRegistration($this->input->post('regId'));
+        setResponse($result, 'delete');
     }
 
     //----------------------PENGHULU-------------------------

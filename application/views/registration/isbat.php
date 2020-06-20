@@ -550,15 +550,15 @@
                                 $('#cancelRegistration').show();
                                 $('#nextToDetail').attr('disabled', true);
                             } else {
-                                swal("Gagal submit data header isbat!", "Error!", "error");
+                                swal("Error!", "Gagal submit data header isbat!", "error");
                             }
                         },
                         error: function() {
-                            swal("Internal Server error 500!", "Error!", "error");
+                            swal("Error!", "Internal Server error 500!", "error");
                         }
                     });
                 } else {
-                    swal("Isi field yang kosong!", "Error!", "error");
+                    swal("Error!", "Isi field yang kosong!", "error");
                 }
             });
 
@@ -589,7 +589,7 @@
                                 }
                             },
                             error: function() {
-                                swal("Internal Server error 500!", "Error!", "error");
+                                swal("Error!", "Internal Server error 500!", "error");
                             }
                         });
                     }
@@ -677,7 +677,7 @@
                     }
                 },
                 error: function() {
-                    swal("Internal Server error 500!", "Error!", "error");
+                    swal("Error!", "Internal Server error 500!", "error");
                 }
             });
 
@@ -742,7 +742,7 @@
                 $('#isb_pekerjaan_' + actor).val(response.PEKERJAAN);
                 $('#isb_pekerjaan_' + actor).trigger('change');
             } else {
-                swal(msg, "Error!", "error");
+                swal("Error!", msg, "error");
             }
         }
 
@@ -818,15 +818,15 @@
                         if (data != null) {
                             retrieveDataNIK(data, actor);
                         } else {
-                            swal("Data NIK tidak ditemukan!", "Error!", "error");
+                            swal("Error!", "Data NIK tidak ditemukan!", "error");
                         }
                     },
                     error: function() {
-                        swal("Internal Server error 500!", "Error!", "error");
+                        swal("Error!", "Internal Server error 500!", "error");
                     }
                 });
             } else {
-                swal("Harap masukkan No. KTP!", "Error!", "error");
+                swal("Error!", "Harap masukkan No. KTP!", "error");
             }
         }
     </script>

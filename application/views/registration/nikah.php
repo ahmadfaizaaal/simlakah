@@ -567,6 +567,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/locale/id.js" type="text/javascript"></script>
     <script src="<?= BASE_THEME ?>datetime/build/js/bootstrap-datetimepicker.min.js"></script>
     <script>
+        var listAkad = <?= json_encode($listDateAkad); ?>;
         var numberLength = 0;
         var hasAuth = {
             's': false,
@@ -651,7 +652,7 @@
                                 }
                             },
                             error: function() {
-                                swal("Internal Server error 500!", "Error!", "error");
+                                swal("Error!", "Internal Server error 500!", "error");
                             }
                         });
                     }
@@ -721,7 +722,8 @@
             $('#nkh_tanggal_akad').datetimepicker({
                 locale: 'id',
                 format: 'DD-MM-YYYY',
-                minDate: tomorrow
+                minDate: tomorrow,
+                disabledDates: listAkad
             });
 
             $('#nkh_jam_akad').datetimepicker({
@@ -759,7 +761,7 @@
                         }
                     },
                     error: function() {
-                        swal("Internal Server error 500!", "Error!", "error");
+                        swal("Error!", "Internal Server error 500!", "error");
                     }
                 });
 
@@ -807,7 +809,7 @@
                     }
                 },
                 error: function() {
-                    swal("Internal Server error 500!", "Error!", "error");
+                    swal("Error!", "Internal Server error 500!", "error");
                 }
             });
 
@@ -872,7 +874,7 @@
                 $('#nkh_pekerjaan_' + actor).val(response.PEKERJAAN);
                 $('#nkh_pekerjaan_' + actor).trigger('change');
             } else {
-                swal(msg, "Error!", "error");
+                swal("Error!", msg, "error");
             }
 
         }
@@ -949,15 +951,15 @@
                         if (data != null) {
                             retrieveDataNIK(data, actor);
                         } else {
-                            swal("Data NIK tidak ditemukan!", "Error!", "error");
+                            swal("Error!", "Data NIK tidak ditemukan!", "error");
                         }
                     },
                     error: function() {
-                        swal("Internal Server error 500!", "Error!", "error");
+                        swal("Error!", "Internal Server error 500!", "error");
                     }
                 });
             } else {
-                swal("Harap masukkan No. KTP!", "Error!", "error");
+                swal("Error!", "Harap masukkan No. KTP!", "error");
             }
         }
     </script>

@@ -40,6 +40,15 @@ class M_Registration extends CI_Model
         return $result->result();
     }
 
+    public function getListAkad()
+    {
+        $this->db->select('TGL_AKAD');
+        $this->db->from('regdetail_tr');
+        $sql = $this->db->get();
+        $result = $sql->result();
+        return $result;
+    }
+
     public function getStatusId($statusDesc)
     {
         $sql = $this->db->get_where('registration_status', ['STATUS_DESC' => $statusDesc]);
@@ -65,6 +74,18 @@ class M_Registration extends CI_Model
         return $result[0]->FORM_NAME;
     }
 
+    public function getEventName($regCode)
+    {
+        $this->db->select('e.EVENT_NAME');
+        $this->db->from('registration r');
+        $this->db->join('form f', 'r.FORM_ID = f.FORM_ID');
+        $this->db->join('event e', 'f.EVENT_ID = e.EVENT_ID');
+        $this->db->where('r.REG_CODE', $regCode);
+        $sql = $this->db->get();
+        $result = $sql->result();
+        return $result[0]->EVENT_NAME;
+    }
+
     public function getRegistrationId($regCode)
     {
         $sql = $this->db->get_where('registration', ['REG_CODE' => $regCode]);
@@ -88,7 +109,8 @@ class M_Registration extends CI_Model
 
     public function getDataRegistration($statusCode, $formName)
     {
-        $this->db->select('rd.*, f.FORM_NAME, st.*, DATE_FORMAT(r.SCHEDULE, "%d-%m-%Y %H:%i:%s") as SCHEDULE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR');
+        $this->db->select('rd.*, f.FORM_NAME, st.*, r.REG_CODE, DATE_FORMAT(r.SCHEDULE, "%d-%m-%Y %H:%i:%s") as SCHEDULE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR');
+        // $this->db->select('rd.*, f.FORM_NAME, st.*, r.SCHEDULE_ID as SCHEDULE, r.REG_CODE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR');
         $this->db->from('registration r');
         $this->db->join('regdetail_tr rd', 'r.REG_ID = rd.REG_ID');
         $this->db->join('form f', 'r.FORM_ID = f.FORM_ID');
@@ -228,6 +250,21 @@ class M_Registration extends CI_Model
     {
         $this->db->where('REG_ID', $regID);
         $this->db->delete('registration');
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateScheduleRegistration($regCode, $schedule, $statusId)
+    {
+        $this->db->set('STATUS_ID', $statusId);
+        $this->db->set('SCHEDULE', $schedule);
+        $this->db->set('DTM_UPD', date('Y-m-d H:i:s'));
+        $this->db->set('USR_UPD', $this->session->userdata('officer_id'));
+        $this->db->where('REG_CODE', $regCode);
+        $this->db->update('registration');
         if ($this->db->affected_rows() > 0) {
             return true;
         } else {

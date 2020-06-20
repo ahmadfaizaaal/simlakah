@@ -34,6 +34,12 @@ class Home extends CI_Controller
         $data['title'] = "Sistem Manajemen Layanan Pernikahan";
         $data['type'] = $type;
         $data['question'] = $this->registration->getListQuestion($type);
+        $result = $this->registration->getListAkad();
+        $listAkad = array();
+        foreach ($result as $val) {
+            array_push($listAkad, date_format(date_create($val->TGL_AKAD), "Y-m-d"));
+        }
+        $data['listDateAkad'] = $listAkad;
         $this->load->view('registration/' . $type, $data);
     }
 
