@@ -5293,7 +5293,7 @@ input[type='button'].btn-block {
 
 .nav-link {
 	display: block;
-
+	color: #747888;
 	padding: .5rem 1rem;
 }
 
@@ -5303,7 +5303,7 @@ input[type='button'].btn-block {
 }
 
 .nav-link.disabled {
-	color: #6b6f80;
+	color: #747888;
 }
 
 .nav-tabs {
@@ -5326,7 +5326,7 @@ input[type='button'].btn-block {
 }
 
 .nav-tabs .nav-link.disabled {
-	color: #6b6f80;
+	color: #747888;
 	border-color: transparent;
 	background-color: transparent;
 }
@@ -5335,7 +5335,7 @@ input[type='button'].btn-block {
 .nav-tabs .nav-item.show .nav-link {
 	color: #fff;
 	border-color: #babfc7 #626e82 #6967ce;
-	background-color: #6967ce;
+	background-color: #18d26e;
 }
 
 .nav-tabs .dropdown-menu {

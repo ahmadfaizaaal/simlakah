@@ -98,7 +98,7 @@ class Auth extends CI_Controller
                 if ('1' == $userLogin->ROLE_ID) {
                     redirect('staff');
                 } else if ('2' == $userLogin->ROLE_ID) {
-                    redirect('staff');
+                    redirect('penghulu');
                 }
             }
             // $this->session->set_userdata($data);

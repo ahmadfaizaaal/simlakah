@@ -15,6 +15,7 @@ class M_Auth extends CI_Model
         $this->db->from('menu');
         $this->db->where('ROLE_ID', $roleId);
         $this->db->where('PARENTMENU_ID', null);
+        $this->db->where('IS_ACTIVE', '1');
         $result = $this->db->get();
         if ($result->num_rows() > 0) {
             return $result->result();

@@ -684,7 +684,7 @@
                         swal("Error!", "Internal Server error 500!", "error");
                     }
                 });
-            });;
+            });
 
             $('#rjk_ttl2_' + actor).datetimepicker({
                 locale: 'id',

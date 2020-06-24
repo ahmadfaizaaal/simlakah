@@ -259,10 +259,10 @@
                                                 <div class="col-md-9">
                                                     <select id="nkh_status_s" name="nkh_status_s" class="form-control required">
                                                         <option value="none" selected="" disabled="">Pilih salah satu</option>
-                                                        <option value="jejaka">Jejaka</option>
-                                                        <option value="beristri">Beristri</option>
-                                                        <option value="ceraimati">Cerai Mati</option>
-                                                        <option value="ceraihidup">Cerai Hidup</option>
+                                                        <option value="Jejakan">Jejaka</option>
+                                                        <option value="Beristri">Beristri</option>
+                                                        <option value="Cerai Mati">Cerai Mati</option>
+                                                        <option value="Cerai Hidup">Cerai Hidup</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -722,14 +722,46 @@
             $('#nkh_tanggal_akad').datetimepicker({
                 locale: 'id',
                 format: 'DD-MM-YYYY',
-                minDate: tomorrow,
-                disabledDates: listAkad
+                minDate: tomorrow
+                // disabledDates: listAkad
+            }).on('dp.change', function(e) {
+                var nkh_tanggal_akad = $('#nkh_tanggal_akad').val();
+                var disabledHours;
+                $.ajax({
+                    type: 'ajax',
+                    method: 'post',
+                    url: '<?= BASE_URL . 'registration/getDisabledHours'; ?>',
+                    data: {
+                        nkh_tanggal_akad: nkh_tanggal_akad
+                    },
+                    async: false,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.length != 0) {
+                            disabledHours = response;
+                            $('#nkh_jam_akad').datetimepicker({
+                                locale: 'id',
+                                format: 'HH:mm:ss',
+                                disabledHours: response
+                            });
+                        } else {
+                            $('#nkh_jam_akad').datetimepicker({
+                                locale: 'id',
+                                format: 'HH:mm:ss',
+                                enabledHours: disabledHours
+                            });
+                        }
+                    },
+                    error: function() {
+                        swal("Error!", "Internal Server error 500!", "error");
+                    }
+                });
             });
 
-            $('#nkh_jam_akad').datetimepicker({
-                locale: 'id',
-                format: 'HH:mm:ss'
-            });
+            // $('#nkh_jam_akad').datetimepicker({
+            //     locale: 'id',
+            //     format: 'HH:mm:ss'
+            // });
 
             $('#nkh_ttl2_' + actor).datetimepicker({
                 locale: 'id',
