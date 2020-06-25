@@ -724,44 +724,45 @@
                 format: 'DD-MM-YYYY',
                 minDate: tomorrow
                 // disabledDates: listAkad
-            }).on('dp.change', function(e) {
-                var nkh_tanggal_akad = $('#nkh_tanggal_akad').val();
-                var disabledHours;
-                $.ajax({
-                    type: 'ajax',
-                    method: 'post',
-                    url: '<?= BASE_URL . 'registration/getDisabledHours'; ?>',
-                    data: {
-                        nkh_tanggal_akad: nkh_tanggal_akad
-                    },
-                    async: false,
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.length != 0) {
-                            disabledHours = response;
-                            $('#nkh_jam_akad').datetimepicker({
-                                locale: 'id',
-                                format: 'HH:mm:ss',
-                                disabledHours: response
-                            });
-                        } else {
-                            $('#nkh_jam_akad').datetimepicker({
-                                locale: 'id',
-                                format: 'HH:mm:ss',
-                                enabledHours: disabledHours
-                            });
-                        }
-                    },
-                    error: function() {
-                        swal("Error!", "Internal Server error 500!", "error");
-                    }
-                });
             });
-
-            // $('#nkh_jam_akad').datetimepicker({
-            //     locale: 'id',
-            //     format: 'HH:mm:ss'
+            // .on('dp.change', function(e) {
+            //     var nkh_tanggal_akad = $('#nkh_tanggal_akad').val();
+            //     var disabledHours;
+            //     $.ajax({
+            //         type: 'ajax',
+            //         method: 'post',
+            //         url: '<?= BASE_URL . 'registration/getDisabledHours'; ?>',
+            //         data: {
+            //             nkh_tanggal_akad: nkh_tanggal_akad
+            //         },
+            //         async: false,
+            //         dataType: 'json',
+            //         success: function(response) {
+            //             if (response.length != 0) {
+            //                 disabledHours = response;
+            //                 $('#nkh_jam_akad').datetimepicker({
+            //                     locale: 'id',
+            //                     format: 'HH:mm:ss',
+            //                     disabledHours: response
+            //                 });
+            //             } else {
+            //                 $('#nkh_jam_akad').datetimepicker({
+            //                     locale: 'id',
+            //                     format: 'HH:mm:ss',
+            //                     enabledHours: disabledHours
+            //                 });
+            //             }
+            //         },
+            //         error: function() {
+            //             swal("Error!", "Internal Server error 500!", "error");
+            //         }
+            //     });
             // });
+
+            $('#nkh_jam_akad').datetimepicker({
+                locale: 'id',
+                format: 'HH:mm:ss'
+            });
 
             $('#nkh_ttl2_' + actor).datetimepicker({
                 locale: 'id',

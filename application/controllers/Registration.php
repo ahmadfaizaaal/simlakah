@@ -158,7 +158,6 @@ class Registration extends CI_Controller
             $startIndex = 3;
 
             $dataDetailNikah = array(
-                'REG_ID' => $regID,
                 'KEWARGANEGARAAN_S' => $kwn_s,
                 'NIK_CAL_S' => $nik_s,
                 'NAMA_CAL_S' => $nama_s,
@@ -193,7 +192,7 @@ class Registration extends CI_Controller
                 'FILE_ADDITIONAL_DOC_I' => $pendukung_i
             );
 
-            $this->registration->insertDetail($dataDetailNikah);
+            $this->registration->updateDetail($regID, $dataDetailNikah);
         } else if ('isbat' == $type) {
             //suami
             $kwn_s = strtoupper($this->input->post('isb_kewarganegaraan_s'));
@@ -235,7 +234,6 @@ class Registration extends CI_Controller
             $startIndex = 2;
 
             $dataDetailIsbat = array(
-                'REG_ID' => $regID,
                 'KEWARGANEGARAAN_S' => $kwn_s,
                 'NIK_S' => $nik_s,
                 'NAMA_S' => $nama_s,
@@ -265,7 +263,7 @@ class Registration extends CI_Controller
                 'FILE_AKTA_LAHIR_I' => $akta_i
             );
 
-            $this->registration->insertDetail($dataDetailIsbat);
+            $this->registration->updateDetail($regID, $dataDetailIsbat);
         } else if ('rujuk' == $type) {
             //suami
             $kwn_s = strtoupper($this->input->post('rjk_kewarganegaraan_s'));
@@ -307,7 +305,6 @@ class Registration extends CI_Controller
             $startIndex = 4;
 
             $dataDetailRujuk = array(
-                'REG_ID' => $regID,
                 'KEWARGANEGARAAN_S' => $kwn_s,
                 'NIK_S' => $nik_s,
                 'NAMA_S' => $nama_s,
@@ -337,7 +334,7 @@ class Registration extends CI_Controller
                 'FILE_AKTA_LAHIR_I' => $akta_i
             );
 
-            $this->registration->insertDetail($dataDetailRujuk);
+            $this->registration->updateDetail($regID, $dataDetailRujuk);
         }
 
         $insertedDetail = 0;
