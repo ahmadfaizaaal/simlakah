@@ -73,6 +73,13 @@ class M_Registration extends CI_Model
         return $result->FORM_ID;
     }
 
+    public function getEventId($eventName)
+    {
+        $sql = $this->db->get_where('event', ['EVENT_NAME' => $eventName]);
+        $result = $sql->row();
+        return $result->EVENT_ID;
+    }
+
     public function getFormName($regId)
     {
         $this->db->select('f.FORM_NAME');
@@ -249,6 +256,23 @@ class M_Registration extends CI_Model
         $this->db->set('USR_UPD', $this->session->userdata('officer_id'));
         $this->db->where('REG_ID', $regId);
         $this->db->update('regdetail_tr', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function insertVerificationDetail($regID, $verifType, $questionLabel, $answer)
+    {
+        $data = array(
+            'DTM_CRT' => date('Y-m-d H:i:s'),
+            'REG_ID' => $regID,
+            'VERIF_TYPE' => $verifType,
+            'QUESTION_LABEL' => $questionLabel,
+            'ANSWER' => $answer
+        );
+        $this->db->insert('verification', $data);
         if ($this->db->affected_rows() > 0) {
             return true;
         } else {

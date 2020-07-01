@@ -293,19 +293,11 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="nkh_foto_s"><?= $question[13]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-9">
-                                                    <!-- <div class="row"> -->
-                                                    <!-- <div class="col-sm-3">
-                                                            <input type="hidden" name="nkh_oldfoto_s" value="Avatar">
-                                                            <img src="<?= BASE_THEME ?>adm/app-assets/images/portrait/small/avatar-s-19.png" alt="" class="img-thumbnail">
-                                                        </div>
-                                                        <div class="col-sm-9"> -->
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" name="nkh_foto_s" id="nkh_foto_s" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_foto_s', 'foto_s')">
                                                         <label for="nkh_foto_s" class="custom-file-label required" id="foto_s"></label>
                                                         <p class="text-left"><small class="text-muted">NB : Silahkan unggah pas foto ukuran 2x3 dengan latar belakang berwarna biru.</small></p>
                                                     </div>
-                                                    <!-- </div> -->
-                                                    <!-- </div> -->
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -396,19 +388,11 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="nkh_oldfoto_i"><?= $question[24]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-9">
-                                                    <!-- <div class="row">
-                                                        <div class="col-sm-3">
-                                                            <input type="hidden" name="nkh_foto_i" value="Avatar">
-                                                            <img src="<?= BASE_THEME ?>adm/app-assets/images/portrait/small/avatar-s-19.png" alt="" class="img-thumbnail">
-                                                        </div>
-                                                        <div class="col-sm-9"> -->
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" name="nkh_foto_i" id="nkh_foto_i" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_foto_i', 'foto_i')">
                                                         <label for="nkh_foto_i" class="custom-file-label required" id="foto_i"></label>
                                                         <p class="text-left"><small class="text-muted">NB : Silahkan unggah pas foto ukuran 2x3 dengan latar belakang berwarna biru.</small></p>
                                                     </div>
-                                                    <!-- </div>
-                                                    </div> -->
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -513,6 +497,57 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group row" id="kedutaan">
+                                                <label class="col-md-4 label-control"><?= $question[35]->QUESTION_LABEL ?> <span class="danger">*</span></label>
+                                                <div class="">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="nkh_dockedutaan_s" id="nkh_dockedutaan_s" accept="image/jpg, image/jpeg, image/png" onchange="getFileNameOfImage('nkh_dockedutaan_s', 'kedutaans')">
+                                                        <label for="nkh_dockedutaan_s" class="custom-file-label" id="kedutaans"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk suami</small></p>
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="nkh_dockedutaan_i" id="nkh_dockedutaan_i" accept="image/jpg, image/jpeg, image/png" onchange="getFileNameOfImage('nkh_dockedutaan_i', 'kedutaani')">
+                                                        <label for="nkh_dockedutaan_i" class="custom-file-label" id="kedutaani"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk istri</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" id="passport">
+                                                <label class="col-md-4 label-control"><?= $question[37]->QUESTION_LABEL ?> <span class="danger">*</span></label>
+                                                <div class="">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="nkh_docpassport_s" id="nkh_docpassport_s" accept="image/jpg, image/jpeg, image/png" onchange="getFileNameOfImage('nkh_docpassport_s', 'passports')">
+                                                        <label for="nkh_docpassport_s" class="custom-file-label" id="passports"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk suami</small></p>
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="nkh_docpassport_i" id="nkh_docpassport_i" accept="image/jpg, image/jpeg, image/png" onchange="getFileNameOfImage('nkh_docpassport_i', 'passporti')">
+                                                        <label for="nkh_docpassport_i" class="custom-file-label" id="passporti"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk istri</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" id="imigrasi">
+                                                <label class="col-md-4 label-control"><?= $question[39]->QUESTION_LABEL ?> <span class="danger">*</span></label>
+                                                <div class="">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="nkh_docimigrasi_s" id="nkh_docimigrasi_s" accept="image/jpg, image/jpeg, image/png" onchange="getFileNameOfImage('nkh_docimigrasi_s', 'imigrasis')">
+                                                        <label for="nkh_docimigrasi_s" class="custom-file-label" id="imigrasis"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk suami</small></p>
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="nkh_docimigrasi_i" id="nkh_docimigrasi_i" accept="image/jpg, image/jpeg, image/png" onchange="getFileNameOfImage('nkh_docimigrasi_i', 'imigrasii')">
+                                                        <label for="nkh_docimigrasi_i" class="custom-file-label" id="imigrasii"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk istri</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </fieldset>
                                         </form>
                                     </div>
@@ -570,6 +605,11 @@
         var listAkad = <?= json_encode($listDateAkad); ?>;
         var numberLength = 0;
         var hasAuth = {
+            's': false,
+            'i': false
+        };
+
+        var isWna = {
             's': false,
             'i': false
         };
@@ -860,8 +900,72 @@
         function getKewarganegaraan(element, actor) {
             if ('wni' == element) {
                 setEditableElement(true, actor);
+
+                isWna[actor] = false;
+                $('#nkh_dockedutaan_' + actor).parent().parent().hide();
+                $('#nkh_dockedutaan_' + actor).attr('required', false);
+                $('#nkh_docpassport_' + actor).parent().parent().hide();
+                $('#nkh_docpassport_' + actor).attr('required', false);
+                $('#nkh_docimigrasi_' + actor).parent().parent().hide();
+                $('#nkh_docimigrasi_' + actor).attr('required', false);
             } else {
                 setEditableElement(false, actor);
+
+                isWna[actor] = true;
+                $('#nkh_dockedutaan_' + actor).parent().parent().show();
+                $('#nkh_dockedutaan_' + actor).attr('required', true);
+                $('#nkh_docpassport_' + actor).parent().parent().show();
+                $('#nkh_docpassport_' + actor).attr('required', true);
+                $('#nkh_docimigrasi_' + actor).parent().parent().show();
+                $('#nkh_docimigrasi_' + actor).attr('required', true);
+
+                if (isWna['s'] && isWna['i']) {
+                    $('#nkh_dockedutaan_s').parent().parent().removeClass();
+                    $('#nkh_dockedutaan_i').parent().parent().removeClass();
+                    $('#nkh_docpassport_s').parent().parent().removeClass();
+                    $('#nkh_docpassport_i').parent().parent().removeClass();
+                    $('#nkh_docimigrasi_s').parent().parent().removeClass();
+                    $('#nkh_docimigrasi_i').parent().parent().removeClass();
+                    $('#nkh_dockedutaan_s').parent().parent().addClass('col-md-4');
+                    $('#nkh_dockedutaan_i').parent().parent().addClass('col-md-4');
+                    $('#nkh_docpassport_s').parent().parent().addClass('col-md-4');
+                    $('#nkh_docpassport_i').parent().parent().addClass('col-md-4');
+                    $('#nkh_docimigrasi_s').parent().parent().addClass('col-md-4');
+                    $('#nkh_docimigrasi_i').parent().parent().addClass('col-md-4');
+                    // $('#jobAuth').show();
+                } else if (isWna['s'] && !isWna['i']) {
+                    $('#nkh_dockedutaan_s').parent().parent().removeClass();
+                    $('#nkh_dockedutaan_i').parent().parent().removeClass();
+                    $('#nkh_docpassport_s').parent().parent().removeClass();
+                    $('#nkh_docpassport_i').parent().parent().removeClass();
+                    $('#nkh_docimigrasi_s').parent().parent().removeClass();
+                    $('#nkh_docimigrasi_i').parent().parent().removeClass();
+                    $('#nkh_dockedutaan_s').parent().parent().addClass('col-md-8');
+                    $('#nkh_docpassport_s').parent().parent().addClass('col-md-8');
+                    $('#nkh_docimigrasi_s').parent().parent().addClass('col-md-8');
+                    // $('#jobAuth').show();
+                } else if (!isWna['s'] && isWna['i']) {
+                    $('#nkh_dockedutaan_s').parent().parent().removeClass();
+                    $('#nkh_dockedutaan_i').parent().parent().removeClass();
+                    $('#nkh_docpassport_s').parent().parent().removeClass();
+                    $('#nkh_docpassport_i').parent().parent().removeClass();
+                    $('#nkh_docimigrasi_s').parent().parent().removeClass();
+                    $('#nkh_docimigrasi_i').parent().parent().removeClass();
+                    $('#nkh_dockedutaan_i').parent().parent().addClass('col-md-8');
+                    $('#nkh_docpassport_i').parent().parent().addClass('col-md-8');
+                    $('#nkh_docimigrasi_i').parent().parent().addClass('col-md-8');
+                    // $('#jobAuth').show();
+                }
+            }
+
+            if (isWna['s'] || isWna['i']) {
+                $('#kedutaan').show();
+                $('#passport').show();
+                $('#imigrasi').show();
+            } else {
+                $('#kedutaan').hide();
+                $('#passport').hide();
+                $('#imigrasi').hide();
             }
         }
 

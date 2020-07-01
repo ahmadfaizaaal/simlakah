@@ -3,7 +3,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
             <div class="content-header-left col-md-4 col-12 mb-2">
-                <h2 class="content-header-title">RUJUK</h>
+                <h2 class="content-header-title">MENU RUJUK</h>
             </div>
             <!-- <div class="content-header-right col-md-8 col-12">
                     <div class="breadcrumbs-top float-md-right">
@@ -29,9 +29,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <!-- <h4 class="card-title">Data Penghulu</h4> -->
-                                <div class="text-left">
+                                <!-- <div class="text-left">
                                     <a href="javascript::" id="btnAdd" class="btn btn-icon btn-success mb-0" data-toggle="modal" data-target="#modalRujuk"><i class="ft-user-plus"></i> &nbsp;Tambah Calon Pengantin</a>
-                                </div>
+                                </div> -->
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
                                         <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -78,7 +78,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalRujukLabel"><strong>TAMBAH CALON PENGANTIN</strong></h5>
+                <!-- <h5 class="modal-title" id="modalRujukLabel"><strong>TAMBAH CALON PENGANTIN</strong></h5> -->
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -157,12 +157,12 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="rjk_nik_s"><?= $question[5]->QUESTION_LABEL ?> <span class="danger">*</span></label>
-                        <div class="col-md-7">
+                        <div class="col-md-9">
                             <input type="text" id="rjk_nik_s" class="form-control required" placeholder="" name="rjk_nik_s">
                         </div>
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
                             <input type="button" class="btn btn-info btn-min-width" value="Cek NIK" id="rjk_btnceknik_s" style="margin-left: -20px;">
-                        </div>
+                        </div> -->
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="rjk_nama_s"><?= $question[6]->QUESTION_LABEL ?> <span class="danger">*</span></label>
@@ -240,12 +240,12 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="rjk_nik_i"><?= $question[15]->QUESTION_LABEL ?> <span class="danger">*</span></label>
-                        <div class="col-md-7">
+                        <div class="col-md-9">
                             <input type="text" id="rjk_nik_i" class="form-control required" placeholder="" name="rjk_nik_i">
                         </div>
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
                             <input type="button" class="btn btn-info btn-min-width" value="Cek NIK" id="rjk_btnceknik_i" style="margin-left: -20px;">
-                        </div>
+                        </div> -->
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 label-control" for="rjk_nama_i"><?= $question[16]->QUESTION_LABEL ?> <span class="danger">*</span></label>
@@ -360,152 +360,6 @@
             }
         });
 
-        //ADD CALON PENGANTIN
-        $('#btnAdd').click(function() {
-            $('#rjk_btnceknik_s').show();
-            $('#rjk_btnceknik_i').show();
-            //header
-            // $('select[name=rjk_tempat]').val('0');
-            // $('select[name=rjk_tempat]').removeAttr('disabled');
-            // $('input[name=rjk_tanggal_daftar_rujuk]').removeAttr('readonly');
-            $('input[name=rjk_tanggal_cerai]').removeAttr('readonly');
-            // $('input[name=rjk_masa_idah]').removeAttr('readonly');
-            // $('input[name=rjk_status_cerai]').removeAttr('readonly');
-
-            //suami
-            $('select[name=rjk_kewarganegaraan_s]').val('0');
-            $('select[name=rjk_kewarganegaraan_s]').removeAttr('readonly');
-            $('input[name=rjk_nik_s]').removeAttr('readonly');
-            $('input[name=rjk_nama_s]').removeAttr('readonly');
-            $('input[name=rjk_ttl_s]').removeAttr('readonly');
-            $('input[name=rjk_ttl2_s]').removeAttr('readonly');
-            $('input[name=rjk_umur_s]').removeAttr('readonly');
-            // $('select[name=rjk_status_s]').val('0');
-            // $('select[name=rjk_status_s]').removeAttr('readonly');
-            $('input[name=rjk_agama_s]').val('');
-            $('input[name=rjk_agama_s]').removeAttr('readonly');
-            $('input[name=rjk_alamat_s]').removeAttr('readonly');
-            $('input[name=rjk_pekerjaan_s]').val(null).trigger('change');
-            $('input[name=rjk_pekerjaan_s]').removeAttr('readonly');
-            $('input[name=rjk_nohp_s]').removeAttr('readonly');
-
-            //istri
-            $('select[name=rjk_kewarganegaraan_i]').val('0');
-            $('select[name=rjk_kewarganegaraan_i]').removeAttr('readonly');
-            $('input[name=rjk_nik_i]').removeAttr('readonly');
-            $('input[name=rjk_nama_i]').removeAttr('readonly');
-            $('input[name=rjk_ttl_i]').removeAttr('readonly');
-            $('input[name=rjk_ttl2_i]').removeAttr('readonly');
-            $('input[name=rjk_umur_i]').removeAttr('readonly');
-            // $('select[name=rjk_status_i]').val('0');
-            // $('select[name=rjk_status_i]').removeAttr('readonly');
-            $('input[name=rjk_agama_i]').val('');
-            $('input[name=rjk_agama_i]').removeAttr('readonly');
-            $('input[name=rjk_alamat_i]').removeAttr('readonly');
-            $('input[name=rjk_pekerjaan_i]').val(null).trigger('change');
-            $('input[name=rjk_pekerjaan_i]').removeAttr('readonly');
-            $('input[name=rjk_nohp_i]').removeAttr('readonly');
-            $('#btnSave').show();
-            $('#modalRujuk').find('.modal-title').text('TAMBAH CALON PENGANTIN');
-            $('#formAddEditRujuk').attr('action', '<?= BASE_URL . 'staff/submitRegistration/RujukByOfficer^add^0'; ?>');
-            $('#formAddEditRujuk')[0].reset();
-        });
-
-        //EDIT DATA RUJUK
-        $('#showDataRujuk').on('click', '.editDataRujuk', function() {
-            var regId = $(this).attr('data');
-            $('#btnSave').show();
-            $('#rjk_btnceknik_s').show();
-            $('#rjk_btnceknik_i').show();
-            $('#modalRujuk').modal('show');
-            $('#modalRujuk').find('.modal-title').text('UBAH DATA CALON PENGANTIN');
-            $('#formAddEditRujuk').attr('action', '<?= BASE_URL . 'staff/submitRegistration/RujukByOfficer^update^' ?>' + regId);
-            $.ajax({
-                type: 'ajax',
-                method: 'post',
-                url: '<?= BASE_URL . 'staff/getDetailRujuk'; ?>',
-                data: {
-                    regId: regId
-                },
-                async: false,
-                dataType: 'json',
-                success: function(data) {
-                    for (i = 0; i < data.length; i++) {
-                        //header
-                        // $('input[name=rjk_tanggal_daftar_rujuk]').removeAttr('readonly');
-                        $('input[name=rjk_tanggal_cerai]').removeAttr('readonly');
-                        // $('input[name=rjk_masa_idah]').removeAttr('readonly');
-                        // $('input[name=rjk_status_cerai]').removeAttr('readonly');
-
-                        //suami
-                        $('select[name=rjk_kewarganegaraan_s]').removeAttr('readonly');
-                        $('input[name=rjk_nik_s]').removeAttr('readonly');
-                        $('input[name=rjk_nama_s]').removeAttr('readonly');
-                        $('input[name=rjk_ttl_s]').removeAttr('readonly');
-                        $('input[name=rjk_ttl2_s]').removeAttr('readonly');
-                        $('input[name=rjk_umur_s]').removeAttr('readonly');
-                        // $('select[name=rjk_status_s]').removeAttr('readonly');
-                        $('input[name=rjk_agama_s]').removeAttr('readonly');
-                        $('input[name=rjk_alamat_s]').removeAttr('readonly');
-                        $('input[name=rjk_pekerjaan_s]').removeAttr('readonly');
-                        $('input[name=rjk_nohp_s]').removeAttr('readonly');
-
-                        //istri
-                        $('select[name=rjk_kewarganegaraan_i]').removeAttr('readonly');
-                        $('input[name=rjk_nik_i]').removeAttr('readonly');
-                        $('input[name=rjk_nama_i]').removeAttr('readonly');
-                        $('input[name=rjk_ttl_i]').removeAttr('readonly');
-                        $('input[name=rjk_ttl2_i]').removeAttr('readonly');
-                        $('input[name=rjk_umur_i]').removeAttr('readonly');
-                        // $('select[name=rjk_status_i]').removeAttr('readonly');
-                        $('input[name=rjk_agama_i]').removeAttr('readonly');
-                        $('input[name=rjk_alamat_i]').removeAttr('readonly');
-                        $('input[name=rjk_pekerjaan_i]').removeAttr('readonly');
-                        $('input[name=rjk_nohp_i]').removeAttr('readonly');
-
-                        //header
-                        $('input[name=rjk_tanggal_daftar_rujuk]').val(data[i].TGL_RUJUK);
-                        $('input[name=rjk_tanggal_cerai]').val(data[i].TGL_CERAI);
-                        $('input[name=rjk_masa_idah]').val(data[i].MASA_IDAH);
-                        $('input[name=rjk_status_cerai]').val(data[i].STATUS_CERAI);
-
-                        //suami
-                        $('select[name=rjk_kewarganegaraan_s]').val(data[i].KEWARGANEGARAAN_S);
-                        $('input[name=rjk_nik_s]').val(data[i].NIK_S);
-                        $('input[name=rjk_nama_s]').val(data[i].NAMA_S);
-                        var objTtl = data[i].TTL_S;
-                        var ttl = objTtl.split(' ');
-                        $('input[name=rjk_ttl_s]').val(ttl[0].substr(0, ttl[0].length - 1));
-                        $('input[name=rjk_ttl2_s]').val(ttl[1]);
-                        $('input[name=rjk_umur_s]').val(data[i].UMUR_S);
-                        // $('select[name=rjk_status_s]').val(data[i].STATUS_S);
-                        $('input[name=rjk_agama_s]').val(data[i].AGAMA_S);
-                        $('input[name=rjk_alamat_s]').val(data[i].ALMT_S);
-                        $('input[name=rjk_pekerjaan_s]').val(data[i].PEKERJAAN_S).trigger('change');
-                        $('input[name=rjk_nohp_s]').val(data[i].NO_HP_S);
-
-                        //istri
-                        $('select[name=rjk_kewarganegaraan_i]').val(data[i].KEWARGANEGARAAN_I);
-                        $('input[name=rjk_nik_i]').val(data[i].NIK_I);
-                        $('input[name=rjk_nama_i]').val(data[i].NAMA_I);
-                        var objTtl = data[i].TTL_I;
-                        var ttl = objTtl.split(' ');
-                        $('input[name=rjk_ttl_i]').val(ttl[0].substr(0, ttl[0].length - 1));
-                        $('input[name=rjk_ttl2_i]').val(ttl[1]);
-                        $('input[name=rjk_umur_i]').val(data[i].UMUR_I);
-                        // $('select[name=rjk_status_i]').val(data[i].STATUS_I);
-                        $('input[name=rjk_agama_i]').val(data[i].AGAMA_I);
-                        $('input[name=rjk_alamat_i]').val(data[i].ALMT_I);
-                        $('input[name=rjk_pekerjaan_i]').val(data[i].PEKERJAAN_I).trigger('change');
-                        $('input[name=rjk_nohp_i]').val(data[i].NO_HP_I);
-                    }
-                },
-                error: function() {
-                    swal("Error!", "Internal Server error 500!", "error");
-                }
-            });
-        });
-
         //VIEW RUJUK
         $('#showDataRujuk').on('click', '.viewDetailRujuk', function() {
             var regId = $(this).attr('data');
@@ -526,7 +380,7 @@
                 success: function(data) {
                     for (i = 0; i < data.length; i++) {
                         //header
-                        $('input[name=rjk_tanggal_daftar_rujuk]').attr('readonly', true);
+                        $('input[name=rjk_tanggal_daftar_rujuk]').attr('disabled', true);
                         $('input[name=rjk_tanggal_daftar_rujuk]').val(data[i].TGL_RUJUK);
                         $('input[name=rjk_tanggal_cerai]').attr('readonly', true);
                         $('input[name=rjk_tanggal_cerai]').val(data[i].TGL_CERAI);
@@ -536,7 +390,7 @@
                         $('input[name=rjk_status_cerai]').val(data[i].STATUS_CERAI);
 
                         //suami
-                        $('select[name=rjk_kewarganegaraan_s]').attr('readonly', true);
+                        $('select[name=rjk_kewarganegaraan_s]').attr('disabled', true);
                         $('select[name=rjk_kewarganegaraan_s]').val(data[i].KEWARGANEGARAAN_S);
                         $('input[name=rjk_nik_s]').attr('readonly', true);
                         $('input[name=rjk_nik_s]').val(data[i].NIK_S);
@@ -556,13 +410,13 @@
                         $('input[name=rjk_agama_s]').val(data[i].AGAMA_S);
                         $('input[name=rjk_alamat_s]').attr('readonly', true);
                         $('input[name=rjk_alamat_s]').val(data[i].ALMT_S);
-                        $('input[name=rjk_pekerjaan_s]').attr('readonly', true);
+                        $('input[name=rjk_pekerjaan_s]').attr('disabled', true);
                         $('input[name=rjk_pekerjaan_s]').val(data[i].PEKERJAAN_S).trigger('change');
                         $('input[name=rjk_nohp_s]').attr('readonly', true);
                         $('input[name=rjk_nohp_s]').val(data[i].NO_HP_S);
 
                         //istri
-                        $('select[name=rjk_kewarganegaraan_i]').attr('readonly', true);
+                        $('select[name=rjk_kewarganegaraan_i]').attr('disabled', true);
                         $('select[name=rjk_kewarganegaraan_i]').val(data[i].KEWARGANEGARAAN_I);
                         $('input[name=rjk_nik_i]').attr('readonly', true);
                         $('input[name=rjk_nik_i]').val(data[i].NIK_I);
@@ -582,7 +436,7 @@
                         $('input[name=rjk_agama_i]').val(data[i].AGAMA_I);
                         $('input[name=rjk_alamat_i]').attr('readonly', true);
                         $('input[name=rjk_alamat_i]').val(data[i].ALMT_I);
-                        $('input[name=rjk_pekerjaan_i]').attr('readonly', true);
+                        $('input[name=rjk_pekerjaan_i]').attr('disabled', true);
                         $('input[name=rjk_pekerjaan_i]').val(data[i].PEKERJAAN_I).trigger('change');
                         $('input[name=rjk_nohp_i]').attr('readonly', true);
                         $('input[name=rjk_nohp_i]').val(data[i].NO_HP_I);
@@ -594,51 +448,12 @@
             });
         });
 
-        //DELETE RUJUK
-        $('#showDataRujuk').on('click', '.deleteDataRujuk', function() {
-            var regId = $(this).attr('data');
-            swal({
-                title: 'Apakah anda yakin ingin menghapus data ini?',
-                type: 'warning',
-                showCancelButton: true,
-                focusConfirm: false,
-                confirmButtonColor: '#18d26e',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya',
-                cancelButtonText: 'Tidak'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        type: 'ajax',
-                        method: 'post',
-                        url: '<?= BASE_URL . 'staff/deleteRujuk/'; ?>',
-                        data: {
-                            regId: regId
-                        },
-                        async: false,
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.success) {
-                                swal("Selamat!", "Data rujuk berhasil dihapus!", "success");
-                                showDataRujuk();
-                            } else {
-                                swal("Error!", "Gagal Hapus data!", "error");
-                            }
-                        },
-                        error: function() {
-                            swal("Error!", "Internal Server error 500!", "error");
-                        }
-                    });
-                }
-            });
-        });
-
         //SHOW DATA RUJUK
         function showDataRujuk() {
             $.ajax({
                 type: 'ajax',
                 method: 'post',
-                url: '<?= BASE_URL . 'staff/showDataRujuk'; ?>',
+                url: '<?= BASE_URL . 'penghulu/showDataRujuk'; ?>',
                 async: false,
                 dataType: 'json',
                 success: function(data) {
@@ -660,9 +475,8 @@
                                 '<td scope="col" style="width: 10%;">' + data[i].SCHEDULE + '</td>';
                         }
                         html += '<td scope="col" style="width: 50%">' +
-                            '<a href="javascript:;" class="btn round btn-sm btn-icon btn-info viewDetailRujuk" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="LIhat Detail" data="' + data[i].REG_ID + '"><i class="ft-eye"></i></a>' +
-                            '<a href="javascript:;" class="btn round btn-sm btn-icon btn-warning editDataRujuk" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="Edit" data="' + data[i].REG_ID + '"><i class="ft-edit-2"></i></a>' +
-                            '<a href="javascript:;" class="btn round btn-sm btn-icon btn-danger deleteDataRujuk" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="Hapus" data="' + data[i].REG_ID + '"><i class="ft-x"></i></a>' +
+                            '<a href="javascript:;" class="btn round btn-sm btn-icon btn-info viewDetailRujuk" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="Lihat Detail" data="' + data[i].REG_ID + '"><i class="ft-eye"></i></a>' +
+                            '<a href="<?= BASE_URL . 'penghulu/periksarujuk/'; ?>' + data[i].REG_ID + '" class="btn round btn-sm btn-icon btn-warning periksaRujuk" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="Periksa" data="' + data[i].REG_ID + '"><i class="ft-edit-2"></i></a>' +
                             '</td>' +
                             '</tr>';
                     }

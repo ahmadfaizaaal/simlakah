@@ -3,7 +3,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
             <div class="content-header-left col-md-4 col-12 mb-2">
-                <h2 class="content-header-title">PERNIKAHAN</h>
+                <h2 class="content-header-title">MENU PERNIKAHAN</h>
             </div>
             <!-- <div class="content-header-right col-md-8 col-12">
                     <div class="breadcrumbs-top float-md-right">
@@ -382,153 +382,32 @@
             });
         });
 
-        //ADD CALON PENGANTIN
-        $('#btnAdd').click(function() {
-            $('#nkh_btnceknik_s').show();
-            $('#nkh_btnceknik_i').show();
-            //header
-            $('select[name=nkh_tempat]').val('0');
-            $('select[name=nkh_tempat]').removeAttr('disabled');
-            $('input[name=nkh_tanggal_akad]').removeAttr('readonly');
-            $('input[name=nkh_jam_akad]').removeAttr('readonly');
-            $('input[name=nkh_alamat_akad]').removeAttr('readonly');
-
-            //suami
-            $('select[name=nkh_kewarganegaraan_s]').val('0');
-            $('select[name=nkh_kewarganegaraan_s]').removeAttr('readonly');
-            $('input[name=nkh_nik_s]').removeAttr('readonly');
-            $('input[name=nkh_nama_s]').removeAttr('readonly');
-            $('input[name=nkh_ttl_s]').removeAttr('readonly');
-            $('input[name=nkh_ttl2_s]').removeAttr('readonly');
-            $('input[name=nkh_umur_s]').removeAttr('readonly');
-            $('select[name=nkh_status_s]').val('0');
-            $('select[name=nkh_status_s]').removeAttr('readonly');
-            $('input[name=nkh_agama_s]').val('');
-            $('input[name=nkh_agama_s]').removeAttr('readonly');
-            $('input[name=nkh_alamat_s]').removeAttr('readonly');
-            $('input[name=nkh_pekerjaan_s]').val(null).trigger('change');
-            $('input[name=nkh_pekerjaan_s]').removeAttr('readonly');
-            $('input[name=nkh_nohp_s]').removeAttr('readonly');
-
-            //istri
-            $('select[name=nkh_kewarganegaraan_i]').val('0');
-            $('select[name=nkh_kewarganegaraan_i]').removeAttr('readonly');
-            $('input[name=nkh_nik_i]').removeAttr('readonly');
-            $('input[name=nkh_nama_i]').removeAttr('readonly');
-            $('input[name=nkh_ttl_i]').removeAttr('readonly');
-            $('input[name=nkh_ttl2_i]').removeAttr('readonly');
-            $('input[name=nkh_umur_i]').removeAttr('readonly');
-            $('select[name=nkh_status_i]').val('0');
-            $('select[name=nkh_status_i]').removeAttr('readonly');
-            $('input[name=nkh_agama_i]').val('');
-            $('input[name=nkh_agama_i]').removeAttr('readonly');
-            $('input[name=nkh_alamat_i]').removeAttr('readonly');
-            $('input[name=nkh_pekerjaan_i]').val(null).trigger('change');
-            $('input[name=nkh_pekerjaan_i]').removeAttr('readonly');
-            $('input[name=nkh_nohp_i]').removeAttr('readonly');
-            $('#btnSave').show();
-            $('#modalPernikahan').find('.modal-title').text('TAMBAH CALON PENGANTIN');
-            $('#formAddEditPernikahan').attr('action', '<?= BASE_URL . 'staff/submitRegistration/NikahByOfficer^add^0'; ?>');
-            $('#formAddEditPernikahan')[0].reset();
-        });
-
         //EDIT DATA PERNIKAHAN
-        $('#showDataPernikahan').on('click', '.editDataNikah', function() {
-            var regId = $(this).attr('data');
-            $('#btnSave').show();
-            $('#nkh_btnceknik_s').show();
-            $('#nkh_btnceknik_i').show();
-            $('#modalPernikahan').modal('show');
-            $('#modalPernikahan').find('.modal-title').text('UBAH DATA CALON PENGANTIN');
-            $('#formAddEditPernikahan').attr('action', '<?= BASE_URL . 'staff/submitRegistration/NikahByOfficer^update^' ?>' + regId);
-            $.ajax({
-                type: 'ajax',
-                method: 'post',
-                url: '<?= BASE_URL . 'staff/getDetailPernikahan'; ?>',
-                data: {
-                    regId: regId
-                },
-                async: false,
-                dataType: 'json',
-                success: function(data) {
-                    for (i = 0; i < data.length; i++) {
-                        //header
-                        $('select[name=nkh_tempat]').attr('disabled', true);
-                        $('input[name=nkh_tanggal_akad]').removeAttr('readonly');
-                        $('input[name=nkh_jam_akad]').removeAttr('readonly');
-                        $('input[name=nkh_alamat_akad]').removeAttr('readonly');
+        // $('#showDataPernikahan').on('click', '.periksaDataNikah', function() {
+        //     var regId = $(this).attr('data');
+        //     $('#btnSave').show();
+        //     $('#nkh_btnceknik_s').show();
+        //     $('#nkh_btnceknik_i').show();
+        //     $('#modalPernikahan').modal('show');
+        //     $('#modalPernikahan').find('.modal-title').text('UBAH DATA CALON PENGANTIN');
+        //     $('#formAddEditPernikahan').attr('action', '<?= BASE_URL . 'staff/submitRegistration/NikahByOfficer^update^' ?>' + regId);
+        //     $.ajax({
+        //         type: 'ajax',
+        //         method: 'post',
+        //         url: '<?= BASE_URL . 'penghulu/pemeriksaan'; ?>',
+        //         data: {
+        //             regId: regId
+        //         },
+        //         async: false,
+        //         dataType: 'json',
+        //         success: function(data) {
 
-                        //suami
-                        $('select[name=nkh_kewarganegaraan_s]').removeAttr('readonly');
-                        $('input[name=nkh_nik_s]').removeAttr('readonly');
-                        $('input[name=nkh_nama_s]').removeAttr('readonly');
-                        $('input[name=nkh_ttl_s]').removeAttr('readonly');
-                        $('input[name=nkh_ttl2_s]').removeAttr('readonly');
-                        $('input[name=nkh_umur_s]').removeAttr('readonly');
-                        $('select[name=nkh_status_s]').removeAttr('readonly');
-                        $('input[name=nkh_agama_s]').removeAttr('readonly');
-                        $('input[name=nkh_alamat_s]').removeAttr('readonly');
-                        $('input[name=nkh_pekerjaan_s]').removeAttr('readonly');
-                        $('input[name=nkh_nohp_s]').removeAttr('readonly');
-
-                        //istri
-                        $('select[name=nkh_kewarganegaraan_i]').removeAttr('readonly');
-                        $('input[name=nkh_nik_i]').removeAttr('readonly');
-                        $('input[name=nkh_nama_i]').removeAttr('readonly');
-                        $('input[name=nkh_ttl_i]').removeAttr('readonly');
-                        $('input[name=nkh_ttl2_i]').removeAttr('readonly');
-                        $('input[name=nkh_umur_i]').removeAttr('readonly');
-                        $('select[name=nkh_status_i]').removeAttr('readonly');
-                        $('input[name=nkh_agama_i]').removeAttr('readonly');
-                        $('input[name=nkh_alamat_i]').removeAttr('readonly');
-                        $('input[name=nkh_pekerjaan_i]').removeAttr('readonly');
-                        $('input[name=nkh_nohp_i]').removeAttr('readonly');
-
-                        //header
-                        $('select[name=nkh_tempat]').val(data[i].TMP_NIKAH);
-                        $('#nkh_tempat_edit').val(data[i].TMP_NIKAH);
-                        var objTgl = data[i].TGL_AKAD;
-                        var tgl = objTgl.split(' ');
-                        $('input[name=nkh_tanggal_akad]').val(tgl[0]);
-                        $('input[name=nkh_jam_akad]').val(tgl[1]);
-                        $('input[name=nkh_alamat_akad]').val(data[i].ALMT_AKAD);
-
-                        //suami
-                        $('select[name=nkh_kewarganegaraan_s]').val(data[i].KEWARGANEGARAAN_S);
-                        $('input[name=nkh_nik_s]').val(data[i].NIK_CAL_S);
-                        $('input[name=nkh_nama_s]').val(data[i].NAMA_CAL_S);
-                        var objTtl = data[i].TTL_S;
-                        var ttl = objTtl.split(' ');
-                        $('input[name=nkh_ttl_s]').val(ttl[0].substr(0, ttl[0].length - 1));
-                        $('input[name=nkh_ttl2_s]').val(ttl[1]);
-                        $('input[name=nkh_umur_s]').val(data[i].UMUR_S);
-                        $('select[name=nkh_status_s]').val(data[i].STATUS_CAL_S);
-                        $('input[name=nkh_agama_s]').val(data[i].AGAMA_S);
-                        $('input[name=nkh_alamat_s]').val(data[i].ALMT_S);
-                        $('input[name=nkh_pekerjaan_s]').val(data[i].PEKERJAAN_S).trigger('change');
-                        $('input[name=nkh_nohp_s]').val(data[i].NO_HP_S);
-
-                        //istri
-                        $('select[name=nkh_kewarganegaraan_i]').val(data[i].KEWARGANEGARAAN_I);
-                        $('input[name=nkh_nik_i]').val(data[i].NIK_CAL_I);
-                        $('input[name=nkh_nama_i]').val(data[i].NAMA_CAL_I);
-                        var objTtl = data[i].TTL_I;
-                        var ttl = objTtl.split(' ');
-                        $('input[name=nkh_ttl_i]').val(ttl[0].substr(0, ttl[0].length - 1));
-                        $('input[name=nkh_ttl2_i]').val(ttl[1]);
-                        $('input[name=nkh_umur_i]').val(data[i].UMUR_I);
-                        $('select[name=nkh_status_i]').val(data[i].STATUS_CAL_I);
-                        $('input[name=nkh_agama_i]').val(data[i].AGAMA_I);
-                        $('input[name=nkh_alamat_i]').val(data[i].ALMT_I);
-                        $('input[name=nkh_pekerjaan_i]').val(data[i].PEKERJAAN_I).trigger('change');
-                        $('input[name=nkh_nohp_i]').val(data[i].NO_HP_I);
-                    }
-                },
-                error: function() {
-                    swal("Error!", "Internal Server error 500!", "error");
-                }
-            });
-        });
+        //         },
+        //         error: function() {
+        //             swal("Error!", "Internal Server error 500!", "error");
+        //         }
+        //     });
+        // });
 
         //VIEW PERNIKAHAN
         $('#showDataPernikahan').on('click', '.viewDetailNikah', function() {
@@ -562,7 +441,7 @@
                         $('input[name=nkh_alamat_akad]').val(data[i].ALMT_AKAD);
 
                         //suami
-                        $('select[name=nkh_kewarganegaraan_s]').attr('readonly', true);
+                        $('select[name=nkh_kewarganegaraan_s]').attr('disabled', true);
                         $('select[name=nkh_kewarganegaraan_s]').val(data[i].KEWARGANEGARAAN_S);
                         $('input[name=nkh_nik_s]').attr('readonly', true);
                         $('input[name=nkh_nik_s]').val(data[i].NIK_CAL_S);
@@ -576,19 +455,19 @@
                         $('input[name=nkh_ttl2_s]').val(ttl[1]);
                         $('input[name=nkh_umur_s]').attr('readonly', true);
                         $('input[name=nkh_umur_s]').val(data[i].UMUR_S);
-                        $('select[name=nkh_status_s]').attr('readonly', true);
+                        $('select[name=nkh_status_s]').attr('disabled', true);
                         $('select[name=nkh_status_s]').val(data[i].STATUS_CAL_S);
                         $('input[name=nkh_agama_s]').attr('readonly', true);
                         $('input[name=nkh_agama_s]').val(data[i].AGAMA_S);
                         $('input[name=nkh_alamat_s]').attr('readonly', true);
                         $('input[name=nkh_alamat_s]').val(data[i].ALMT_S);
-                        $('input[name=nkh_pekerjaan_s]').attr('readonly', true);
+                        $('input[name=nkh_pekerjaan_s]').attr('disabled', true);
                         $('input[name=nkh_pekerjaan_s]').val(data[i].PEKERJAAN_S).trigger('change');
                         $('input[name=nkh_nohp_s]').attr('readonly', true);
                         $('input[name=nkh_nohp_s]').val(data[i].NO_HP_S);
 
                         //istri
-                        $('select[name=nkh_kewarganegaraan_i]').attr('readonly', true);
+                        $('select[name=nkh_kewarganegaraan_i]').attr('disabled', true);
                         $('select[name=nkh_kewarganegaraan_i]').val(data[i].KEWARGANEGARAAN_I);
                         $('input[name=nkh_nik_i]').attr('readonly', true);
                         $('input[name=nkh_nik_i]').val(data[i].NIK_CAL_I);
@@ -602,13 +481,13 @@
                         $('input[name=nkh_ttl2_i]').val(ttl[1]);
                         $('input[name=nkh_umur_i]').attr('readonly', true);
                         $('input[name=nkh_umur_i]').val(data[i].UMUR_I);
-                        $('select[name=nkh_status_i]').attr('readonly', true);
+                        $('select[name=nkh_status_i]').attr('disabled', true);
                         $('select[name=nkh_status_i]').val(data[i].STATUS_CAL_I);
                         $('input[name=nkh_agama_i]').attr('readonly', true);
                         $('input[name=nkh_agama_i]').val(data[i].AGAMA_I);
                         $('input[name=nkh_alamat_i]').attr('readonly', true);
                         $('input[name=nkh_alamat_i]').val(data[i].ALMT_I);
-                        $('input[name=nkh_pekerjaan_i]').attr('readonly', true);
+                        $('input[name=nkh_pekerjaan_i]').attr('disabled', true);
                         $('input[name=nkh_pekerjaan_i]').val(data[i].PEKERJAAN_I).trigger('change');
                         $('input[name=nkh_nohp_i]').attr('readonly', true);
                         $('input[name=nkh_nohp_i]').val(data[i].NO_HP_I);
@@ -616,45 +495,6 @@
                 },
                 error: function() {
                     swal("Error!", "Internal Server error 500!", "error");
-                }
-            });
-        });
-
-        //DELETE PERNIKAHAN
-        $('#showDataPernikahan').on('click', '.deleteDataNikah', function() {
-            var regId = $(this).attr('data');
-            swal({
-                title: 'Apakah anda yakin ingin menghapus data ini?',
-                type: 'warning',
-                showCancelButton: true,
-                focusConfirm: false,
-                confirmButtonColor: '#18d26e',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya',
-                cancelButtonText: 'Tidak'
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        type: 'ajax',
-                        method: 'post',
-                        url: '<?= BASE_URL . 'staff/deletePernikahan/'; ?>',
-                        data: {
-                            regId: regId
-                        },
-                        async: false,
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.success) {
-                                swal("Selamat!", "Data pernikahan berhasil dihapus!", "success");
-                                showDataPernikahan();
-                            } else {
-                                swal("Error!", "Gagal Hapus data!", "error");
-                            }
-                        },
-                        error: function() {
-                            swal("Error!", "Internal Server error 500!", "error");
-                        }
-                    });
                 }
             });
         });
@@ -686,9 +526,8 @@
                                 '<td scope="col" style="width: 10%;">' + data[i].SCHEDULE + '</td>';
                         }
                         html += '<td scope="col" style="width: 50%">' +
-                            '<a href="javascript:;" class="btn round btn-sm btn-icon btn-info viewDetailNikah" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="LIhat Detail" data="' + data[i].REG_ID + '"><i class="ft-eye"></i></a>' +
-                            '<a href="javascript:;" class="btn round btn-sm btn-icon btn-warning editDataNikah" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="Periksa" data="' + data[i].REG_ID + '"><i class="ft-check-square"></i></a>' +
-                            // '<a href="javascript:;" class="btn round btn-sm btn-icon btn-danger deleteDataNikah" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="Hapus" data="' + data[i].REG_ID + '"><i class="ft-x"></i></a>' +
+                            '<a href="javascript:;" class="btn round btn-sm btn-icon btn-info viewDetailNikah" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="Lihat Detail" data="' + data[i].REG_ID + '"><i class="ft-eye"></i></a>' +
+                            '<a href="<?= BASE_URL . 'penghulu/periksanikah/'; ?>' + data[i].REG_ID + '" class="btn round btn-sm btn-icon btn-warning periksaDataNikah" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="Periksa"><i class="ft-check-square"></i></a>' +
                             '</td>' +
                             '</tr>';
                     }
@@ -701,73 +540,12 @@
             });
         }
 
-        //suami
-        initializeDatetime('s');
-        validateCitizenship('s');
-        validateNIK('s');
-        validateMobilePhone('s');
+        // //suami
         initializeJobList('s');
 
-        //istri
-        initializeDatetime('i');
-        validateCitizenship('i');
-        validateNIK('i');
-        validateMobilePhone('i');
+        // //istri
         initializeJobList('i');
-
-        // VALIDASI TEMPAT AKAD NIKAH
-        $('#nkh_tempat').change(function() {
-            var nkh_tempat = $('#nkh_tempat').val();
-            if ('KUA' === nkh_tempat) {
-                $('#nkh_alamat_akad').attr('readonly', true);
-                $('#nkh_alamat_akad').val('KUA Dawarblandong');
-            } else {
-                $('#nkh_alamat_akad').val('');
-                $('#nkh_alamat_akad').attr('readonly', false);
-            }
-        });
-
-        // CHECK NIK
-        $('#nkh_btnceknik_s').on('click', function() {
-            var nik = $('#nkh_nik_s').val();
-            checkNIK(nik, 's');
-            $('#nkh_kewarganegaraan_s').attr('readonly', true);
-        });
-
-        $('#nkh_btnceknik_i').on('click', function() {
-            var nik = $('#nkh_nik_i').val();
-            checkNIK(nik, 'i');
-            $('#nkh_kewarganegaraan_i').attr('readonly', true);
-        });
     });
-
-    function validateCitizenship(actor) {
-        $('#nkh_kewarganegaraan_' + actor).change(function() {
-            var nkh_kewarganegaraan = $('#nkh_kewarganegaraan_' + actor).val();
-            getKewarganegaraan(nkh_kewarganegaraan, actor);
-        });
-    }
-
-    function initializeDatetime(actor) {
-        var tomorrow = moment().add(2, 'days');
-
-        $('#nkh_tanggal_akad').datetimepicker({
-            locale: 'id',
-            format: 'DD-MM-YYYY',
-            minDate: tomorrow,
-            disabledDates: listAkad
-        });
-
-        $('#nkh_jam_akad').datetimepicker({
-            locale: 'id',
-            format: 'HH:mm:ss'
-        });
-
-        $('#nkh_ttl2_' + actor).datetimepicker({
-            locale: 'id',
-            format: 'DD-MM-YYYY'
-        });
-    }
 
     function initializeJobList(actor) {
         var data = [];
@@ -795,144 +573,5 @@
             data: data,
             placeholder: "Pilih salah satu",
         });
-    }
-
-    function getKewarganegaraan(element, actor) {
-        if ('WNI' == element) {
-            setEditableElement(true, actor);
-        } else {
-            setEditableElement(false, actor);
-        }
-    }
-
-    function setEditableElement(value, actor) {
-        var button = '#nkh_btnceknik_' + actor;
-        $(button).attr('disabled', !value);
-        $('#nkh_nama_' + actor).attr('readonly', value);
-        $('#nkh_ttl_' + actor).attr('readonly', value);
-        $('#nkh_ttl2_' + actor).attr('readonly', value);
-        $('#nkh_umur_' + actor).attr('readonly', value);
-        $('#nkh_agama_' + actor).attr('readonly', value);
-        $('#nkh_alamat_' + actor).attr('readonly', value);
-    }
-
-    function retrieveDataNIK(response, actor) {
-        var today = new Date();
-        var thisYear = today.getFullYear();
-        var day = response.TANGGAL_LAHIR.substr(8, 2);
-        var month = response.TANGGAL_LAHIR.substr(5, 2);
-        var year = response.TANGGAL_LAHIR.substr(0, 4);
-        var umur = today.getFullYear() - year;
-        var alamat = response.ALAMAT + ' RT ' + response.RT + ' RW ' + response.RW + ' ' +
-            response.KELURAHAN + ' ' + response.KECAMATAN + ' ' +
-            response.KABUPATEN_KOTA;
-
-        var isSameGender = false;
-        var msg = '';
-        if ('s' == actor) {
-            isSameGender = 'Laki-laki' == response.JENIS_KELAMIN ? true : false;
-            msg = 'Calon suami harus berjenis kelamin laki-laki!';
-        } else if ('i' == actor) {
-            isSameGender = 'Perempuan' == response.JENIS_KELAMIN ? true : false;
-            msg = 'Calon istri harus berjenis kelamin perempuan!';
-        }
-
-        if (isSameGender) {
-            $('#nkh_nama_' + actor).val(response.NAMA);
-            $('#nkh_ttl_' + actor).val(response.TEMPAT_LAHIR);
-            $('#nkh_ttl2_' + actor).val(day + '-' + month + '-' + year);
-            $('#nkh_umur_' + actor).val(umur);
-            $('#nkh_agama_' + actor).val(response.AGAMA);
-            $('#nkh_alamat_' + actor).val(alamat);
-            $('#nkh_pekerjaan_' + actor).val(response.PEKERJAAN);
-            $('#nkh_pekerjaan_' + actor).trigger('change');
-        } else {
-            swal("Error!", msg, "error");
-        }
-
-    }
-
-    function validateMobilePhone(actor) {
-        $('#nkh_nohp_' + actor).on('keyup', function(e) {
-            numberLength = $('#nkh_nohp_' + actor).val().length;
-        });
-
-        $('#nkh_nohp_' + actor).on('keypress', function(e) {
-            var $this = $(this);
-            var regex = new RegExp("^[0-9\b]+$");
-            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-            var currentNum = 48;
-            // for 12 digit number only
-            if ($this.val().length > 11) {
-                e.preventDefault();
-                return false;
-            }
-            if (numberLength == 0) {
-                currentNum = 48;
-            } else if (numberLength == 1) {
-                currentNum = 56;
-            }
-            if (e.charCode != currentNum && e.charCode > 47 && e.charCode < 58) {
-                if ($this.val().length == 0) {
-                    e.preventDefault();
-                    return false;
-                } else {
-                    var result = e.charCode != currentNum && numberLength == 1 ? false : true;
-                    return result;
-                }
-            }
-            if (regex.test(str)) {
-                currentNum = 56;
-                return true;
-            }
-            e.preventDefault();
-            return false;
-        });
-    }
-
-    function validateNIK(actor) {
-        $('#nkh_nik_' + actor).on('keypress', function(e) {
-            var $this = $(this);
-            var regex = new RegExp("^[0-9\b]+$");
-            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-            // for 16 digit number only
-            if ($this.val().length > 15) {
-                e.preventDefault();
-                return false;
-            }
-            if (regex.test(str)) {
-                currentNum = 56;
-                return true;
-            }
-            e.preventDefault();
-            return false;
-        });
-    }
-
-    function checkNIK(nik, actor) {
-        if ('' != nik) {
-            $.ajax({
-                type: 'ajax',
-                method: 'post',
-                url: '<?= BASE_URL . 'auth/cekNIK'; ?>',
-                data: {
-                    nik: nik
-                },
-                async: false,
-                dataType: 'json',
-                success: function(data) {
-                    if (data != null) {
-                        retrieveDataNIK(data, actor);
-                    } else {
-                        swal("Error!", "Data NIK tidak ditemukan!", "error");
-                    }
-                },
-                error: function() {
-                    swal("Error!", "Internal Server error 500!", "error");
-                }
-            });
-        } else {
-            swal("Error!", "Harap masukkan No. KTP!", "error");
-        }
     }
 </script>
