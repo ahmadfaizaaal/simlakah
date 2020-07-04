@@ -395,7 +395,7 @@
                             html += '<a href="javascript:;" class="btn btn-sm round btn-success mr-1 validate" data-toggle="tooltip" data-placement="bottom" title="Valid" data="' + data[i].REG_ID + '^' + lokasiAkad + '^' + data[i].FORM_NAME + '" style="margin-left:5px;">Valid</a>' +
                                 '<a href="javascript:;" class="btn btn-sm round btn-danger mr-1 reject" data-toggle="tooltip" data-placement="bottom" title="Tolak" data="' + data[i].REG_ID + '" style="margin-left:5px;">Tolak</a>';
                         } else if (data[i].STATUS_CODE == 'V') {
-                            if (lokasiAkad == 'KUA') {
+                            if (lokasiAkad != 'KUA') {
                                 html += '<a href="<?= BASE_URL . 'project/detail/'; ?>' + data[i].REG_ID + '" class="btn btn-sm round btn-info mr-1" data-toggle="tooltip" data-placement="bottom" title="Kirim kode bayar">Kirim kode bayar</a>';
                             } else {
                                 html += '-';

@@ -96,9 +96,9 @@ class Auth extends CI_Controller
                 ];
                 $this->session->set_userdata($data);
                 if ('1' == $userLogin->ROLE_ID) {
-                    redirect('staff');
+                    redirect('staff/nikah');
                 } else if ('2' == $userLogin->ROLE_ID) {
-                    redirect('penghulu');
+                    redirect('penghulu/nikah');
                 }
             }
             // $this->session->set_userdata($data);
@@ -253,5 +253,36 @@ class Auth extends CI_Controller
         );
         redirect('home');
         $this->session->sess_destroy();
+    }
+
+    public function sendMessage()
+    {
+        if (!isset($_GET['text']) or !isset($_GET['phone'])) {
+            die('Not enough data');
+        }
+
+        $apiURL = 'https://eu82.chat-api.com/instance145465/';
+        $token = 'eiz2pcqsncdgtlnz';
+
+        $message = $_GET['text'];
+        $phone = $_GET['phone'];
+
+        $data = json_encode(
+            array(
+                'phone' => $phone,
+                'body' => $message
+            )
+        );
+        $url = $apiURL . 'message?token=' . $token;
+        $options = stream_context_create(
+            array('http' =>
+            array(
+                'method'  => 'POST',
+                'header'  => 'Content-type: application/json',
+                'content' => $data
+            ))
+        );
+        $response = file_get_contents($url, false, $options);
+        echo json_encode($response);
     }
 }

@@ -91,6 +91,17 @@ class M_Registration extends CI_Model
         return $result[0]->FORM_NAME;
     }
 
+    public function getPhoneNumber($regId)
+    {
+        $this->db->select('rd.NO_HP_S');
+        $this->db->from('registration r');
+        $this->db->join('regdetail_tr rd', 'r.REG_ID = rd.REG_ID');
+        $this->db->where('r.REG_ID', $regId);
+        $sql = $this->db->get();
+        $result = $sql->result();
+        return $result[0]->NO_HP_S;
+    }
+
     public function getEventName($regCode)
     {
         $this->db->select('e.EVENT_NAME');
@@ -126,7 +137,7 @@ class M_Registration extends CI_Model
 
     public function getDataRegistration($statusCode, $formName)
     {
-        $this->db->select('rd.*, f.FORM_NAME, st.*, r.REG_CODE, DATE_FORMAT(r.SCHEDULE, "%d-%m-%Y %H:%i:%s") as SCHEDULE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR');
+        $this->db->select('rd.*, f.FORM_NAME, st.*, r.REG_CODE, DATE_FORMAT(r.SCHEDULE, "%d-%m-%Y %H:%i:%s") as SCHEDULE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR, DATE_FORMAT(r.VERIFIED_DATE, "%d-%m-%Y %H:%i:%s") as VERIFIED_DATE');
         // $this->db->select('rd.*, f.FORM_NAME, st.*, r.SCHEDULE_ID as SCHEDULE, r.REG_CODE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR');
         $this->db->from('registration r');
         $this->db->join('regdetail_tr rd', 'r.REG_ID = rd.REG_ID');
@@ -137,6 +148,7 @@ class M_Registration extends CI_Model
         }
         $this->db->where_in('st.STATUS_CODE', $statusCode);
         $this->db->order_by('r.DTM_CRT', 'desc');
+        $this->db->order_by('r.STATUS_ID', 'desc');
         $result = $this->db->get();
         if ($result->num_rows() > 0) {
             return $result->result();
@@ -298,6 +310,21 @@ class M_Registration extends CI_Model
         $this->db->set('DTM_UPD', date('Y-m-d H:i:s'));
         $this->db->set('USR_UPD', $this->session->userdata('officer_id'));
         $this->db->where('REG_CODE', $regCode);
+        $this->db->update('registration');
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateVerifiedRegistration($regID, $statusId)
+    {
+        $this->db->set('STATUS_ID', $statusId);
+        $this->db->set('VERIFIED_DATE', date('Y-m-d H:i:s'));
+        $this->db->set('DTM_UPD', date('Y-m-d H:i:s'));
+        $this->db->set('USR_UPD', $this->session->userdata('officer_id'));
+        $this->db->where('REG_ID', $regID);
         $this->db->update('registration');
         if ($this->db->affected_rows() > 0) {
             return true;

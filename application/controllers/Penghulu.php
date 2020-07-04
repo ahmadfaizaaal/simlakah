@@ -264,6 +264,8 @@ class Penghulu extends CI_Controller
         }
 
         if (count($questionLabel) == $insertedVerif) {
+            $statusId = $this->registration->getStatusId('Done');
+            $this->registration->updateVerifiedRegistration($regID, $statusId);
             redirect('penghulu/nikah');
         }
     }
@@ -383,6 +385,8 @@ class Penghulu extends CI_Controller
         }
 
         if (count($questionLabel) == $insertedVerif) {
+            $statusId = $this->registration->getStatusId('Done');
+            $this->registration->updateVerifiedRegistration($regID, $statusId);
             redirect('penghulu/rujuk');
         }
     }
@@ -411,7 +415,7 @@ class Penghulu extends CI_Controller
 
     public function showDataPernikahan()
     {
-        $statusCode = array('VR');
+        $statusCode = array('VR', 'D');
         $formName = array('Nikah', 'NikahByOfficer');
         $result = $this->registration->getDataRegistration($statusCode, $formName);
         echo json_encode($result);

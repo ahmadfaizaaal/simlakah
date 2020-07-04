@@ -39,6 +39,11 @@
     <link rel="stylesheet" href="<?= BASE_THEME ?>datetime/build/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="<?= BASE_THEME ?>plugins/fullcalendar/fullcalendar.css">
     <!-- <link rel="stylesheet" href="<?= BASE_THEME ?>plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"> -->
+    <style>
+        .modal {
+            overflow: auto !important;
+        }
+    </style>
 </head>
 
 <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x-blue-green" data-col="2-columns">

@@ -682,8 +682,13 @@
                             html += '<a href="<?= BASE_URL . 'jadwal/aturjadwal/'; ?>' + data[i].REG_CODE.replace(/\//g, "~") + '^' + data[i].NAMA_CAL_S + '^' + data[i].FORM_NAME + '" class="btn btn-sm round btn-info mr-1" data-toggle="tooltip" data-placement="bottom" title="Jadwalkan" data="' + data[i].REG_CODE + '^' + data[i].NAMA_CAL_S + '">Jadwalkan</a>' +
                                 '<td scope="col" style="width: 10%;">-</td>';
                         } else {
-                            html += 'Terjadwal</td>' +
-                                '<td scope="col" style="width: 10%;">' + data[i].SCHEDULE + '</td>';
+                            if (data[i].VERIFIED_DATE != null && data[i].VERIFIED_DATE != '') {
+                                html += 'Sudah Sidang</td>' +
+                                    '<td scope="col" style="width: 10%;">' + data[i].VERIFIED_DATE + '</td>';
+                            } else {
+                                html += 'Terjadwal</td>' +
+                                    '<td scope="col" style="width: 10%;">' + data[i].SCHEDULE + '</td>';
+                            }
                         }
                         html += '<td scope="col" style="width: 50%">' +
                             '<a href="javascript:;" class="btn round btn-sm btn-icon btn-info viewDetailNikah" style="margin-left:5px;" data-toggle="tooltip" data-placement="bottom" title="LIhat Detail" data="' + data[i].REG_ID + '"><i class="ft-eye"></i></a>' +

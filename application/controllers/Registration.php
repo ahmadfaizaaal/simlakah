@@ -175,9 +175,9 @@ class Registration extends CI_Controller
             $akta_s = $this->uploadFile('nkh_docakta_s', 'aktalahir', $nama_s, $type, $regID);
             $akta_i = $this->uploadFile('nkh_docakta_i', 'aktalahir', $nama_i, $type, $regID);
 
-            array_push($params, $kwn_s, $nik_s, $nama_s, $ttl_s, $umur_s, $status_s, $agama_s, $alamat_s, $pekerjaan_s, $nohp_s, $foto_s, $kedutaan_s, $passport_s, $imigrasi_s);
-            array_push($params, $kwn_i, $nik_i, $nama_i, $ttl_i, $umur_i, $status_i, $agama_i, $alamat_i, $pekerjaan_i, $nohp_i, $foto_i, $kedutaan_i, $passport_i, $imigrasi_i);
-            array_push($params, $n1, $n3, $ktp_s, $ktp_i, $kk_s, $kk_i, $akta_s, $akta_i, $pendukung_s, $pendukung_i);
+            array_push($params, $kwn_s, $nik_s, $nama_s, $ttl_s, $umur_s, $status_s, $agama_s, $alamat_s, $pekerjaan_s, $nohp_s, $foto_s);
+            array_push($params, $kwn_i, $nik_i, $nama_i, $ttl_i, $umur_i, $status_i, $agama_i, $alamat_i, $pekerjaan_i, $nohp_i, $foto_i);
+            array_push($params, $n1, $n3, $ktp_s, $ktp_i, $kk_s, $kk_i, $akta_s, $akta_i, $pendukung_s, $pendukung_i, $kedutaan_s, $kedutaan_i, $passport_s, $passport_i, $imigrasi_s, $imigrasi_i);
 
             $startIndex = 3;
 
@@ -442,6 +442,30 @@ class Registration extends CI_Controller
         $regId = $this->input->post('regId');
         $statusId = $this->registration->getStatusId('Rejected');
         $result = $this->registration->updateStatusRegistration($regId, $statusId);
+
+        $apiURL = 'https://eu82.chat-api.com/instance145465/';
+        $token = 'eiz2pcqsncdgtlnz';
+
+        $message = 'Pendaftaran anda ditolak oleh pihak staff KUA karena beberapa hal. Harap melakukan pendaftaran ulang!';
+        $phone = $this->registration->getPhoneNumber($regId);
+
+        $data = json_encode(
+            array(
+                'phone' => $phone,
+                'body' => $message
+            )
+        );
+        $url = $apiURL . 'message?token=' . $token;
+        $options = stream_context_create(
+            array('http' =>
+            array(
+                'method'  => 'POST',
+                'header'  => 'Content-type: application/json',
+                'content' => $data
+            ))
+        );
+        file_get_contents($url, false, $options);
+
         setResponse($result, 'rejected');
     }
 

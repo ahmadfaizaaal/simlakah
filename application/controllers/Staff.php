@@ -11,6 +11,7 @@ class Staff extends CI_Controller
         $this->load->model('M_Auth', 'auth');
         $this->load->model('M_Registration', 'registration');
         $this->load->model('M_Penghulu', 'penghulu');
+        $this->load->model('M_Schedule', 'schedule');
         date_default_timezone_set('Asia/Bangkok');
     }
 
@@ -26,6 +27,38 @@ class Staff extends CI_Controller
         $this->load->view('component/headerstaff', $data);
         $this->load->view('staff/index');
         $this->load->view('component/footerstaff');
+    }
+
+    //----------------------LIHAT JADWAL--------------------
+    public function jadwal()
+    {
+        if (!$this->session->userdata('username')) {
+            redirect('auth/login/general');
+        }
+
+        $dataSchedule = $this->schedule->get_list('registration_schedule');
+        $schedule = array();
+        foreach ($dataSchedule as $val) {
+            $schedule[] = array(
+                'id'     => intval($val->SCHEDULE_ID),
+                'title' => '(' . $val->EVENT_TIME . ')   ' . $val->TITLE,
+                'start' => date_format(date_create($val->EVENT_SCHEDULE), "Y-m-d H:i:s"),
+                'color' => $val->COLOR,
+                'textColor' => '#ffffff'
+            );
+        }
+
+        $data = array();
+        $data['title'] = 'Lihat Jadwal';
+        $data['get_data'] = json_encode($schedule);
+        $data['regCode'] = '';
+        $data['namaCalon'] = '';
+        $data['regType'] = '';
+        $data['scheduleType'] = 'general';
+        $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
+        $this->load->view('component/headerscheduler', $data);
+        $this->load->view('staff/maincalender', $data);
+        $this->load->view('component/footerscheduler');
     }
 
     //----------------------PERNIKAHAN----------------------
@@ -52,7 +85,7 @@ class Staff extends CI_Controller
 
     public function showDataPernikahan()
     {
-        $statusCode = array('TVR', 'VR');
+        $statusCode = array('TVR', 'VR', 'D');
         $formName = array('Nikah', 'NikahByOfficer');
         $result = $this->registration->getDataRegistration($statusCode, $formName);
         echo json_encode($result);
@@ -480,7 +513,13 @@ class Staff extends CI_Controller
                 'FILE_AKTA_LAHIR_S',
                 'FILE_AKTA_LAHIR_I',
                 'FILE_ADDITIONAL_DOC_S',
-                'FILE_ADDITIONAL_DOC_I'
+                'FILE_ADDITIONAL_DOC_I',
+                'FILE_ADDITIONAL_DOC_KEDUTAAN_S',
+                'FILE_ADDITIONAL_DOC_KEDUTAAN_I',
+                'FILE_ADDITIONAL_DOC_PASSPORT_S',
+                'FILE_ADDITIONAL_DOC_PASSPORT_I',
+                'FILE_ADDITIONAL_DOC_IMIGRASI_S',
+                'FILE_ADDITIONAL_DOC_IMIGRASI_I'
             );
         } else if ('Isbat' == $formName) {
             $selectedColumn = array(
