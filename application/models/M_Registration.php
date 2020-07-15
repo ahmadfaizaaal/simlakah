@@ -159,7 +159,7 @@ class M_Registration extends CI_Model
 
     public function getDetailRegistration($regId)
     {
-        $this->db->select('rd.*, f.FORM_NAME, st.*, DATE_FORMAT(r.SCHEDULE, "%d-%m-%Y %H:%i:%s") as SCHEDULE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR');
+        $this->db->select('rd.*, f.FORM_NAME, st.*, DATE_FORMAT(r.SCHEDULE, "%d-%m-%Y %H:%i:%s") as SCHEDULE, DATE_FORMAT(r.DTM_CRT, "%d-%m-%Y %H:%i:%s") as TGL_DAFTAR, r.REG_CODE');
         $this->db->from('registration r');
         $this->db->join('regdetail_tr rd', 'r.REG_ID = rd.REG_ID');
         $this->db->join('form f', 'r.FORM_ID = f.FORM_ID');
@@ -345,6 +345,32 @@ class M_Registration extends CI_Model
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function checkAuthorityRegistration($nik)
+    {
+        $this->db->select('dk.STATUS_KAWIN');
+        $this->db->from('dukcapil dk');
+        $this->db->where('dk.NIK', $nik);
+        $sql = $this->db->get();
+        $result = $sql->result();
+        return $result[0]->STATUS_KAWIN;
+    }
+
+    public function checkOnGoingRegistration($nik, $where)
+    {
+        $select = substr($where, 3);
+        $this->db->select($where);
+        $this->db->from('registration r');
+        $this->db->join('regdetail_tr rd', 'r.REG_ID = rd.REG_ID');
+        $this->db->where($where, $nik);
+        $sql = $this->db->get();
+        $result = $sql->result();
+        if (null == $result) {
+            return null;
+        } else {
+            return $result[0]->$select;
         }
     }
 }

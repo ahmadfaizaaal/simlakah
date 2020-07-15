@@ -85,7 +85,8 @@ class Staff extends CI_Controller
 
     public function showDataPernikahan()
     {
-        $statusCode = array('TVR', 'VR', 'D');
+        //S = Terjadwal ; RJ = Ditolak ; V = Valid ; SSD = Sudah Sidang ; D = Selesai
+        $statusCode = array('S', 'RJ', 'V', 'SSD', 'D');
         $formName = array('Nikah', 'NikahByOfficer');
         $result = $this->registration->getDataRegistration($statusCode, $formName);
         echo json_encode($result);
@@ -121,7 +122,7 @@ class Staff extends CI_Controller
             $regCode = $this->session->userdata('officer_id') . '/OFFICER' . '/' . date('YmdHis');
 
             //INITIALIZE REGISTRATION STATUS
-            $statusID = $this->registration->getStatusId('To be verif');
+            $statusID = $this->registration->getStatusId('Valid');
 
             //INITIALIZE FORM
             $formID = $this->registration->getFormId($formName);
@@ -355,7 +356,8 @@ class Staff extends CI_Controller
 
     public function showDataIsbat()
     {
-        $statusCode = array('TVR', 'VR');
+        // V = Valid ; S = Terjadwal
+        $statusCode = array('V', 'S');
         $formName = array('Isbat', 'IsbatByOfficer');
         $result = $this->registration->getDataRegistration($statusCode, $formName);
         echo json_encode($result);
@@ -388,7 +390,8 @@ class Staff extends CI_Controller
 
     public function showDataRujuk()
     {
-        $statusCode = array('TVR', 'VR');
+        // V = Valid ; S = Terjadwal
+        $statusCode = array('V', 'S');
         $formName = array('Rujuk', 'RujukByOfficer');
         $result = $this->registration->getDataRegistration($statusCode, $formName);
         echo json_encode($result);
@@ -491,7 +494,8 @@ class Staff extends CI_Controller
 
     public function showDataRegistration()
     {
-        $statusCode = array('P', 'V', 'R');
+        //P = belum diproses ; PC = Menunggu Pembayaran
+        $statusCode = array('P', 'PC');
         $result = $this->registration->getDataRegistration($statusCode, null);
         echo json_encode($result);
     }

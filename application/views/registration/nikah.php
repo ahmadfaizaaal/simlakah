@@ -57,7 +57,7 @@
                                     <a class="dropdown-item" href="project-summary.html"><i class="ft-check-square"></i> Task</a>
                                     <a class="dropdown-item" href="chat-application.html"><i class="ft-message-square"></i> Chats</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="login.html"><i class="ft-power"></i> Logout</a>
+                                    <a class="dropdown-item" href="<?= BASE_URL . 'auth/logout' ?>"><i class="ft-power"></i> Logout</a>
                                 </div>
                             </div>
                         </li>
@@ -212,6 +212,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="nkh_kewarganegaraan_s"><?= $question[3]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-9">
+                                                    <input type="hidden" name="nkh_kewarganegaraan_s" id="hidden_kwn_s">
                                                     <select id="nkh_kewarganegaraan_s" name="nkh_kewarganegaraan_s" class="form-control required">
                                                         <option value="none" selected="" disabled="">Pilih salah satu</option>
                                                         <option value="wni">WNI</option>
@@ -259,7 +260,7 @@
                                                 <div class="col-md-9">
                                                     <select id="nkh_status_s" name="nkh_status_s" class="form-control required">
                                                         <option value="none" selected="" disabled="">Pilih salah satu</option>
-                                                        <option value="Jejakan">Jejaka</option>
+                                                        <option value="Jejaka">Jejaka</option>
                                                         <option value="Beristri">Beristri</option>
                                                         <option value="Cerai Mati">Cerai Mati</option>
                                                         <option value="Cerai Hidup">Cerai Hidup</option>
@@ -308,6 +309,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="nkh_kewarganegaraan_i"><?= $question[14]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-9">
+                                                    <input type="hidden" name="nkh_kewarganegaraan_i" id="hidden_kwn_i">
                                                     <select id="nkh_kewarganegaraan_i" name="nkh_kewarganegaraan_i" class="form-control required">
                                                         <option value="none" selected="" disabled="">Pilih salah satu</option>
                                                         <option value="wni">WNI</option>
@@ -355,9 +357,9 @@
                                                 <div class="col-md-9">
                                                     <select id="nkh_status_i" name="nkh_status_i" class="form-control required">
                                                         <option value="none" selected="" disabled="">Pilih salah satu</option>
-                                                        <option value="perawan">Perawan</option>
-                                                        <option value="ceraimati">Cerai Mati</option>
-                                                        <option value="ceraihidup">Cerai Hidup</option>
+                                                        <option value="Perawan">Perawan</option>
+                                                        <option value="Cerai Mati">Cerai Mati</option>
+                                                        <option value="Cerai Hidup">Cerai Hidup</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -699,6 +701,9 @@
                 })
             });
 
+            //session
+            retrieveDataFromSession(<?= $participant; ?>);
+
             //suami
             initializeDatetime('s');
             validateCitizenship('s');
@@ -746,7 +751,7 @@
             var participantID = '<?= $this->session->userdata('participant_id') ?>';
             var name = '<?= $this->session->userdata('name') ?>';
             var date = '<?= date('YmdHis') ?>';
-            return participantID + '/' + name.substr(0, 3) + '/' + date;
+            return 'NKH/' + participantID + '/' + name.substr(0, 3) + '/' + date;
         }
 
         function validateCitizenship(actor) {
@@ -978,6 +983,30 @@
             $('#nkh_umur_' + actor).attr('readonly', value);
             $('#nkh_agama_' + actor).attr('readonly', value);
             $('#nkh_alamat_' + actor).attr('readonly', value);
+        }
+
+        function retrieveDataFromSession(data) {
+            if (data != null) {
+                var actor = '';
+                var gender = data.JENIS_KELAMIN;
+                if ('Laki-laki' == gender) {
+                    actor = 's';
+                } else {
+                    actor = 'i';
+                }
+                $('#nkh_kewarganegaraan_' + actor).val('wni');
+                $('#nkh_nik_' + actor).val(data.NIK);
+
+                //disabled kwn, nik, button NIK
+                $('#nkh_kewarganegaraan_' + actor).attr('disabled', true);
+                $('#nkh_nik_' + actor).attr('readonly', true);
+                $('#nkh_btnceknik_' + actor).attr('disabled', true);
+
+                var kwn = $('#nkh_kewarganegaraan_' + actor).val();
+                $('#hidden_kwn_' + actor).val(kwn);
+                getKewarganegaraan(kwn, actor);
+                retrieveDataNIK(data, actor);
+            }
         }
 
         function retrieveDataNIK(response, actor) {

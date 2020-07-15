@@ -56,7 +56,7 @@
                                     <a class="dropdown-item" href="project-summary.html"><i class="ft-check-square"></i> Task</a>
                                     <a class="dropdown-item" href="chat-application.html"><i class="ft-message-square"></i> Chats</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="login.html"><i class="ft-power"></i> Logout</a>
+                                    <a class="dropdown-item" href="<?= BASE_URL . 'auth/logout' ?>"><i class="ft-power"></i> Logout</a>
                                 </div>
                             </div>
                         </li>
@@ -222,6 +222,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="rjk_nik_s"><?= $question[5]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-7">
+                                                    <input type="hidden" name="rjk_kewarganegaraan_s" id="hidden_kwn_s">
                                                     <input type="text" id="rjk_nik_s" class="form-control required" placeholder="" name="rjk_nik_s">
                                                 </div>
                                                 <div class="col-md-2">
@@ -314,6 +315,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="rjk_nik_i"><?= $question[15]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-7">
+                                                    <input type="hidden" name="rjk_kewarganegaraan_i" id="hidden_kwn_i">
                                                     <input type="text" id="rjk_nik_i" class="form-control required" placeholder="" name="rjk_nik_i">
                                                 </div>
                                                 <div class="col-md-2">
@@ -606,6 +608,9 @@
                 })
             });
 
+            //session
+            retrieveDataFromSession(<?= $participant; ?>);
+
             //suami
             initializeDatetime('s');
             validateCitizenship('s');
@@ -639,7 +644,7 @@
             var participantID = '<?= $this->session->userdata('participant_id') ?>';
             var name = '<?= $this->session->userdata('name') ?>';
             var date = '<?= date('YmdHis') ?>';
-            return participantID + '/' + name.substr(0, 3) + '/' + date;
+            return 'RJK/' + participantID + '/' + name.substr(0, 3) + '/' + date;
         }
 
         function validateCitizenship(actor) {
@@ -742,6 +747,30 @@
             $('#rjk_umur_' + actor).attr('readonly', value);
             $('#rjk_agama_' + actor).attr('readonly', value);
             $('#rjk_alamat_' + actor).attr('readonly', value);
+        }
+
+        function retrieveDataFromSession(data) {
+            if (data != null) {
+                var actor = '';
+                var gender = data.JENIS_KELAMIN;
+                if ('Laki-laki' == gender) {
+                    actor = 's';
+                } else {
+                    actor = 'i';
+                }
+                $('#rjk_kewarganegaraan_' + actor).val('wni');
+                $('#rjk_nik_' + actor).val(data.NIK);
+
+                //disabled kwn, nik, button NIK
+                $('#rjk_kewarganegaraan_' + actor).attr('disabled', true);
+                $('#rjk_nik_' + actor).attr('readonly', true);
+                $('#rjk_btnceknik_' + actor).attr('disabled', true);
+
+                var kwn = $('#rjk_kewarganegaraan_' + actor).val();
+                $('#hidden_kwn_' + actor).val(kwn);
+                getKewarganegaraan(kwn, actor);
+                retrieveDataNIK(data, actor);
+            }
         }
 
         function retrieveDataNIK(response, actor) {

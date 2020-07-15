@@ -198,10 +198,10 @@
                         <div class="col-md-9">
                             <select id="nkh_status_s" name="nkh_status_s" class="form-control required" required>
                                 <option value="0" selected="" disabled="">Pilih salah satu</option>
-                                <option value="jejaka">Jejaka</option>
-                                <option value="beristri">Beristri</option>
-                                <option value="ceraimati">Cerai Mati</option>
-                                <option value="ceraihidup">Cerai Hidup</option>
+                                <option value="Jejaka">Jejaka</option>
+                                <option value="Beristri">Beristri</option>
+                                <option value="Cerai Mati">Cerai Mati</option>
+                                <option value="Cerai Hidup">Cerai Hidup</option>
                             </select>
                         </div>
                     </div>
@@ -678,16 +678,21 @@
                             '<td scope="col" style="width: 10%;">' + data[i].ALMT_AKAD + '</td>' +
                             '<td scope="col" style="width: 10%;">' + data[i].NAMA_CAL_S + '</td>' +
                             '<td scope="col" style="width: 10%;">';
-                        if (data[i].SCHEDULE == null || data[i].SCHEDULE == '') {
-                            html += '<a href="<?= BASE_URL . 'jadwal/aturjadwal/'; ?>' + data[i].REG_CODE.replace(/\//g, "~") + '^' + data[i].NAMA_CAL_S + '^' + data[i].FORM_NAME + '" class="btn btn-sm round btn-info mr-1" data-toggle="tooltip" data-placement="bottom" title="Jadwalkan" data="' + data[i].REG_CODE + '^' + data[i].NAMA_CAL_S + '">Jadwalkan</a>' +
+                        if (data[i].STATUS_DESC == 'Ditolak') {
+                            html += data[i].STATUS_DESC + '</td>' +
                                 '<td scope="col" style="width: 10%;">-</td>';
                         } else {
-                            if (data[i].VERIFIED_DATE != null && data[i].VERIFIED_DATE != '') {
-                                html += 'Sudah Sidang</td>' +
-                                    '<td scope="col" style="width: 10%;">' + data[i].VERIFIED_DATE + '</td>';
+                            if (data[i].SCHEDULE == null || data[i].SCHEDULE == '') {
+                                html += '<a href="<?= BASE_URL . 'jadwal/aturjadwal/'; ?>' + data[i].REG_CODE.replace(/\//g, "~") + '^' + data[i].NAMA_CAL_S + '^' + data[i].FORM_NAME + '" class="btn btn-sm round btn-info mr-1" data-toggle="tooltip" data-placement="bottom" title="Jadwalkan" data="' + data[i].REG_CODE + '^' + data[i].NAMA_CAL_S + '">Jadwalkan</a>' +
+                                    '<td scope="col" style="width: 10%;">-</td>';
                             } else {
-                                html += 'Terjadwal</td>' +
+                                // if (data[i].VERIFIED_DATE != null && data[i].VERIFIED_DATE != '') {
+                                html += data[i].STATUS_DESC + '</td>' +
                                     '<td scope="col" style="width: 10%;">' + data[i].SCHEDULE + '</td>';
+                                // } else {
+                                //     html += data[i].STATUS_DESC + '</td>' +
+                                //         '<td scope="col" style="width: 10%;">' + data[i].SCHEDULE + '</td>';
+                                // }
                             }
                         }
                         html += '<td scope="col" style="width: 50%">' +

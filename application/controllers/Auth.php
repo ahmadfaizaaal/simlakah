@@ -255,34 +255,34 @@ class Auth extends CI_Controller
         $this->session->sess_destroy();
     }
 
-    public function sendMessage()
-    {
-        if (!isset($_GET['text']) or !isset($_GET['phone'])) {
-            die('Not enough data');
-        }
+    // public function sendMessage()
+    // {
+    //     if (!isset($this->input->post('text')) or !isset($this->input->post('phone'))) {
+    //         die('Not enough data');
+    //     }
 
-        $apiURL = 'https://eu82.chat-api.com/instance145465/';
-        $token = 'eiz2pcqsncdgtlnz';
+    //     $apiURL = 'https://eu82.chat-api.com/instance145465/';
+    //     $token = 'eiz2pcqsncdgtlnz';
 
-        $message = $_GET['text'];
-        $phone = $_GET['phone'];
+    //     $message = $this->input->post('text');
+    //     $phone =  $this->input->post('phone');
 
-        $data = json_encode(
-            array(
-                'phone' => $phone,
-                'body' => $message
-            )
-        );
-        $url = $apiURL . 'message?token=' . $token;
-        $options = stream_context_create(
-            array('http' =>
-            array(
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/json',
-                'content' => $data
-            ))
-        );
-        $response = file_get_contents($url, false, $options);
-        echo json_encode($response);
-    }
+    //     $data = json_encode(
+    //         array(
+    //             'phone' => $phone,
+    //             'body' => $message
+    //         )
+    //     );
+    //     $url = $apiURL . 'message?token=' . $token;
+    //     $options = stream_context_create(
+    //         array('http' =>
+    //         array(
+    //             'method'  => 'POST',
+    //             'header'  => 'Content-type: application/json',
+    //             'content' => $data
+    //         ))
+    //     );
+    //     $response = file_get_contents($url, false, $options);
+    //     echo json_encode($response);
+    // }
 }

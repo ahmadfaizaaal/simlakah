@@ -77,8 +77,8 @@ class Jadwal extends CI_Controller
             $type = '#FFD700';
         }
         $data['regType'] = $type;
-        // $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
-        $data['listmenu'] = $this->auth->listMenu('1');
+        $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
+        // $data['listmenu'] = $this->auth->listMenu('1');
         $this->load->view('component/headerscheduler', $data);
         $this->load->view('staff/calender', $data);
         $this->load->view('component/footerscheduler');
@@ -147,14 +147,14 @@ class Jadwal extends CI_Controller
 
             if ($delete > 0) {
                 $response['status'] = TRUE;
-                $response['notif']    = 'Success delete calendar';
+                $response['notif']    = 'Hapus data penjadwalan berhasil!';
             } else {
                 $response['status'] = FALSE;
-                $response['notif']    = 'Server wrong, please save again';
+                $response['notif']    = 'Terjadi kesalahan server, harap simpan ulang!';
             }
         } else {
             $response['status'] = FALSE;
-            $response['notif']    = 'Data not found';
+            $response['notif']    = 'Data tidak ditemukan';
         }
 
         echo json_encode($response);
