@@ -9,6 +9,7 @@ class Registration extends CI_Controller
         date_default_timezone_set('Asia/Bangkok');
         $this->load->library('form_validation');
         $this->load->model('M_Registration', 'registration');
+        $this->load->model('M_Penghulu', 'penghulu');
         date_default_timezone_set('Asia/Bangkok');
     }
 
@@ -443,28 +444,30 @@ class Registration extends CI_Controller
         $statusId = $this->registration->getStatusId('Ditolak');
         $result = $this->registration->updateStatusRegistration($regId, $statusId);
 
-        $apiURL = 'https://eu122.chat-api.com/instance150115/';
-        $token = 'n5wfif69crdyupo0';
+        // $apiURL = 'https://eu122.chat-api.com/instance150115/';
+        // $token = 'n5wfif69crdyupo0';
 
         $message = 'Pendaftaran anda ditolak oleh pihak staff KUA karena beberapa hal. Harap melakukan pendaftaran ulang!';
         $phone = $this->registration->getPhoneNumber($regId);
 
-        $data = json_encode(
-            array(
-                'phone' => '62' . substr($phone, 1),
-                'body' => $message
-            )
-        );
-        $url = $apiURL . 'message?token=' . $token;
-        $options = stream_context_create(
-            array('http' =>
-            array(
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/json',
-                'content' => $data
-            ))
-        );
-        $response = file_get_contents($url, false, $options);
+        $this->sendMessage($phone, $message);
+
+        // $data = json_encode(
+        //     array(
+        //         'phone' => '62' . substr($phone, 1),
+        //         'body' => $message
+        //     )
+        // );
+        // $url = $apiURL . 'message?token=' . $token;
+        // $options = stream_context_create(
+        //     array('http' =>
+        //     array(
+        //         'method'  => 'POST',
+        //         'header'  => 'Content-type: application/json',
+        //         'content' => $data
+        //     ))
+        // );
+        // $response = file_get_contents($url, false, $options);
 
         setResponse($result, 'rejected');
     }
@@ -473,28 +476,33 @@ class Registration extends CI_Controller
     {
         $dataReg = $this->registration->getDetailRegistration($regId);
 
-        $apiURL = 'https://eu122.chat-api.com/instance150115/';
-        $token = 'n5wfif69crdyupo0';
-
-        $message = 'Pendaftaran anda telah divalidasi oleh pihak KUA. Harap melakukan pembayaran untuk proses pendjadwalan sidang! [KODE PEMBAYARAN: ' . $dataReg[0]->REG_CODE . ']';
+        $message = '*[PEMBERITAHUAN]* Pendaftaran anda telah divalidasi oleh pihak KUA. Harap melakukan pembayaran untuk proses penjadwalan sidang! [KODE PEMBAYARAN: *' . $dataReg[0]->REG_CODE . '*]';
         $phone = $this->registration->getPhoneNumber($regId);
 
-        $data = json_encode(
-            array(
-                'phone' => '62' . substr($phone, 1),
-                'body' => $message
-            )
-        );
-        $url = $apiURL . 'message?token=' . $token;
-        $options = stream_context_create(
-            array('http' =>
-            array(
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/json',
-                'content' => $data
-            ))
-        );
-        $response = file_get_contents($url, false, $options);
+        $this->sendMessage($phone, $message);
+
+        // $apiURL = 'https://eu122.chat-api.com/instance150115/';
+        // $token = 'n5wfif69crdyupo0';
+
+        // $message = 'Pendaftaran anda telah divalidasi oleh pihak KUA. Harap melakukan pembayaran untuk proses pendjadwalan sidang! [KODE PEMBAYARAN: ' . $dataReg[0]->REG_CODE . ']';
+        // $phone = $this->registration->getPhoneNumber($regId);
+
+        // $data = json_encode(
+        //     array(
+        //         'phone' => '62' . substr($phone, 1),
+        //         'body' => $message
+        //     )
+        // );
+        // $url = $apiURL . 'message?token=' . $token;
+        // $options = stream_context_create(
+        //     array('http' =>
+        //     array(
+        //         'method'  => 'POST',
+        //         'header'  => 'Content-type: application/json',
+        //         'content' => $data
+        //     ))
+        // );
+        // $response = file_get_contents($url, false, $options);
 
         $statusId = $this->registration->getStatusId('Valid');
         $result = $this->registration->updateStatusRegistration($regId, $statusId);
@@ -508,17 +516,23 @@ class Registration extends CI_Controller
         $schedule = $this->input->post('schedule');
         $time = $this->input->post('time');
         $regId = $this->registration->getRegistrationId($regCode);
+        $dataPenghulu = $this->penghulu->getDataPenghulu();
 
         $eventType = $this->registration->getEventName($regCode);
         $statusId = $this->registration->getStatusId('Terjadwal');
         $result = $this->registration->updateScheduleRegistration($regCode, $schedule . ' ' . $time . ':00', $statusId);
         if ($result) {
 
-            $messageToUser = 'Anda dijadwalkan untuk melakukan sidang ' . $eventType . ' pada ' . $schedule . ' ' . $time . ':00. Harap datang tepat waktu. Terima kasih.';
+            $messageToUser = '*[PEMBERITAHUAN]* Anda dijadwalkan untuk melakukan sidang ' . $eventType . ' pada ' . $schedule . ' ' . $time . ':00. Harap datang tepat waktu. Terima kasih.';
             $phoneUser = $this->registration->getPhoneNumber($regId);
-
             $this->sendMessage($phoneUser, $messageToUser);
 
+            foreach ($dataPenghulu as $penghulu) {
+                $messageToPenghulu = '*[PEMBERITAHUAN]* Akan dilaksanakan prosesi sidang ' . $eventType . ' pada *' .
+                    $schedule . ' ' . $time .
+                    ':00*. Terima kasih.';
+                $this->sendMessage($penghulu->PHONE, $messageToPenghulu);
+            }
 
             $data['redirect_url'] = BASE_URL . 'staff/' . $eventType;
             $data['success'] = $result;
