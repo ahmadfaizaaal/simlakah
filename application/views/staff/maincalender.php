@@ -295,7 +295,7 @@
             },
             defaultDate: moment().format('YYYY-MM-DD'),
             displayEventTime: false,
-            editable: false,
+            editable: true,
             eventLimit: true, // allow "more" link when too many events
             selectable: false,
             selectHelper: true,

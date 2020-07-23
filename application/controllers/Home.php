@@ -34,6 +34,7 @@ class Home extends CI_Controller
 
         $data['title'] = "Sistem Manajemen Layanan Pernikahan";
         $data['type'] = $type;
+        $data['job'] = 'User';
         $data['question'] = $this->registration->getListQuestion($type);
         $dataNIK = $this->auth->getDataByNIK($this->session->userdata('nik'));
         $data['participant'] = json_encode($dataNIK);

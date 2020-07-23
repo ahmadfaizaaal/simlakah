@@ -11,6 +11,7 @@ class Penghulu extends CI_Controller
         $this->load->model('M_Auth', 'auth');
         $this->load->model('M_Registration', 'registration');
         $this->load->model('M_Penghulu', 'penghulu');
+        $this->load->model('M_Schedule', 'schedule');
         date_default_timezone_set('Asia/Bangkok');
     }
 
@@ -20,12 +21,70 @@ class Penghulu extends CI_Controller
             redirect('auth/login/general');
         }
 
+        //awal jadwal
+        $dataSchedule = $this->schedule->get_list('registration_schedule');
+        $schedule = array();
+        foreach ($dataSchedule as $val) {
+            $schedule[] = array(
+                'id'     => intval($val->SCHEDULE_ID),
+                'title' => '(' . $val->EVENT_TIME . ')   ' . $val->TITLE,
+                'start' => date_format(date_create($val->EVENT_SCHEDULE), "Y-m-d H:i:s"),
+                'color' => $val->COLOR,
+                'textColor' => '#ffffff'
+            );
+        }
+
+        $data['get_data'] = json_encode($schedule);
+        $data['regCode'] = '';
+        $data['namaCalon'] = '';
+        $data['regType'] = '';
+        $data['scheduleType'] = 'general';
+        //akhir jadwal
+
         $data['title'] = 'Dashboard';
         $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
+        $data['job'] = 'Penghulu';
+        $jumlahPendaftarNikah = $this->registration->getCountNikah();
+        $jumlahPendaftarRujuk = $this->registration->getCountRujuk();
+        $jumlahPendaftarIsbat = $this->registration->getCountIsbat();
+        $totalNikah = array();
+        $totalRujuk = array();
+        $totalIsbat = array();
+        $bulan = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12');
+        for ($i = 0; $i < count($bulan); $i++) {
+            $jumlah = 0;
+            foreach ($jumlahPendaftarNikah as $val) {
+                if ($val->BULAN == $bulan[$i]) {
+                    $jumlah = intval($val->JUMLAH);
+                }
+            }
+            array_push($totalNikah, $jumlah);
+        }
+        for ($j = 0; $j < count($bulan); $j++) {
+            $jumlah = 0;
+            foreach ($jumlahPendaftarRujuk as $val) {
+                if ($val->BULAN == $bulan[$j]) {
+                    $jumlah = intval($val->JUMLAH);
+                }
+            }
+            array_push($totalRujuk, $jumlah);
+        }
+        for ($k = 0; $k < count($bulan); $k++) {
+            $jumlah = 0;
+            foreach ($jumlahPendaftarIsbat as $val) {
+                if ($val->BULAN == $bulan[$k]) {
+                    $jumlah = intval($val->JUMLAH);
+                }
+            }
+            array_push($totalIsbat, $jumlah);
+        }
+        $data['totalNikah'] = $totalNikah;
+        $data['totalRujuk'] = $totalRujuk;
+        $data['totalIsbat'] = $totalIsbat;
 
-        $this->load->view('component/headerstaff', $data);
+        $this->load->view('component/headerscheduler', $data);
         $this->load->view('penghulu/index');
-        $this->load->view('component/footerstaff');
+        $this->load->view('component/footerscheduler');
     }
 
     //----------------------PEMERIKSAAN---------------------

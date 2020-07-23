@@ -545,8 +545,8 @@ class Registration extends CI_Controller
 
     public function sendMessage($phone, $message)
     {
-        $apiURL = 'https://eu122.chat-api.com/instance150115/';
-        $token = 'n5wfif69crdyupo0';
+        $apiURL = 'https://eu7.chat-api.com/instance153126/';
+        $token = 'uto30ffehi8gru42';
 
         $dataAPI = json_encode(
             array(

@@ -10,7 +10,7 @@
 
 // Bar chart
 // ------------------------------
-$(window).on("load", function(){
+$(window).on("load", function () {
 
     //Get the context of the Chart canvas element we want to select
     var ctx = $("#bar-chart");
@@ -28,7 +28,7 @@ $(window).on("load", function(){
         },
         responsive: true,
         maintainAspectRatio: false,
-        responsiveAnimationDuration:500,
+        responsiveAnimationDuration: 500,
         legend: {
             position: 'top',
         },
@@ -62,7 +62,7 @@ $(window).on("load", function(){
 
     // Chart Data
     var chartData = {
-        labels: ["January", "February", "March", "April"],
+        labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
         datasets: [{
             label: "2017",
             data: [65, 59, 80, 81],
@@ -82,9 +82,9 @@ $(window).on("load", function(){
         type: 'horizontalBar',
 
         // Chart Options
-        options : chartOptions,
+        options: chartOptions,
 
-        data : chartData
+        data: chartData
     };
 
     // Create the chart

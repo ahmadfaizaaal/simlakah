@@ -40,6 +40,36 @@ class M_Registration extends CI_Model
         return $result->result();
     }
 
+    public function getCountNikah()
+    {
+        $query = "SELECT MONTH(DTM_CRT) AS BULAN, sum(1) AS JUMLAH
+                FROM REGISTRATION
+                WHERE FORM_ID IN (1, 4)
+                GROUP BY MONTH(DTM_CRT)";
+        $result = $this->db->query($query);
+        return $result->result();
+    }
+
+    public function getCountRujuk()
+    {
+        $query = "SELECT MONTH(DTM_CRT) AS BULAN, sum(1) AS JUMLAH
+                FROM REGISTRATION
+                WHERE FORM_ID IN (2, 5)
+                GROUP BY MONTH(DTM_CRT)";
+        $result = $this->db->query($query);
+        return $result->result();
+    }
+
+    public function getCountIsbat()
+    {
+        $query = "SELECT MONTH(DTM_CRT) AS BULAN, sum(1) AS JUMLAH
+                FROM REGISTRATION
+                WHERE FORM_ID IN (3, 6)
+                GROUP BY MONTH(DTM_CRT)";
+        $result = $this->db->query($query);
+        return $result->result();
+    }
+
     public function getListAkad()
     {
         $this->db->select('TGL_AKAD');

@@ -17,6 +17,7 @@
 <script src="<?= BASE_THEME ?>adm/app-assets/vendors/js/extensions/sweetalert2.all.js" type="text/javascript"></script>
 <script src="<?= BASE_THEME ?>adm/app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
 <script src="<?= BASE_THEME ?>adm/app-assets/vendors/js/tables/datatable/datatables.min.js" type="text/javascript"></script>
+<script src="<?= BASE_THEME ?>adm/app-assets/vendors/js/charts/chart.min.js" type="text/javascript"></script>
 <!-- END PAGE VENDOR JS-->
 <!-- BEGIN CHAMELEON  JS-->
 <script src="<?= BASE_THEME ?>adm/app-assets/js/core/app-menu.js" type="text/javascript"></script>
@@ -26,6 +27,7 @@
 <script src="<?= BASE_THEME ?>adm/app-assets/js/scripts/forms/wizard-steps.js" type="text/javascript"></script>
 <script src="<?= BASE_THEME ?>adm/app-assets/js/scripts/extensions/sweet-alerts.js" type="text/javascript"></script>
 <script src="<?= BASE_THEME ?>adm/app-assets/js/scripts/forms/select/form-select2.js" type="text/javascript"></script>
+<script src="<?= BASE_THEME ?>adm/app-assets/js/scripts/charts/chartjs/bar/column.js" type="text/javascript"></script>
 <!-- <script src="<?= BASE_THEME ?>adm/app-assets/js/scripts/tables/datatables/datatable-basic.js" type="text/javascript"></script> -->
 <!-- END PAGE LEVEL JS-->
 

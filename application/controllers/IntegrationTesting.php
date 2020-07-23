@@ -15,9 +15,9 @@ class IntegrationTesting extends CI_Controller
 
     public function validateRegistration()
     {
-        $regId = '174';
-        $lokasiAkad = 'Di Luar KUA';
-        $formName = 'Rujuk';
+        $regId = '175';
+        $lokasiAkad = 'KUA';
+        $formName = 'Nikah';
         $statusId = '';
 
         if ('Nikah' == $formName) {
