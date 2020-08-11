@@ -100,7 +100,7 @@
                         if ($menu->TITLE == 'Pernikahan' && $menu->ROLE_ID == '2') {
                             $role_id = $this->session->userdata('role_id');
                             $query = "SELECT * FROM menu
-                                    where ROLE_ID = '$role_id' and PARENTMENU_ID is not null
+                                    where ROLE_ID = '$role_id' and PARENTMENU_ID is not null and IS_ACTIVE = '1'
                                     order by SEQ asc";
                             $listsubmenu = $this->db->query($query)->result();
 
