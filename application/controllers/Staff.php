@@ -106,7 +106,10 @@ class Staff extends CI_Controller
             );
         }
 
+
+
         $data = array();
+        $data['job'] = 'Staff KUA';
         $data['title'] = 'Lihat Jadwal';
         $data['get_data'] = json_encode($schedule);
         $data['regCode'] = '';
@@ -135,6 +138,7 @@ class Staff extends CI_Controller
             array_push($listAkad, date_format(date_create($val->TGL_AKAD), "Y-m-d"));
         }
         $data['listDateAkad'] = $listAkad;
+        $data['job'] = 'Staff KUA';
 
         $this->load->view('component/headerstaff', $data);
         $this->load->view('staff/pernikahan');
@@ -403,6 +407,7 @@ class Staff extends CI_Controller
     public function isbat()
     {
         $data['title'] = 'Isbat';
+        $data['job'] = 'Staff KUA';
         $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
         $data['question'] = $this->registration->getListQuestion('isbat');
         $result = $this->registration->getListAkad();
@@ -437,6 +442,7 @@ class Staff extends CI_Controller
     public function rujuk()
     {
         $data['title'] = 'Rujuk';
+        $data['job'] = 'Staff KUA';
         $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
         $data['question'] = $this->registration->getListQuestion('rujuk');
         $result = $this->registration->getListAkad();
@@ -475,6 +481,7 @@ class Staff extends CI_Controller
         }
 
         $data['title'] = 'Penghulu';
+        $data['job'] = 'Staff KUA';
         $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
 
         $this->load->view('component/headerstaff', $data);
@@ -543,6 +550,7 @@ class Staff extends CI_Controller
         }
 
         $data['title'] = 'Validasi Berkas';
+        $data['job'] = 'Staff KUA';
         $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
 
         $this->load->view('component/headerstaff', $data);

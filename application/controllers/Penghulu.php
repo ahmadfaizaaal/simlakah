@@ -91,7 +91,8 @@ class Penghulu extends CI_Controller
     public function periksaNikah($regID)
     {
         $data['title'] = 'Pemeriksaan';
-        $data['listmenu'] = $this->auth->listMenu(2);
+        $data['job'] = 'Penghulu';
+        $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
         $data['result'] = $this->registration->getDetailRegistration($regID);
 
         $this->load->view('component/headerpemeriksaan', $data);
@@ -332,6 +333,7 @@ class Penghulu extends CI_Controller
     public function periksaRujuk($regID)
     {
         $data['title'] = 'Pemeriksaan Rujuk';
+        $data['job'] = 'Penghulu';
         $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
         $data['question'] = $this->registration->getListQuestion('rujuk');
         $data['result'] = $this->registration->getDetailRegistration($regID);
@@ -458,6 +460,7 @@ class Penghulu extends CI_Controller
         }
 
         $data['title'] = 'Pernikahan';
+        $data['job'] = 'Penghulu';
         $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
         $data['question'] = $this->registration->getListQuestion('nikah');
         $result = $this->registration->getListAkad();
@@ -491,6 +494,7 @@ class Penghulu extends CI_Controller
     public function rujuk()
     {
         $data['title'] = 'Rujuk';
+        $data['job'] = 'Penghulu';
         $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
         $data['question'] = $this->registration->getListQuestion('rujuk');
         $result = $this->registration->getListAkad();
