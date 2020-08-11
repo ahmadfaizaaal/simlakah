@@ -91,7 +91,7 @@ class Penghulu extends CI_Controller
     public function periksaNikah($regID)
     {
         $data['title'] = 'Pemeriksaan';
-        $data['listmenu'] = $this->auth->listMenu($this->session->userdata('role_id'));
+        $data['listmenu'] = $this->auth->listMenu(2);
         $data['result'] = $this->registration->getDetailRegistration($regID);
 
         $this->load->view('component/headerpemeriksaan', $data);

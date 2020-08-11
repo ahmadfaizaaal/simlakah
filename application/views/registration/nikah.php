@@ -258,6 +258,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="nkh_status_s"><?= $question[8]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-9">
+                                                    <input type="hidden" name="nkh_status_s" id="hidden_status_s">
                                                     <select id="nkh_status_s" name="nkh_status_s" class="form-control required">
                                                         <option value="none" selected="" disabled="">Pilih salah satu</option>
                                                         <option value="Jejaka">Jejaka</option>
@@ -358,6 +359,7 @@
                                                     <select id="nkh_status_i" name="nkh_status_i" class="form-control required">
                                                         <option value="none" selected="" disabled="">Pilih salah satu</option>
                                                         <option value="Perawan">Perawan</option>
+                                                        <option value="Bersuami">Bersuami</option>
                                                         <option value="Cerai Mati">Cerai Mati</option>
                                                         <option value="Cerai Hidup">Cerai Hidup</option>
                                                     </select>
@@ -983,6 +985,7 @@
             $('#nkh_umur_' + actor).attr('readonly', value);
             $('#nkh_agama_' + actor).attr('readonly', value);
             $('#nkh_alamat_' + actor).attr('readonly', value);
+            $('#nkh_status_' + actor).attr('disabled', value);
         }
 
         function retrieveDataFromSession(data) {
@@ -999,11 +1002,14 @@
 
                 //disabled kwn, nik, button NIK
                 $('#nkh_kewarganegaraan_' + actor).attr('disabled', true);
+                $('#nkh_status_' + actor).attr('disabled', true);
                 $('#nkh_nik_' + actor).attr('readonly', true);
                 $('#nkh_btnceknik_' + actor).attr('disabled', true);
 
                 var kwn = $('#nkh_kewarganegaraan_' + actor).val();
                 $('#hidden_kwn_' + actor).val(kwn);
+                var status = $('#nkh_status_' + actor).val();
+                $('#hidden_status_' + actor).val(status);
                 getKewarganegaraan(kwn, actor);
                 retrieveDataNIK(data, actor);
             }
@@ -1021,13 +1027,28 @@
                 response.KABUPATEN_KOTA;
 
             var isSameGender = false;
+            var status = '';
             var msg = '';
             if ('s' == actor) {
                 isSameGender = 'Laki-laki' == response.JENIS_KELAMIN ? true : false;
                 msg = 'Calon suami harus berjenis kelamin laki-laki!';
+                if ('Belum Kawin' == response.STATUS_KAWIN) {
+                    status = 'Jejaka';
+                } else if ('Kawin' == response.STATUS_KAWIN) {
+                    status = 'Beristri';
+                } else {
+                    status = response.STATUS_KAWIN;
+                }
             } else if ('i' == actor) {
                 isSameGender = 'Perempuan' == response.JENIS_KELAMIN ? true : false;
                 msg = 'Calon istri harus berjenis kelamin perempuan!';
+                if ('Belum Kawin' == response.STATUS_KAWIN) {
+                    status = 'Perawan';
+                } else if ('Kawin' == response.STATUS_KAWIN) {
+                    status = 'Bersuami';
+                } else {
+                    status = response.STATUS_KAWIN;
+                }
             }
 
             if (isSameGender) {
@@ -1039,6 +1060,8 @@
                 $('#nkh_alamat_' + actor).val(alamat);
                 $('#nkh_pekerjaan_' + actor).val(response.PEKERJAAN);
                 $('#nkh_pekerjaan_' + actor).trigger('change');
+                $('#nkh_status_' + actor).val(status);
+                $('#hidden_status_' + actor).val(status);
             } else {
                 swal("Error!", msg, "error");
             }
