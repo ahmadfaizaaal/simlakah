@@ -44,6 +44,12 @@ class Home extends CI_Controller
             array_push($listAkad, date_format(date_create($val->TGL_AKAD), "Y-m-d H"));
         }
         $data['listDateAkad'] = $listAkad;
+        $result = $this->registration->getDisabledHours();
+        $listTimeAkad = array();
+        foreach ($result as $val) {
+            array_push($listTimeAkad, intval(substr($val->TGL_AKAD, 11, 2)));
+        }
+        $data['listTimeAkad'] = $listTimeAkad;
 
         $where = '';
         $gender = '';

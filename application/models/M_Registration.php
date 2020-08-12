@@ -89,6 +89,15 @@ class M_Registration extends CI_Model
         return $result;
     }
 
+    public function getDisabledHours()
+    {
+        $this->db->select('TGL_AKAD');
+        $this->db->from('regdetail_tr');
+        $sql = $this->db->get();
+        $result = $sql->result();
+        return $result;
+    }
+
     public function getStatusId($statusDesc)
     {
         $sql = $this->db->get_where('registration_status', ['STATUS_DESC' => $statusDesc]);

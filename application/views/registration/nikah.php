@@ -356,6 +356,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="nkh_status_i"><?= $question[19]->QUESTION_LABEL ?> <span class="danger">*</span></label>
                                                 <div class="col-md-9">
+                                                    <input type="hidden" name="nkh_status_i" id="hidden_status_i">
                                                     <select id="nkh_status_i" name="nkh_status_i" class="form-control required">
                                                         <option value="none" selected="" disabled="">Pilih salah satu</option>
                                                         <option value="Perawan">Perawan</option>
@@ -552,6 +553,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-4 label-control" for="nkh_docnumpang_nikah"><?= $question[41]->QUESTION_LABEL ?> <span class="danger">*</span></label>
+                                                <div class="col-md-8">
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" name="nkh_docnumpang_nikah" id="nkh_docnumpang_nikah" accept="image/jpg, image/jpeg, image/png" required onchange="getFileNameOfImage('nkh_docnumpang_nikah', 'numpang_nikah')">
+                                                        <label for="nkh_docnumpang_nikah" class="custom-file-label" id="numpang_nikah"></label>
+                                                        <p class="text-left"><small class="text-muted">Dokumen untuk suami</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </fieldset>
                                         </form>
                                     </div>
@@ -607,7 +618,9 @@
     <script src="<?= BASE_THEME ?>datetime/build/js/bootstrap-datetimepicker.min.js"></script>
     <script>
         var listAkad = <?= json_encode($listDateAkad); ?>;
+        var listTimeAkad = <?= json_encode($listTimeAkad); ?>;
         var numberLength = 0;
+        var kecamatanSuami = '';
         var hasAuth = {
             's': false,
             'i': false
@@ -772,44 +785,24 @@
                 minDate: tomorrow
                 // disabledDates: listAkad
             });
-            // .on('dp.change', function(e) {
-            //     var nkh_tanggal_akad = $('#nkh_tanggal_akad').val();
-            //     var disabledHours;
-            //     $.ajax({
-            //         type: 'ajax',
-            //         method: 'post',
-            //         url: '<?= BASE_URL . 'registration/getDisabledHours'; ?>',
-            //         data: {
-            //             nkh_tanggal_akad: nkh_tanggal_akad
-            //         },
-            //         async: false,
-            //         dataType: 'json',
-            //         success: function(response) {
-            //             if (response.length != 0) {
-            //                 disabledHours = response;
-            //                 $('#nkh_jam_akad').datetimepicker({
-            //                     locale: 'id',
-            //                     format: 'HH:mm:ss',
-            //                     disabledHours: response
-            //                 });
-            //             } else {
-            //                 $('#nkh_jam_akad').datetimepicker({
-            //                     locale: 'id',
-            //                     format: 'HH:mm:ss',
-            //                     enabledHours: disabledHours
-            //                 });
-            //             }
-            //         },
-            //         error: function() {
-            //             swal("Error!", "Internal Server error 500!", "error");
-            //         }
-            //     });
-            // });
+
 
             $('#nkh_jam_akad').datetimepicker({
-                locale: 'id',
-                format: 'HH:mm:ss'
-            });
+                    locale: 'id',
+                    format: 'HH:mm:ss'
+                })
+                .on('dp.change', function(e) {
+                    var nkh_jam_akad = $('#nkh_jam_akad').val();
+                    var timeAkadInput = parseInt(nkh_jam_akad.substr(0, 2));
+                    var isConflict = false;
+                    for (var i = 0; i < listTimeAkad.length; i++) {
+                        if (timeAkadInput == listTimeAkad[i]) {
+                            swal("Error!", "Jam tersebut tidak tersedia, silahkan pilih jam lain!", "error");
+                            isConflict = true;
+                        }
+                    }
+                    $('#nextToDetail').attr('disabled', isConflict);
+                });
 
             $('#nkh_ttl2_' + actor).datetimepicker({
                 locale: 'id',
@@ -1032,6 +1025,8 @@
             if ('s' == actor) {
                 isSameGender = 'Laki-laki' == response.JENIS_KELAMIN ? true : false;
                 msg = 'Calon suami harus berjenis kelamin laki-laki!';
+                kecamatanSuami = response.KECAMATAN;
+
                 if ('Belum Kawin' == response.STATUS_KAWIN) {
                     status = 'Jejaka';
                 } else if ('Kawin' == response.STATUS_KAWIN) {
@@ -1042,12 +1037,21 @@
             } else if ('i' == actor) {
                 isSameGender = 'Perempuan' == response.JENIS_KELAMIN ? true : false;
                 msg = 'Calon istri harus berjenis kelamin perempuan!';
+
                 if ('Belum Kawin' == response.STATUS_KAWIN) {
                     status = 'Perawan';
                 } else if ('Kawin' == response.STATUS_KAWIN) {
                     status = 'Bersuami';
                 } else {
                     status = response.STATUS_KAWIN;
+                }
+
+                if (kecamatanSuami != response.KECAMATAN) {
+                    $('#nkh_docnumpang_nikah').parent().parent().parent().show();
+                    $('#nkh_docnumpang_nikah').attr('required', true);
+                } else {
+                    $('#nkh_docnumpang_nikah').parent().parent().parent().hide();
+                    $('#nkh_docnumpang_nikah').attr('required', false);
                 }
             }
 

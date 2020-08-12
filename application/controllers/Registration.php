@@ -175,10 +175,14 @@ class Registration extends CI_Controller
             $kk_i = $this->uploadFile('nkh_dockk_i', 'kk', $nama_i, $type, $regID);
             $akta_s = $this->uploadFile('nkh_docakta_s', 'aktalahir', $nama_s, $type, $regID);
             $akta_i = $this->uploadFile('nkh_docakta_i', 'aktalahir', $nama_i, $type, $regID);
+            $numpangNikah = '';
+            if ($_FILES['nkh_docnumpang_nikah']['name']) {
+                $numpangNikah = $this->uploadFile('nkh_docnumpang_nikah', 'numpangnikah', '', $type, $regID);
+            }
 
             array_push($params, $kwn_s, $nik_s, $nama_s, $ttl_s, $umur_s, $status_s, $agama_s, $alamat_s, $pekerjaan_s, $nohp_s, $foto_s);
             array_push($params, $kwn_i, $nik_i, $nama_i, $ttl_i, $umur_i, $status_i, $agama_i, $alamat_i, $pekerjaan_i, $nohp_i, $foto_i);
-            array_push($params, $n1, $n3, $ktp_s, $ktp_i, $kk_s, $kk_i, $akta_s, $akta_i, $pendukung_s, $pendukung_i, $kedutaan_s, $kedutaan_i, $passport_s, $passport_i, $imigrasi_s, $imigrasi_i);
+            array_push($params, $n1, $n3, $ktp_s, $ktp_i, $kk_s, $kk_i, $akta_s, $akta_i, $pendukung_s, $pendukung_i, $kedutaan_s, $kedutaan_i, $passport_s, $passport_i, $imigrasi_s, $imigrasi_i, $numpangNikah);
 
             $startIndex = 3;
 
@@ -220,7 +224,8 @@ class Registration extends CI_Controller
                 'FILE_ADDITIONAL_DOC_PASSPORT_S' => $passport_s,
                 'FILE_ADDITIONAL_DOC_PASSPORT_I' => $passport_i,
                 'FILE_ADDITIONAL_DOC_IMIGRASI_S' => $imigrasi_s,
-                'FILE_ADDITIONAL_DOC_IMIGRASI_I' => $imigrasi_i
+                'FILE_ADDITIONAL_DOC_IMIGRASI_I' => $imigrasi_i,
+                'FILE_ADDITIONAL_DOC_NUMPANG' => $numpangNikah
             );
 
             $this->registration->updateDetail($regID, $dataDetailNikah);
