@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:8015/simlakah/';
+$config['base_url'] = 'http://34.101.127.57/api-manager-ci/';
 
 /*
 |--------------------------------------------------------------------------
